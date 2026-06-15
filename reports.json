@@ -1,0 +1,21 @@
+{
+    "daily": {
+        "06/15/2026": {
+            "Total Leads": 10,
+            "Confirmed": 10,
+            "Conversion": "100.0%",
+            "Tommy": 10,
+            "Elite": 0,
+            "Universal": 0,
+            "McCormick": 0,
+            "Safe & Green": 0,
+            "Nova": 0,
+            "No Answer": 0,
+            "Rejected": 4,
+            "Cancelled": 1,
+            "Reschedule": 2
+        }
+    },
+    "weekly": {},
+    "monthly": {}
+}
