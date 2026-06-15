@@ -1,7 +1,30 @@
 from monday_data import load_monday_data
 import streamlit as st
 import pandas as pd
+import json
+import os
 from datetime import datetime
+
+def load_reports():
+
+    if not os.path.exists("reports.json"):
+
+        return {
+            "daily": {},
+            "weekly": {},
+            "monthly": {}
+        }
+
+    with open("reports.json", "r") as f:
+
+        return json.load(f)
+
+
+def save_reports(data):
+
+    with open("reports.json", "w") as f:
+
+        json.dump(data, f, indent=4)
 
 st.set_page_config(page_title="OUTSOURCE ENGAGE CONFIRMATION", layout="wide")
 
@@ -10,17 +33,27 @@ page = st.sidebar.radio("Navigation", ["Home", "Confirmation Reports"])
 if page == "Home":
 
     (
-    today_slots,
-    tomorrow_slots,
-    universal_today,
-    universal_tomorrow,
-    mccormick_today,
-    mccormick_tomorrow,
-    safegreen_today,
-    safegreen_tomorrow,
-    nova_today,
-    nova_tomorrow
-) = load_monday_data()
+        today_slots,
+        tomorrow_slots,
+        universal_today,
+        universal_tomorrow,
+        mccormick_today,
+        mccormick_tomorrow,
+        safegreen_today,
+        safegreen_tomorrow,
+        nova_today,
+        nova_tomorrow,
+        confirmed,
+        rejected,
+        cancelled,
+        reschedule,
+        tommy_leads,
+        elite_leads,
+        universal_leads,
+        mccormick_leads,
+        safegreen_leads,
+        nova_leads
+    ) = load_monday_data()
 
     st.title("📅 OUTSOURCE ENGAGE CONFIRMATION 📅")
 
@@ -226,34 +259,82 @@ if page == "Home":
 elif page == "Confirmation Reports":
     st.title("📊 Confirmation Reports")
 
-    daily_reports = {
-        "6/12/2026": {
-            "Total Leads": 39,
-            "Confirmed": 20,
-            "Conversion": "51.28%",
-            "Tommy": 17,
-            "Elite": 1,
-            "Kousha": 2,
-            "No Answer": 10,
-            "Reschedule": 2,
-            "Rejected": 10,
-            "Cancelled": 7
-        },
-        "6/11/2026": {
-            "Total Leads": 58,
-            "Confirmed": 40,
-            "Conversion": "68.96%",
-            "Tommy": 36,
-            "Elite": 3,
-            "Kousha": 1,
-            "No Answer": 6,
-            "Reschedule": 2,
-            "Rejected": 11,
-            "Cancelled": 8
-        }
-    }
+    (
+        today_slots,
+        tomorrow_slots,
+        universal_today,
+        universal_tomorrow,
+        mccormick_today,
+        mccormick_tomorrow,
+        safegreen_today,
+        safegreen_tomorrow,
+        nova_today,
+        nova_tomorrow,
+        confirmed,
+        rejected,
+        cancelled,
+        reschedule,
+        tommy_leads,
+        elite_leads,
+        universal_leads,
+        mccormick_leads,
+        safegreen_leads,
+        nova_leads
+    ) = load_monday_data()
 
-    selected_day = st.selectbox("Select Date", list(daily_reports.keys()))
+    reports = load_reports()
+
+    if st.button("🔄 Update Confirmation EOD"):
+
+        today = datetime.now().strftime("%m/%d/%Y")
+
+        total_leads = (
+            tommy_leads +
+            elite_leads +
+            universal_leads +
+            mccormick_leads +
+            safegreen_leads +
+            nova_leads
+        )
+
+        reports["daily"][today] = {
+
+            "Total Leads": total_leads,
+
+            "Confirmed": confirmed,
+
+            "Conversion": f"{round((confirmed / max(1, total_leads)) * 100, 2)}%",
+
+            "Tommy": tommy_leads,
+            "Elite": elite_leads,
+            "Universal": universal_leads,
+
+            "McCormick": mccormick_leads,
+            "Safe & Green": safegreen_leads,
+            "Nova": nova_leads,
+
+            "No Answer": 0,
+            "Rejected": rejected,
+            "Cancelled": cancelled,
+            "Reschedule": reschedule
+        }
+
+        save_reports(reports)
+
+        st.success(f"Report saved for {today}")
+
+    daily_reports = reports["daily"]
+
+    available_dates = sorted(
+        daily_reports.keys(),
+        reverse=True
+    )
+
+    selected_day = st.selectbox(
+        "🔎 Search Historical Reports",
+        available_dates
+    )
+
     report = daily_reports[selected_day]
 
     st.header(f"Daily Report - {selected_day}")
@@ -263,14 +344,28 @@ elif page == "Confirmation Reports":
     c2.metric("Confirmed", report["Confirmed"])
     c3.metric("Conversion", report["Conversion"])
 
-    st.progress(report["Confirmed"] / report["Total Leads"])
+    if report["Total Leads"] > 0:
+
+        progress = 0
+
+        if report["Total Leads"] > 0:
+            progress = min(
+                    report["Confirmed"] / max(1, report["Total Leads"]),
+                    1.0
+            )
+
+            st.progress(progress)
+
+    else:
+
+        st.progress(0)
 
     st.subheader("Lead Breakdown")
 
     c1, c2, c3 = st.columns(3)
     c1.metric("Tommy", report["Tommy"])
     c2.metric("Elite", report["Elite"])
-    c3.metric("Kousha", report["Kousha"])
+    c3.metric("Universal", report["Universal"])
 
     st.subheader("Unconfirmed Outcomes")
 
