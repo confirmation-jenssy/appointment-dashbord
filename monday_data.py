@@ -7,8 +7,6 @@ def load_monday_data():
     import time
     start_time = time.time()
 
-    import streamlit as st
-
     API_TOKEN = st.secrets["MONDAY_API_KEY"]
     BOARD_ID = 1962914669
 
