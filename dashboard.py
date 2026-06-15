@@ -421,3 +421,5 @@ elif page == "Confirmation Reports":
     st.header("Monthly Report")
 
     st.info("Monthly reporting section coming next.")
+
+elif page == "Sit Confirmed":
