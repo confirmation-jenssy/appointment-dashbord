@@ -244,92 +244,67 @@ def load_monday_data():
             if col["id"] == "color_mkr2rpkj":
                 same_day_status = col["text"]
 
-        source_upper = source.upper()
+                source_upper = source.upper()
         qa_upper = qa_notes.upper()
-        
+
         is_mccormick = "MCCORMICK" in source_upper
-        
+
         is_nova = "NOVA" in source_upper
-        
+
         is_safegreen = (
             "SAFE & GREEN" in source_upper
             or "KATHLEEN" in source_upper
         )
-        
+
         is_universal = (
             "ADU LEAD" in qa_upper
             or "SOLAR LEAD" in qa_upper
             or "POOL LEAD" in qa_upper
         )
-        
-        if disburse.upper() == "TOMMY":
+
+        status = disburse.upper().strip()
+
+        if status == "TOMMY":
+
             confirmed += 1
-        
+
             if is_mccormick:
                 mccormick_leads += 1
-        
+
             elif is_nova:
                 nova_leads += 1
-        
+
             elif is_safegreen:
                 safegreen_leads += 1
-        
+
             else:
                 tommy_leads += 1
-        
-        elif disburse.upper() == "ELITE":
+
+        elif status == "ELITE":
+
             confirmed += 1
             elite_leads += 1
-        
-        elif disburse.upper() == "UNIVERSAL":
+
+        elif status == "UNIVERSAL":
+
             confirmed += 1
             universal_leads += 1
-        
-        elif disburse.upper() == "REJECTED":
+
+        elif status == "REJECTED":
+
             rejected += 1
-        
-        elif disburse.upper() == "CANCELED":
+
+        elif status in ["CANCELED", "CANCELLED"]:
+
             cancelled += 1
-        
-        elif disburse.upper() == "RESCHEDULE":
+
+        elif status == "RESCHEDULE":
+
             reschedule += 1
-        
-        elif "NO ANSWER" in disburse.upper():
+
+        elif "NO ANSWER" in status:
+
             no_answer += 1
-            
-            confirmed += 1
-
-            if is_mccormick:
-                mccormick_leads += 1
-
-            elif is_nova:
-                nova_leads += 1
-
-            elif is_safegreen:
-                safegreen_leads += 1
-
-            else:
-                tommy_leads += 1
-
-        elif disburse.upper() == "ELITE":
-            confirmed += 1
-            elite_leads += 1
-
-        elif disburse.upper() == "UNIVERSAL":
-            confirmed += 1
-            universal_leads += 1
-
-        elif disburse.upper() == "REJECTED":
-            rejected += 1
-
-        elif disburse.upper() == "CANCELED":
-            cancelled += 1
-
-        elif disburse.upper() == "RESCHEDULE":
-            reschedule += 1
-            
-        elif disburse.upper() == "NO ANSWER":
-            no_answer += 1   
 
         if (
             same_day_status.upper() == "SAME DAY"
@@ -437,22 +412,6 @@ def load_monday_data():
                     tomorrow_counts[slot][state] += 1
     print()            
     print(f"Runtime: {time.time() - start_time:.2f} seconds")
-
-    print("========== FINAL COUNTS ==========")
-    print("confirmed =", confirmed)
-    print("rejected =", rejected)
-    print("cancelled =", cancelled)
-    print("reschedule =", reschedule)
-    print("tommy_leads =", tommy_leads)
-    print("elite_leads =", elite_leads)
-    print("universal_leads =", universal_leads)
-    print("no_answer =", no_answer)
-    print("same_day =", same_day)
-    print("==================================")
-
-    print("mccormick_leads =", mccormick_leads)
-    print("safegreen_leads =", safegreen_leads)
-    print("nova_leads =", nova_leads)
 
     return (
         today_counts,
