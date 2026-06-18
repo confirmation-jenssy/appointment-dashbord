@@ -12,8 +12,10 @@ items = get_monday_items()
 
 st.write("Items Returned:", len(items))
 
-if items:
-    st.write("First Item:", items[0])
+for item in items[:10]:
+    st.write(item["name"])
+
+st.write(items[0])
 
 report = build_report(items)
 
