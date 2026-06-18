@@ -12,7 +12,7 @@ def load_monday_data():
 
 
     headers = {
-        "Authorization": API_TOKEN
+        "Authorization": MONDAY_API_KEY
     }
 
     all_items = []
