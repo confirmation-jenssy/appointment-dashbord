@@ -4,7 +4,7 @@ from monday_api import get_monday_items
 from reporting import build_report
 
 st.set_page_config(
-    page_title="Appointment Dashboard",
+    page_title="End Of The Day Report",
     layout="wide"
 )
 
@@ -12,9 +12,10 @@ items = get_monday_items()
 
 report = build_report(items)
 
-report = build_report(items)
+st.title("End Of The Day Report")
 
-st.title("Appointment Dashboard")
+if st.button("🔄 Refresh Data"):
+    st.rerun()
 
 c1, c2, c3, c4 = st.columns(4)
 
