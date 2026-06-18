@@ -10,6 +10,13 @@ st.set_page_config(
 
 items = get_monday_items()
 
+st.write("Items Returned:", len(items))
+
+if items:
+    st.write("First Item:", items[0])
+
+report = build_report(items)
+
 report = build_report(items)
 
 st.title("Appointment Dashboard")
