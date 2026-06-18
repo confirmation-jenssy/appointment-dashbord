@@ -2,16 +2,12 @@ import requests
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-
-
 def load_monday_data():
 
     import time
-    import streamlit as st
-    
     start_time = time.time()
-    
-    API_TOKEN = st.secrets["MONDAY_API_KEY"]
+
+    API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjY2MzMxMTAxNywiYWFpIjoxMSwidWlkIjo3NjI0ODkwMSwiaWFkIjoiMjAyNi0wNS0yNlQyMjoxMzoxNi4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6Mjk1ODM2OTAsInJnbiI6ImV1YzEifQ._VLpTeCA3trKNb7T56KS53ru3Gd_b-h1BiDqWHSeTbE"
     BOARD_ID = 1962914669
 
 
@@ -64,8 +60,6 @@ def load_monday_data():
     page = data["data"]["boards"][0]["items_page"]
 
     all_items.extend(page["items"])
-
-    print("MONDAY ITEMS:", len(all_items))
 
     cursor = None
 
@@ -206,8 +200,6 @@ def load_monday_data():
         if dt.date() in [today_date, tomorrow_date]:
             filtered_items.append(item)
 
-            print("FILTERED ITEMS:", len(filtered_items))
-
     confirmed = 0
     rejected = 0
     cancelled = 0
@@ -225,190 +217,204 @@ def load_monday_data():
 
     for item in filtered_items:
 
-            meeting_date = ""
-            disburse = ""
-            source = ""
-            qa_notes = ""
-            same_day_status = ""
+        meeting_date = ""
+        disburse = ""
+        source = ""
+        qa_notes = ""
+        same_day_status = ""
 
-            for col in item["column_values"]:
+        for col in item["column_values"]:
 
-                if col["id"] == "date_mkr2q53p":
-                    meeting_date = col["text"]
+            if col["id"] == "date_mkr2q53p":
+                meeting_date = col["text"]
 
-                elif col["id"] == "status":
-                    disburse = col["text"]
+            elif col["id"] == "status":
+                disburse = col["text"]
 
-                elif col["id"] == "text_mkr22s20":
-                    source = col["text"]
+            elif col["id"] == "text_mkr22s20":
+                source = col["text"]
 
-                elif col["id"] == "long_text_mm0cvyan":
-                    qa_notes = col["text"]
+            elif col["id"] == "long_text_mm0cvyan":
+                qa_notes = col["text"]
 
-                elif col["id"] == "color_mkr2rpkj":
-                    same_day_status = col["text"]
+            if col["id"] == "color_mkr2rpkj":
+                same_day_status = col["text"]
 
-            source_upper = source.upper()
-            qa_upper = qa_notes.upper()
+        source_upper = source.upper()
+        qa_upper = qa_notes.upper()
 
-            is_mccormick = "MCCORMICK" in source_upper
+        if disburse.upper() == "TOMMY":
+            confirmed += 1
 
-            is_nova = "NOVA" in source_upper
+            if is_mccormick:
+                mccormick_leads += 1
 
-            is_safegreen = (
-                "SAFE & GREEN" in source_upper
-                or "KATHLEEN" in source_upper
-            )
+            elif is_nova:
+                nova_leads += 1
 
-            is_universal = (
-                "ADU LEAD" in qa_upper
-                or "SOLAR LEAD" in qa_upper
-                or "POOL LEAD" in qa_upper
-            )
-
-            status = disburse.upper().strip()
-
-            if status == "TOMMY":
-
-                confirmed += 1
-
-                if is_mccormick:
-                    mccormick_leads += 1
-
-                elif is_nova:
-                    nova_leads += 1
-
-                elif is_safegreen:
-                    safegreen_leads += 1
-
-                else:
-                    tommy_leads += 1
-
-            elif status == "ELITE":
-
-                confirmed += 1
-                elite_leads += 1
-
-            elif status == "UNIVERSAL":
-
-                confirmed += 1
-                universal_leads += 1
-
-            elif status == "REJECTED":
-
-                rejected += 1
-
-            elif status in ["CANCELED", "CANCELLED"]:
-
-                cancelled += 1
-
-            elif status == "RESCHEDULE":
-
-                reschedule += 1
-
-            elif "NO ANSWER" in status:
-
-                no_answer += 1
-
-            if (
-                same_day_status.upper() == "SAME DAY"
-                and disburse.upper() in ["TOMMY", "ELITE", "UNIVERSAL"]
-            ):
-                same_day += 1
-
-            if not meeting_date:
-                continue
-
-            lead_key = (
-                item["name"],
-                meeting_date
-            )
-
-            if lead_key in seen:
-                continue
-
-            seen.add(lead_key)
-
-            try:
-                dt = datetime.strptime(
-                    meeting_date,
-                    "%Y-%m-%d %H:%M"
-                )
-
-            except:
-                continue
-
-            state = None
-
-            if "OREGON" in source_upper:
-                state = "OR"
-
-            elif "WASHINGTON" in source_upper:
-                state = "WA"
-
-            elif "CALIFORNIA" in source_upper:
-                state = "CA"
-
-            if not state:
-                continue
-
-            hour = dt.hour
-
-            if hour < 13:
-                slot = "10AM-1PM"
-
-            elif hour < 16:
-                slot = "1PM-4PM"
-
-            elif hour < 19:
-                slot = "4PM-7PM"
+            elif is_safegreen:
+                safegreen_leads += 1
 
             else:
-                slot = "7PM-8PM"
+                tommy_leads += 1
 
-            if disburse.upper() not in ["CANCELED", "REJECTED"]:
+        elif disburse.upper() == "ELITE":
+            confirmed += 1
+            elite_leads += 1
 
-                if is_universal:
+        elif disburse.upper() == "UNIVERSAL":
+            confirmed += 1
+            universal_leads += 1
 
-                    if dt.date() == today_date:
+        elif disburse.upper() == "REJECTED":
+            rejected += 1
+
+        elif disburse.upper() == "CANCELED":
+            cancelled += 1
+
+        elif disburse.upper() == "RESCHEDULE":
+            reschedule += 1
+            
+        elif disburse.upper() == "NO ANSWER":
+            no_answer += 1   
+
+        if (
+            same_day_status.upper() == "SAME DAY"
+            and disburse.upper() in ["TOMMY", "ELITE", "UNIVERSAL"]
+        ):
+            same_day += 1
+
+            if same_day_status:
+                print(
+                    item["name"],
+                    "| SAME DAY =", repr(same_day_status),
+                    "| STATUS =", repr(disburse)
+                )
+
+        is_mccormick = "MCCORMICK" in source_upper
+
+        is_nova = "NOVA" in source_upper
+
+        is_safegreen = (
+            "SAFE & GREEN" in source_upper
+            or "KATHLEEN" in source_upper
+        )
+
+        is_universal = (
+            "ADU LEAD" in qa_upper
+            or "SOLAR LEAD" in qa_upper
+            or "POOL LEAD" in qa_upper
+        )
+
+        if not meeting_date:
+            continue
+
+        lead_key = (
+            item["name"],
+            meeting_date
+        )
+
+        if lead_key in seen:
+            continue
+
+        seen.add(lead_key)
+
+        try:
+            dt = datetime.strptime(
+                meeting_date,
+                "%Y-%m-%d %H:%M"
+            )
+
+        except:
+            continue
+
+        state = None
+
+        if "OREGON" in source_upper:
+            state = "OR"
+
+        elif "WASHINGTON" in source_upper:
+            state = "WA"
+
+        elif "CALIFORNIA" in source_upper:
+            state = "CA"
+
+        if not state:
+            continue
+
+        hour = dt.hour
+
+        if hour < 13:
+            slot = "10AM-1PM"
+
+        elif hour < 16:
+            slot = "1PM-4PM"
+
+        elif hour < 19:
+            slot = "4PM-7PM"
+
+        else:
+            slot = "7PM-8PM"
+
+        if disburse.upper() not in ["CANCELED", "REJECTED"]:
+
+            if is_universal:
+
+                if dt.date() == today_date:
                         universal_today[slot][state] += 1
 
-                    elif dt.date() == tomorrow_date:
+                elif dt.date() == tomorrow_date:
                         universal_tomorrow[slot][state] += 1
 
-                elif is_mccormick:
+            elif is_mccormick:
 
-                    if dt.date() == today_date:
+                if dt.date() == today_date:
                         mccormick_today[slot][state] += 1
 
-                    elif dt.date() == tomorrow_date:
+                elif dt.date() == tomorrow_date:
                         mccormick_tomorrow[slot][state] += 1
 
-                elif is_safegreen:
+            elif is_safegreen:
 
-                    if dt.date() == today_date:
+                if dt.date() == today_date:
                         safegreen_today[slot][state] += 1
 
-                    elif dt.date() == tomorrow_date:
+                elif dt.date() == tomorrow_date:
                         safegreen_tomorrow[slot][state] += 1
 
             elif is_nova:
 
                 if dt.date() == today_date:
-                    nova_today[slot][state] += 1
+                        nova_today[slot][state] += 1
 
                 elif dt.date() == tomorrow_date:
-                    nova_tomorrow[slot][state] += 1
+                        nova_tomorrow[slot][state] += 1
 
             else:
 
                 if dt.date() == today_date:
-                    today_counts[slot][state] += 1
+                        today_counts[slot][state] += 1
 
                 elif dt.date() == tomorrow_date:
-                    tomorrow_counts[slot][state] += 1
+                        tomorrow_counts[slot][state] += 1
     print()            
     print(f"Runtime: {time.time() - start_time:.2f} seconds")
+
+    print("========== FINAL COUNTS ==========")
+    print("confirmed =", confirmed)
+    print("rejected =", rejected)
+    print("cancelled =", cancelled)
+    print("reschedule =", reschedule)
+    print("tommy_leads =", tommy_leads)
+    print("elite_leads =", elite_leads)
+    print("universal_leads =", universal_leads)
+    print("no_answer =", no_answer)
+    print("same_day =", same_day)
+    print("==================================")
+
+    print("mccormick_leads =", mccormick_leads)
+    print("safegreen_leads =", safegreen_leads)
+    print("nova_leads =", nova_leads)
 
     return (
         today_counts,
