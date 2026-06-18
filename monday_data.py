@@ -247,64 +247,64 @@ def load_monday_data():
         source_upper = source.upper()
         qa_upper = qa_notes.upper()
         
-        is_mccormick = "MCCORMICK" in source_upper
+                is_mccormick = "MCCORMICK" in source_upper
         
-        is_nova = "NOVA" in source_upper
+                is_nova = "NOVA" in source_upper
         
-        is_safegreen = (
-            "SAFE & GREEN" in source_upper
-            or "KATHLEEN" in source_upper
-        )
+                is_safegreen = (
+                    "SAFE & GREEN" in source_upper
+                    or "KATHLEEN" in source_upper
+                )
         
-        is_universal = (
-            "ADU LEAD" in qa_upper
-            or "SOLAR LEAD" in qa_upper
-            or "POOL LEAD" in qa_upper
-        )
+                is_universal = (
+                    "ADU LEAD" in qa_upper
+                    or "SOLAR LEAD" in qa_upper
+                    or "POOL LEAD" in qa_upper
+                )
         
-        status = disburse.upper().strip()
+                status = disburse.upper().strip()
         
-        if status == "TOMMY":
+                if status == "TOMMY":
         
-            confirmed += 1
+                    confirmed += 1
         
-            if is_mccormick:
-                mccormick_leads += 1
+                    if is_mccormick:
+                        mccormick_leads += 1
         
-            elif is_nova:
-                nova_leads += 1
+                    elif is_nova:
+                        nova_leads += 1
         
-            elif is_safegreen:
-                safegreen_leads += 1
+                    elif is_safegreen:
+                        safegreen_leads += 1
         
-            else:
-                tommy_leads += 1
+                    else:
+                        tommy_leads += 1
         
-        elif status == "ELITE":
+                elif status == "ELITE":
         
-            confirmed += 1
-            elite_leads += 1
+                    confirmed += 1
+                    elite_leads += 1
         
-        elif status == "UNIVERSAL":
+                elif status == "UNIVERSAL":
         
-            confirmed += 1
-            universal_leads += 1
+                    confirmed += 1
+                    universal_leads += 1
         
-        elif status == "REJECTED":
+                elif status == "REJECTED":
         
-            rejected += 1
+                    rejected += 1
         
-        elif status in ["CANCELED", "CANCELLED"]:
+                elif status in ["CANCELED", "CANCELLED"]:
         
-            cancelled += 1
+                    cancelled += 1
         
-        elif status == "RESCHEDULE":
+                elif status == "RESCHEDULE":
         
-            reschedule += 1
+                    reschedule += 1
         
-        elif "NO ANSWER" in status:
+                elif "NO ANSWER" in status:
         
-            no_answer += 1
+                    no_answer += 1
 
         if (
             same_day_status.upper() == "SAME DAY"
