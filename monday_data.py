@@ -2,7 +2,6 @@ import requests
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-import streamlit as st
 def load_monday_data():
 
     import time
@@ -205,6 +204,8 @@ def load_monday_data():
     rejected = 0
     cancelled = 0
     reschedule = 0
+    no_answer = 0
+    same_day = 0
 
     tommy_leads = 0
     elite_leads = 0
@@ -220,6 +221,7 @@ def load_monday_data():
         disburse = ""
         source = ""
         qa_notes = ""
+        same_day_status = ""
 
         for col in item["column_values"]:
 
@@ -234,6 +236,9 @@ def load_monday_data():
 
             elif col["id"] == "long_text_mm0cvyan":
                 qa_notes = col["text"]
+
+            if col["id"] == "color_mkr2rpkj":
+                same_day_status = col["text"]
 
         source_upper = source.upper()
         qa_upper = qa_notes.upper()
@@ -269,6 +274,22 @@ def load_monday_data():
 
         elif disburse.upper() == "RESCHEDULE":
             reschedule += 1
+            
+        elif disburse.upper() == "NO ANSWER":
+            no_answer += 1   
+
+        if (
+            same_day_status.upper() == "SAME DAY"
+            and disburse.upper() in ["TOMMY", "ELITE", "UNIVERSAL"]
+        ):
+            same_day += 1
+
+            if same_day_status:
+                print(
+                    item["name"],
+                    "| SAME DAY =", repr(same_day_status),
+                    "| STATUS =", repr(disburse)
+                )
 
         is_mccormick = "MCCORMICK" in source_upper
 
@@ -387,7 +408,13 @@ def load_monday_data():
     print("tommy_leads =", tommy_leads)
     print("elite_leads =", elite_leads)
     print("universal_leads =", universal_leads)
+    print("no_answer =", no_answer)
+    print("same_day =", same_day)
     print("==================================")
+
+    print("mccormick_leads =", mccormick_leads)
+    print("safegreen_leads =", safegreen_leads)
+    print("nova_leads =", nova_leads)
 
     return (
         today_counts,
@@ -404,10 +431,12 @@ def load_monday_data():
         rejected,
         cancelled,
         reschedule,
-         tommy_leads,
+        tommy_leads,
         elite_leads,
         universal_leads,
         mccormick_leads,
         safegreen_leads,
-        nova_leads
+        nova_leads,
+        no_answer,
+        same_day
     )
