@@ -10,13 +10,6 @@ st.set_page_config(
 
 items = get_monday_items()
 
-st.write("Items Returned:", len(items))
-
-for item in items[:10]:
-    st.write(item["name"])
-
-st.write(items[0])
-
 report = build_report(items)
 
 report = build_report(items)
