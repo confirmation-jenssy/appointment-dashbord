@@ -227,84 +227,84 @@ def load_monday_data():
         qa_notes = ""
         same_day_status = ""
 
-        for col in item["column_values"]:
+                for col in item["column_values"]:
 
-            if col["id"] == "date_mkr2q53p":
-                meeting_date = col["text"]
-
-            elif col["id"] == "status":
-                disburse = col["text"]
-
-            elif col["id"] == "text_mkr22s20":
-                source = col["text"]
-
-            elif col["id"] == "long_text_mm0cvyan":
-                qa_notes = col["text"]
-
-            if col["id"] == "color_mkr2rpkj":
-                same_day_status = col["text"]
-
+                    if col["id"] == "date_mkr2q53p":
+                        meeting_date = col["text"]
+        
+                    elif col["id"] == "status":
+                        disburse = col["text"]
+        
+                    elif col["id"] == "text_mkr22s20":
+                        source = col["text"]
+        
+                    elif col["id"] == "long_text_mm0cvyan":
+                        qa_notes = col["text"]
+        
+                    elif col["id"] == "color_mkr2rpkj":
+                        same_day_status = col["text"]
+        
                 source_upper = source.upper()
-        qa_upper = qa_notes.upper()
-
-        is_mccormick = "MCCORMICK" in source_upper
-
-        is_nova = "NOVA" in source_upper
-
-        is_safegreen = (
-            "SAFE & GREEN" in source_upper
-            or "KATHLEEN" in source_upper
-        )
-
-        is_universal = (
-            "ADU LEAD" in qa_upper
-            or "SOLAR LEAD" in qa_upper
-            or "POOL LEAD" in qa_upper
-        )
-
-        status = disburse.upper().strip()
-
-        if status == "TOMMY":
-
-            confirmed += 1
-
-            if is_mccormick:
-                mccormick_leads += 1
-
-            elif is_nova:
-                nova_leads += 1
-
-            elif is_safegreen:
-                safegreen_leads += 1
-
-            else:
-                tommy_leads += 1
-
-        elif status == "ELITE":
-
-            confirmed += 1
-            elite_leads += 1
-
-        elif status == "UNIVERSAL":
-
-            confirmed += 1
-            universal_leads += 1
-
-        elif status == "REJECTED":
-
-            rejected += 1
-
-        elif status in ["CANCELED", "CANCELLED"]:
-
-            cancelled += 1
-
-        elif status == "RESCHEDULE":
-
-            reschedule += 1
-
-        elif "NO ANSWER" in status:
-
-            no_answer += 1
+                qa_upper = qa_notes.upper()
+        
+                is_mccormick = "MCCORMICK" in source_upper
+        
+                is_nova = "NOVA" in source_upper
+        
+                is_safegreen = (
+                    "SAFE & GREEN" in source_upper
+                    or "KATHLEEN" in source_upper
+                )
+        
+                is_universal = (
+                    "ADU LEAD" in qa_upper
+                    or "SOLAR LEAD" in qa_upper
+                    or "POOL LEAD" in qa_upper
+                )
+        
+                status = disburse.upper().strip()
+        
+                if status == "TOMMY":
+        
+                    confirmed += 1
+        
+                    if is_mccormick:
+                        mccormick_leads += 1
+        
+                    elif is_nova:
+                        nova_leads += 1
+        
+                    elif is_safegreen:
+                        safegreen_leads += 1
+        
+                    else:
+                        tommy_leads += 1
+        
+                elif status == "ELITE":
+        
+                    confirmed += 1
+                    elite_leads += 1
+        
+                elif status == "UNIVERSAL":
+        
+                    confirmed += 1
+                    universal_leads += 1
+        
+                elif status == "REJECTED":
+        
+                    rejected += 1
+        
+                elif status in ["CANCELED", "CANCELLED"]:
+        
+                    cancelled += 1
+        
+                elif status == "RESCHEDULE":
+        
+                    reschedule += 1
+        
+                elif "NO ANSWER" in status:
+        
+                    no_answer += 1
 
         if (
             same_day_status.upper() == "SAME DAY"
