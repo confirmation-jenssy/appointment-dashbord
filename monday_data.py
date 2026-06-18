@@ -221,179 +221,180 @@ def load_monday_data():
 
     for item in filtered_items:
 
-        meeting_date = ""
-        disburse = ""
-        source = ""
-        qa_notes = ""
-        same_day_status = ""
+            meeting_date = ""
+            disburse = ""
+            source = ""
+            qa_notes = ""
+            same_day_status = ""
 
-        for col in item["column_values"]:
+            for col in item["column_values"]:
 
-             if col["id"] == "date_mkr2q53p":
-                meeting_date = col["text"]
-        
-             elif col["id"] == "status":
-                disburse = col["text"]
-        
-            elif col["id"] == "text_mkr22s20":
-                        source = col["text"]
-        
-            elif col["id"] == "long_text_mm0cvyan":
-                qa_notes = col["text"]
-        
-            elif col["id"] == "color_mkr2rpkj":
-                same_day_status = col["text"]
-        
-        source_upper = source.upper()
-        qa_upper = qa_notes.upper()
-        
-                is_mccormick = "MCCORMICK" in source_upper
-        
-                is_nova = "NOVA" in source_upper
-        
-                is_safegreen = (
-                    "SAFE & GREEN" in source_upper
-                    or "KATHLEEN" in source_upper
-                )
-        
-                is_universal = (
-                    "ADU LEAD" in qa_upper
-                    or "SOLAR LEAD" in qa_upper
-                    or "POOL LEAD" in qa_upper
-                )
-        
-                status = disburse.upper().strip()
-        
-                if status == "TOMMY":
-        
-                    confirmed += 1
-        
-                    if is_mccormick:
-                        mccormick_leads += 1
-        
-                    elif is_nova:
-                        nova_leads += 1
-        
-                    elif is_safegreen:
-                        safegreen_leads += 1
-        
-                    else:
-                        tommy_leads += 1
-        
-                elif status == "ELITE":
-        
-                    confirmed += 1
-                    elite_leads += 1
-        
-                elif status == "UNIVERSAL":
-        
-                    confirmed += 1
-                    universal_leads += 1
-        
-                elif status == "REJECTED":
-        
-                    rejected += 1
-        
-                elif status in ["CANCELED", "CANCELLED"]:
-        
-                    cancelled += 1
-        
-                elif status == "RESCHEDULE":
-        
-                    reschedule += 1
-        
-                elif "NO ANSWER" in status:
-        
-                    no_answer += 1
+                if col["id"] == "date_mkr2q53p":
+                    meeting_date = col["text"]
 
-        if (
-            same_day_status.upper() == "SAME DAY"
-            and disburse.upper() in ["TOMMY", "ELITE", "UNIVERSAL"]
-        ):
-            same_day += 1
+                elif col["id"] == "status":
+                    disburse = col["text"]
 
-            if same_day_status:
-                print(
-                    item["name"],
-                    "| SAME DAY =", repr(same_day_status),
-                    "| STATUS =", repr(disburse)
-                )
+                elif col["id"] == "text_mkr22s20":
+                    source = col["text"]
 
-        if not meeting_date:
-            continue
+                elif col["id"] == "long_text_mm0cvyan":
+                    qa_notes = col["text"]
 
-        lead_key = (
-            item["name"],
-            meeting_date
-        )
+                elif col["id"] == "color_mkr2rpkj":
+                    same_day_status = col["text"]
 
-        if lead_key in seen:
-            continue
+            source_upper = source.upper()
+            qa_upper = qa_notes.upper()
 
-        seen.add(lead_key)
+            is_mccormick = "MCCORMICK" in source_upper
 
-        try:
-            dt = datetime.strptime(
-                meeting_date,
-                "%Y-%m-%d %H:%M"
+            is_nova = "NOVA" in source_upper
+
+            is_safegreen = (
+                "SAFE & GREEN" in source_upper
+                or "KATHLEEN" in source_upper
             )
 
-        except:
-            continue
+            is_universal = (
+                "ADU LEAD" in qa_upper
+                or "SOLAR LEAD" in qa_upper
+                or "POOL LEAD" in qa_upper
+            )
 
-        state = None
+            status = disburse.upper().strip()
 
-        if "OREGON" in source_upper:
-            state = "OR"
+            if status == "TOMMY":
 
-        elif "WASHINGTON" in source_upper:
-            state = "WA"
+                confirmed += 1
 
-        elif "CALIFORNIA" in source_upper:
-            state = "CA"
+                if is_mccormick:
+                    mccormick_leads += 1
 
-        if not state:
-            continue
+                elif is_nova:
+                    nova_leads += 1
 
-        hour = dt.hour
+                elif is_safegreen:
+                    safegreen_leads += 1
 
-        if hour < 13:
-            slot = "10AM-1PM"
+                else:
+                    tommy_leads += 1
 
-        elif hour < 16:
-            slot = "1PM-4PM"
+            elif status == "ELITE":
 
-        elif hour < 19:
-            slot = "4PM-7PM"
+                confirmed += 1
+                elite_leads += 1
 
-        else:
-            slot = "7PM-8PM"
+            elif status == "UNIVERSAL":
 
-        if disburse.upper() not in ["CANCELED", "REJECTED"]:
+                confirmed += 1
+                universal_leads += 1
 
-            if is_universal:
+            elif status == "REJECTED":
 
-                if dt.date() == today_date:
-                    universal_today[slot][state] += 1
+                rejected += 1
 
-                elif dt.date() == tomorrow_date:
-                    universal_tomorrow[slot][state] += 1
+            elif status in ["CANCELED", "CANCELLED"]:
 
-            elif is_mccormick:
+                cancelled += 1
 
-                if dt.date() == today_date:
-                    mccormick_today[slot][state] += 1
+            elif status == "RESCHEDULE":
 
-                elif dt.date() == tomorrow_date:
-                    mccormick_tomorrow[slot][state] += 1
+                reschedule += 1
 
-            elif is_safegreen:
+            elif "NO ANSWER" in status:
 
-                if dt.date() == today_date:
-                    safegreen_today[slot][state] += 1
+                no_answer += 1
 
-                elif dt.date() == tomorrow_date:
-                    safegreen_tomorrow[slot][state] += 1
+                if (
+                    same_day_status.upper() == "SAME DAY"
+                    and disburse.upper() in ["TOMMY", "ELITE", "UNIVERSAL"]
+                ):
+                
+                    same_day += 1
+
+                if same_day_status:
+                    print(
+                        item["name"],
+                        "| SAME DAY =", repr(same_day_status),
+                        "| STATUS =", repr(disburse)
+                    )
+
+            if not meeting_date:
+                continue
+
+            lead_key = (
+                item["name"],
+                meeting_date
+            )
+
+            if lead_key in seen:
+                continue
+
+            seen.add(lead_key)
+
+            try:
+                dt = datetime.strptime(
+                    meeting_date,
+                    "%Y-%m-%d %H:%M"
+                )
+
+            except:
+                continue
+
+            state = None
+
+            if "OREGON" in source_upper:
+                state = "OR"
+
+            elif "WASHINGTON" in source_upper:
+                state = "WA"
+
+            elif "CALIFORNIA" in source_upper:
+                state = "CA"
+
+            if not state:
+                continue
+
+            hour = dt.hour
+
+            if hour < 13:
+                slot = "10AM-1PM"
+
+            elif hour < 16:
+                slot = "1PM-4PM"
+
+            elif hour < 19:
+                slot = "4PM-7PM"
+
+            else:
+                slot = "7PM-8PM"
+
+            if disburse.upper() not in ["CANCELED", "REJECTED"]:
+
+                if is_universal:
+
+                    if dt.date() == today_date:
+                        universal_today[slot][state] += 1
+
+                    elif dt.date() == tomorrow_date:
+                        universal_tomorrow[slot][state] += 1
+
+                elif is_mccormick:
+
+                    if dt.date() == today_date:
+                        mccormick_today[slot][state] += 1
+
+                    elif dt.date() == tomorrow_date:
+                        mccormick_tomorrow[slot][state] += 1
+
+                elif is_safegreen:
+
+                    if dt.date() == today_date:
+                        safegreen_today[slot][state] += 1
+
+                    elif dt.date() == tomorrow_date:
+                        safegreen_tomorrow[slot][state] += 1
 
             elif is_nova:
 
