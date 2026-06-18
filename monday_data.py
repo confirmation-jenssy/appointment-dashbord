@@ -227,25 +227,25 @@ def load_monday_data():
         qa_notes = ""
         same_day_status = ""
 
-                for col in item["column_values"]:
+        for col in item["column_values"]:
 
-                    if col["id"] == "date_mkr2q53p":
-                        meeting_date = col["text"]
+             if col["id"] == "date_mkr2q53p":
+                meeting_date = col["text"]
         
-                    elif col["id"] == "status":
-                        disburse = col["text"]
+             elif col["id"] == "status":
+                disburse = col["text"]
         
-                    elif col["id"] == "text_mkr22s20":
+            elif col["id"] == "text_mkr22s20":
                         source = col["text"]
         
-                    elif col["id"] == "long_text_mm0cvyan":
-                        qa_notes = col["text"]
+            elif col["id"] == "long_text_mm0cvyan":
+                qa_notes = col["text"]
         
-                    elif col["id"] == "color_mkr2rpkj":
-                        same_day_status = col["text"]
+            elif col["id"] == "color_mkr2rpkj":
+                same_day_status = col["text"]
         
-                source_upper = source.upper()
-                qa_upper = qa_notes.upper()
+        source_upper = source.upper()
+        qa_upper = qa_notes.upper()
         
                 is_mccormick = "MCCORMICK" in source_upper
         
