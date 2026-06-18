@@ -65,6 +65,8 @@ def load_monday_data():
 
     all_items.extend(page["items"])
 
+    print("MONDAY ITEMS:", len(all_items))
+
     cursor = None
 
     while False:
@@ -203,6 +205,8 @@ def load_monday_data():
 
         if dt.date() in [today_date, tomorrow_date]:
             filtered_items.append(item)
+
+            print("FILTERED ITEMS:", len(filtered_items))
 
     confirmed = 0
     rejected = 0
