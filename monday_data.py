@@ -7,16 +7,16 @@ from collections import defaultdict
 def load_monday_data():
 
     import time
-    start_time = time.time()
-
     import streamlit as st
+    
+    start_time = time.time()
     
     API_TOKEN = st.secrets["MONDAY_API_KEY"]
     BOARD_ID = 1962914669
 
 
     headers = {
-        "Authorization": MONDAY_API_KEY
+        "Authorization": API_TOKEN
     }
 
     all_items = []
@@ -246,8 +246,57 @@ def load_monday_data():
 
         source_upper = source.upper()
         qa_upper = qa_notes.upper()
-
+        
+        is_mccormick = "MCCORMICK" in source_upper
+        
+        is_nova = "NOVA" in source_upper
+        
+        is_safegreen = (
+            "SAFE & GREEN" in source_upper
+            or "KATHLEEN" in source_upper
+        )
+        
+        is_universal = (
+            "ADU LEAD" in qa_upper
+            or "SOLAR LEAD" in qa_upper
+            or "POOL LEAD" in qa_upper
+        )
+        
         if disburse.upper() == "TOMMY":
+            confirmed += 1
+        
+            if is_mccormick:
+                mccormick_leads += 1
+        
+            elif is_nova:
+                nova_leads += 1
+        
+            elif is_safegreen:
+                safegreen_leads += 1
+        
+            else:
+                tommy_leads += 1
+        
+        elif disburse.upper() == "ELITE":
+            confirmed += 1
+            elite_leads += 1
+        
+        elif disburse.upper() == "UNIVERSAL":
+            confirmed += 1
+            universal_leads += 1
+        
+        elif disburse.upper() == "REJECTED":
+            rejected += 1
+        
+        elif disburse.upper() == "CANCELED":
+            cancelled += 1
+        
+        elif disburse.upper() == "RESCHEDULE":
+            reschedule += 1
+        
+        elif "NO ANSWER" in disburse.upper():
+            no_answer += 1
+            
             confirmed += 1
 
             if is_mccormick:
@@ -294,21 +343,6 @@ def load_monday_data():
                     "| SAME DAY =", repr(same_day_status),
                     "| STATUS =", repr(disburse)
                 )
-
-        is_mccormick = "MCCORMICK" in source_upper
-
-        is_nova = "NOVA" in source_upper
-
-        is_safegreen = (
-            "SAFE & GREEN" in source_upper
-            or "KATHLEEN" in source_upper
-        )
-
-        is_universal = (
-            "ADU LEAD" in qa_upper
-            or "SOLAR LEAD" in qa_upper
-            or "POOL LEAD" in qa_upper
-        )
 
         if not meeting_date:
             continue
