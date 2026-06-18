@@ -12,10 +12,25 @@ def get_monday_items():
         "Authorization": api_token
     }
 
+    from datetime import datetime
+
+    today = datetime.now().strftime("%Y-%m-%d")
+
     query = f"""
     {{
         boards(ids: {BOARD_ID}) {{
-            items_page(limit: 500) {{
+            items_page(
+                limit: 500,
+                query_params: {{
+                    rules: [
+                        {{
+                            column_id: "date_mkr2q53p",
+                            compare_value: ["{today}"],
+                            operator: greater_than_or_equals
+                        }}
+                    ]
+                }}
+            ) {{
                 items {{
                     id
                     name
