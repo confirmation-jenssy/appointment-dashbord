@@ -52,7 +52,9 @@ if page == "Home":
         universal_leads,
         mccormick_leads,
         safegreen_leads,
-        nova_leads
+        nova_leads,
+        no_answer,
+        same_day
     ) = load_monday_data()
 
     st.title("📅 OUTSOURCE ENGAGE CONFIRMATION 📅")
@@ -279,7 +281,9 @@ elif page == "Confirmation Reports":
         universal_leads,
         mccormick_leads,
         safegreen_leads,
-        nova_leads
+        nova_leads,
+        no_answer,
+        same_day
     ) = load_monday_data()
 
     reports = load_reports()
@@ -288,18 +292,25 @@ elif page == "Confirmation Reports":
 
         today = datetime.now().strftime("%m/%d/%Y")
 
+        confirmed = (
+            tommy_leads +
+            elite_leads +
+            universal_leads
+        )
+
         total_leads = (
             confirmed +
-            rejected +
+            no_answer +
             cancelled +
             reschedule
         )
-
         reports["daily"][today] = {
 
             "Total Leads": total_leads,
 
             "Confirmed": confirmed,
+
+            "Same Day": same_day,
 
             "Conversion": f"{round((confirmed / max(1, total_leads)) * 100, 2)}%",
 
@@ -311,7 +322,7 @@ elif page == "Confirmation Reports":
             "Safe & Green": safegreen_leads,
             "Nova": nova_leads,
 
-            "No Answer": 0,
+            "No Answer": no_answer,
             "Rejected": rejected,
             "Cancelled": cancelled,
             "Reschedule": reschedule
@@ -328,9 +339,13 @@ elif page == "Confirmation Reports":
         reverse=True
     )
 
+    if len(daily_reports) == 0:
+        st.warning("No reports found.")
+        st.stop()
+
     selected_day = st.selectbox(
-        "🔎 Search Historical Reports",
-        available_dates
+        "Select Report",
+        list(daily_reports.keys())
     )
 
     report = daily_reports[selected_day]
@@ -421,6 +436,3 @@ elif page == "Confirmation Reports":
     st.header("Monthly Report")
 
     st.info("Monthly reporting section coming next.")
-
-elif page == "Sit Confirmed":
-    st.title("📊 Sit Confirmed")
