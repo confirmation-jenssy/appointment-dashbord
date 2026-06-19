@@ -126,11 +126,16 @@ if page == "Appointment Counts":
     
     st.write("Total items pulled from Monday:", len(items))
 
-if len(items) > 0:
+for item in items:
 
-    sample = {}
+    values = {}
 
-    for col in items[0]["column_values"]:
-        sample[col["id"]] = col["text"]
+    for col in item["column_values"]:
+        values[col["id"]] = col["text"]
 
-    st.write(sample)
+    st.write({
+        "source": values.get(COLUMN_IDS["source"], ""),
+        "status": values.get(COLUMN_IDS["status"], ""),
+        "confirmation": values.get(COLUMN_IDS["confirmation"], ""),
+        "meeting_date": values.get(COLUMN_IDS["meeting_date"], "")
+    })
