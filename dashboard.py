@@ -1,3 +1,7 @@
+# ==============================
+# FILE: dashboard (4).py 
+# ==============================
+
 import streamlit as st
 
 from monday_api import get_monday_items
@@ -13,7 +17,12 @@ st.set_page_config(
     layout="wide"
 )
 
-items = get_monday_items()
+# --- CHANGE HERE: Fetch data when needed (and rely on the caching in monday_api.py) ---
+items = get_monday_items() 
+
+# Check if items were successfully loaded before running the app logic
+if not items and st.session_state.get('page') != "Confirmation":
+    st.warning("Cannot load reports because no data was retrieved from Monday. Please check API keys or board status.")
 
 
 page = st.sidebar.selectbox(
@@ -28,54 +37,57 @@ if page == "Confirmation":
 
     st.title("Confirmation")
 
-    tab1, tab2, tab3, tab4 = st.tabs([
-        "Tommy & Elite EOD",
-        "Universal EOD",
-        "McCormick EOD",
-        "Nova EOD"
-    ])
+    # We use the 'items' variable fetched above
+    with st.container(): # Use a container for better layout structure
+        tab1, tab2, tab3, tab4 = st.tabs([
+            "Tommy & Elite EOD",
+            "Universal EOD",
+            "McCormick EOD",
+            "Nova EOD"
+        ])
 
-    with tab1:
+        # Only run the reports if items were successfully retrieved
+        if items: 
+            with tab1:
+                report = build_tommy_elite_report(items)
+                c1,c2,c3,c4 = st.columns(4)
+                c1.metric("Confirmed", report["confirmed"])
+                c2.metric("Same Day", report["same_day"])
+                c3.metric("Same Day %", f'{report["same_day_percent"]}%')
+                c4.metric("Conversion %", f'{report["conversion"]}%')
 
-        report = build_tommy_elite_report(items)
+                st.divider()
 
-        c1,c2,c3,c4 = st.columns(4)
+                c1,c2 = st.columns(2)
+                c1.metric("Tommy", report["tommy"])
+                c2.metric("Elite", report["elite"])
 
-        c1.metric("Confirmed", report["confirmed"])
-        c2.metric("Same Day", report["same_day"])
-        c3.metric("Same Day %", f'{report["same_day_percent"]}%')
-        c4.metric("Conversion %", f'{report["conversion"]}%')
+                st.divider()
 
-        st.divider()
+                c1,c2,c3,c4 = st.columns(4)
+                c1.metric("No Answer", report["no_answer"])
+                c2.metric("Cancelled", report["cancelled"])
+                c3.metric("Reschedule", report["reschedule"])
+                c4.metric("Rejected", report["rejected"])
 
-        c1,c2 = st.columns(2)
+            with tab2:
+                report = build_universal_report(items)
+                st.write(report) # Consider formatting this output better if possible
 
-        c1.metric("Tommy", report["tommy"])
-        c2.metric("Elite", report["elite"])
+            with tab3:
+                report = build_mccormick_report(items)
+                st.write(report)
 
-        st.divider()
+            with tab4:
+                report = build_nova_report(items)
+                st.write(report)
+        else:
+             # Display a message if no data is available for reporting
+             col1, col2 = st.columns(2)
+             col1.info("Data Unavailable")
+             col2.warning("Please check your API keys or board settings.")
 
-        c1,c2,c3,c4 = st.columns(4)
 
-        c1.metric("No Answer", report["no_answer"])
-        c2.metric("Cancelled", report["cancelled"])
-        c3.metric("Reschedule", report["reschedule"])
-        c4.metric("Rejected", report["rejected"])
+# Note: The remaining "Appointment Counts" logic would go here 
+# and should also be wrapped with data checking if implemented later.
 
-    with tab2:
-
-        report = build_universal_report(items)
-
-        st.write(report)
-
-    with tab3:
-
-        report = build_mccormick_report(items)
-
-        st.write(report)
-
-    with tab4:
-
-        report = build_nova_report(items)
-
-        st.write(report)
