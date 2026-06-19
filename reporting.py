@@ -50,8 +50,8 @@ def build_report(items):
         except:
             continue
 
-        #if dt.date() != today:
-        #    continue
+        if dt.date() != today:
+            continue
 
         raw_status = values.get(
             COLUMN_IDS["status"],
