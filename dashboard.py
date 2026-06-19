@@ -15,6 +15,25 @@ st.set_page_config(
 
 items = get_monday_items()
 
+st.write("Items Returned:", len(items))
+
+for item in items[:10]:
+
+    values = {}
+
+    for col in item["column_values"]:
+        values[col["id"]] = col["text"]
+
+    st.write(
+        item["name"],
+        "| Status =",
+        values.get("status"),
+        "| Source =",
+        values.get("text_mkr22s20"),
+        "| Date =",
+        values.get("date_mkr2q53p")
+    )
+
 page = st.sidebar.selectbox(
     "Select Page",
     [
