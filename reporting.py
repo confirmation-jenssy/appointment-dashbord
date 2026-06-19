@@ -169,6 +169,9 @@ def build_report(items):
 
 
 # The helper functions remain unchanged and use the updated build_report
+def build_tommy_elite_report(items):
+    return build_report(items)
+
 def build_universal_report(items):
     return build_disburse_report(
         items,
