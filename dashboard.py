@@ -67,16 +67,49 @@ if page == "Confirmation":
 
             with tab2:
                 report = build_universal_report(items)
-                st.write(report) # Consider formatting this output better if possible
+            
+                c1, c2 = st.columns(2)
+                c1.metric("Confirmed", report["confirmed"])
+                c2.metric("Conversion %", f'{report["conversion"]}%')
+            
+                st.divider()
+            
+                c1, c2, c3, c4 = st.columns(4)
+                c1.metric("No Answer", report["no_answer"])
+                c2.metric("Cancelled", report["cancelled"])
+                c3.metric("Reschedule", report["reschedule"])
+                c4.metric("Rejected", report["rejected"])
 
             with tab3:
                 report = build_mccormick_report(items)
-                st.write(report)
+            
+                c1, c2 = st.columns(2)
+                c1.metric("Confirmed", report["confirmed"])
+                c2.metric("Conversion %", f'{report["conversion"]}%')
+            
+                st.divider()
+            
+                c1, c2, c3, c4 = st.columns(4)
+                c1.metric("No Answer", report["no_answer"])
+                c2.metric("Cancelled", report["cancelled"])
+                c3.metric("Reschedule", report["reschedule"])
+                c4.metric("Rejected", report["rejected"])
 
             with tab4:
                 report = build_nova_report(items)
-                st.write(report)
-        else:
+            
+                c1, c2 = st.columns(2)
+                c1.metric("Confirmed", report["confirmed"])
+                c2.metric("Conversion %", f'{report["conversion"]}%')
+            
+                st.divider()
+            
+                c1, c2, c3, c4 = st.columns(4)
+                c1.metric("No Answer", report["no_answer"])
+                c2.metric("Cancelled", report["cancelled"])
+                c3.metric("Reschedule", report["reschedule"])
+                c4.metric("Rejected", report["rejected"])
+                    else:
              # Display a message if no data is available for reporting
              col1, col2 = st.columns(2)
              col1.info("Data Unavailable")
