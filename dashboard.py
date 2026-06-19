@@ -15,6 +15,9 @@ st.set_page_config(
 
 items = get_monday_items()
 
+for col in items[0]["column_values"]:
+    st.write(col["id"], "=", col["text"])
+
 page = st.sidebar.selectbox(
     "Select Page",
     [
