@@ -15,6 +15,30 @@ st.set_page_config(
 
 items = get_monday_items()
 
+Yes. That's actually much easier than hunting through logs.
+
+Add this to your dashboard.py temporarily, right under:
+
+items = get_monday_items()
+with st.expander("Debug Status Values"):
+
+    for item in items[:50]:
+
+        values = {}
+
+        for col in item["column_values"]:
+            values[col["id"]] = col["text"]
+
+        st.write(
+            item["name"],
+            "| Status:",
+            values.get("status", ""),
+            "| Same Day:",
+            values.get("color_mkr2rpkj", ""),
+            "| Source:",
+            values.get("text_mkr22s20", "")
+        )
+
 page = st.sidebar.selectbox(
     "Select Page",
     [
