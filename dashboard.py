@@ -15,6 +15,8 @@ st.set_page_config(
 
 items = get_monday_items()
 
+st.write("Items Returned:", len(items))
+
 page = st.sidebar.selectbox(
     "Select Page",
     [
