@@ -1,105 +1,50 @@
 import streamlit as st
 
 from monday_api import get_monday_items
-from reporting import (
-    build_tommy_elite_report,
-    build_universal_report,
-    build_mccormick_report,
-    build_nova_report
-)
+from reporting import build_report
 
 st.set_page_config(
-    page_title="Confirmation",
+    page_title="End Of The Day Report",
     layout="wide"
 )
 
 items = get_monday_items()
 
-from collections import Counter
+report = build_report(items)
 
-status_counts = Counter()
+st.title("End Of The Day Report")
 
-for item in items:
+if st.button("🔄 Refresh Data"):
+    st.rerun()
 
-    values = {}
+c1, c2, c3, c4 = st.columns(4)
 
-    for col in item["column_values"]:
-        values[col["id"]] = col["text"]
+c1.metric("Confirmed", report["confirmed"])
+c2.metric("Same Day", report["same_day"])
+c3.metric("Same Day %", f'{report["same_day_percent"]}%')
+c4.metric("Conversion %", f'{report["conversion"]}%')
 
-    status_counts[
-        values.get("status", "(BLANK)")
-    ] += 1
+st.divider()
 
-st.write(status_counts)
+c1, c2, c3 = st.columns(3)
 
-st.write("Items Returned:", len(items))
+c1.metric("Tommy", report["tommy"])
+c2.metric("Elite", report["elite"])
+c3.metric("Universal", report["universal"])
 
-page = st.sidebar.selectbox(
-    "Select Page",
-    [
-        "Confirmation",
-        "Appointment Counts"
-    ]
-)
+st.divider()
 
-if page == "Confirmation":
+c1, c2, c3, c4 = st.columns(4)
 
-    st.title("Confirmation")
+c1.metric("No Answer", report["no_answer"])
+c2.metric("Cancelled", report["cancelled"])
+c3.metric("Reschedule", report["reschedule"])
+c4.metric("Rejected", report["rejected"])
 
-    col1, col2 = st.columns([8,1])
+st.divider()
 
-    with col2:
-        if st.button("🔄 Refresh"):
-             st.rerun()
+c1, c2, c3 = st.columns(3)
 
-    tab1, tab2, tab3, tab4 = st.tabs([
-        "Tommy & Elite EOD",
-        "Universal EOD",
-        "McCormick EOD",
-        "Nova EOD"
-    ])
-
-    with tab1:
-
-        report = build_tommy_elite_report(items)
-
-        c1,c2,c3,c4 = st.columns(4)
-
-        c1.metric("Confirmed", report["confirmed"])
-        c2.metric("Same Day", report["same_day"])
-        c3.metric("Same Day %", f'{report["same_day_percent"]}%')
-        c4.metric("Conversion %", f'{report["conversion"]}%')
-
-        st.divider()
-
-        c1,c2 = st.columns(2)
-
-        c1.metric("Tommy", report["tommy"])
-        c2.metric("Elite", report["elite"])
-
-        st.divider()
-
-        c1,c2,c3,c4 = st.columns(4)
-
-        c1.metric("No Answer", report["no_answer"])
-        c2.metric("Cancelled", report["cancelled"])
-        c3.metric("Reschedule", report["reschedule"])
-        c4.metric("Rejected", report["rejected"])
-
-    with tab2:
-
-        report = build_universal_report(items)
-
-        st.write(report)
-
-    with tab3:
-
-        report = build_mccormick_report(items)
-
-        st.write(report)
-
-    with tab4:
-
-        report = build_nova_report(items)
-
-        st.write(report)
+c1.metric("McCormick", report["mccormick"])
+c2.metric("Nova", report["nova"])
+c3.metric("Safe & Green", report["safegreen"])
