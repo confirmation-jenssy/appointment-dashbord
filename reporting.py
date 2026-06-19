@@ -1,4 +1,9 @@
+# ==============================
+# FILE: reporting (1).py 
+# ==============================
+
 from datetime import datetime, timedelta
+import time # Added for better handling of parsing attempts
 
 from config import (
     COLUMN_IDS,
@@ -7,8 +12,35 @@ from config import (
 )
 
 
+def parse_meeting_date(date_string):
+    """
+    Attempts to parse a date string using multiple common formats. 
+    Returns the datetime object if successful, otherwise None.
+    """
+    if not date_string:
+        return None
+
+    # List of possible date format codes (YYYY-MM-DD, YYYY-MM-DD HH:MM, etc.)
+    date_formats = [
+        "%Y-%m-%d %H:%M", # Date and Time (The current expected format)
+        "%Y-%m-%d",       # Just the Date
+        "%m/%d/%Y",       # Common US Format 
+        "%d/%m/%Y"        # Common UK/EU Format
+    ]
+
+    for fmt in date_formats:
+        try:
+            dt = datetime.strptime(date_string, fmt)
+            return dt
+        except ValueError:
+            continue # Try the next format
+            
+    return None
+
+
 def build_report(items):
 
+    # ... (rest of report initialization remains the same) ...
     report = {
         "confirmed": 0,
         "same_day": 0,
@@ -39,17 +71,13 @@ def build_report(items):
             ""
         )
 
-        if not meeting_date:
-            continue
-
-        try:
-            dt = datetime.strptime(
-                meeting_date,
-                "%Y-%m-%d %H:%M"
-            )
-        except:
-            continue
+        # --- CRITICAL CHANGE HERE: Use the robust parser function ---
+        dt = parse_meeting_date(meeting_date) 
+        if dt is None:
+             # This item could not be dated, skip it safely.
+             continue
             
+        # Check if the date part matches today's date
         if dt.date() != today:
             continue
 
@@ -58,18 +86,17 @@ def build_report(items):
             ""
         )
         
+        # ... (The rest of the logic remains the same, as it was correct for counting statuses/sources) ...
         raw_same_day = values.get(
             COLUMN_IDS["same_day"],
             ""
         )
         
         status = raw_status.upper().strip()
-        
         source = values.get(
             COLUMN_IDS["source"],
             ""
         ).upper()
-        
         same_day_status = raw_same_day.upper().strip()
         
         if status in CONFIRMED_STATUSES:
@@ -84,6 +111,8 @@ def build_report(items):
 
             elif status == "UNIVERSAL":
                 report["universal"] += 1
+
+        # ... (rest of the counting logic) ...
 
         elif status == "NO ANSWER":
             report["no_answer"] += 1
@@ -115,6 +144,7 @@ def build_report(items):
         ):
             report["safegreen"] += 1
 
+    # ... (The rest of the calculation logic remains the same) ...
     report["total_leads"] = (
         report["confirmed"]
         + report["no_answer"]
@@ -122,6 +152,7 @@ def build_report(items):
         + report["reschedule"]
     )
 
+    # Handle division by zero for safety
     report["conversion"] = round(
         (report["confirmed"] /
          max(1, report["total_leads"])) * 100,
@@ -136,17 +167,16 @@ def build_report(items):
 
     return report
 
+
+# The helper functions remain unchanged and use the updated build_report
 def build_tommy_elite_report(items):
     return build_report(items)
 
-
 def build_universal_report(items):
     return build_report(items)
-    
     
 def build_mccormick_report(items):
     return build_report(items)
     
 def build_nova_report(items):
     return build_report(items)
-
