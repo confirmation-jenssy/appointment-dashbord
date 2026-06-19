@@ -119,4 +119,8 @@ if page == "Confirmation":
 
 # Note: The remaining "Appointment Counts" logic would go here 
 # and should also be wrapped with data checking if implemented later.
+if page == "Appointment Counts":
 
+    st.title("Appointment Counts")
+        counts = build_appointment_counts(items)
+        st.write(counts)
