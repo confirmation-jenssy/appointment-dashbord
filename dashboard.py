@@ -15,14 +15,6 @@ st.set_page_config(
 
 items = get_monday_items()
 
-print(
-    item["name"],
-    "| DATE =",
-    meeting_date,
-    "| STATUS =",
-    status
-)
-
 page = st.sidebar.selectbox(
     "Select Page",
     [
