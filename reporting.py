@@ -49,14 +49,7 @@ def build_report(items):
             )
         except:
             continue
-
-        today_date = datetime.now().date()
-
-        tomorrow_date = today_date + timedelta(days=1)
-        
-        if dt.date() not in [today_date, tomorrow_date]:
-            continue
-
+            
         if dt.date() != today:
             continue
 
@@ -79,24 +72,6 @@ def build_report(items):
         
         same_day_status = raw_same_day.upper().strip()
         
-        print(
-            item["name"],
-            "| STATUS =",
-            repr(raw_status)
-        )
-        
-        print(
-            item["name"],
-            "| SAME DAY =",
-            repr(raw_same_day)
-        )
-        
-        print(
-            item["name"],
-            "| SOURCE =",
-            repr(source)
-        )
-
         if status in CONFIRMED_STATUSES:
 
             report["confirmed"] += 1
@@ -172,6 +147,7 @@ def build_universal_report(items):
 def build_mccormick_report(items):
     return build_report(items)
     
-    
 def build_nova_report(items):
     return build_report(items)
+
+    
