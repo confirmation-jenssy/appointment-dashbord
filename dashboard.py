@@ -15,11 +15,6 @@ st.set_page_config(
 
 items = get_monday_items()
 
-Yes. That's actually much easier than hunting through logs.
-
-Add this to your dashboard.py temporarily, right under:
-
-items = get_monday_items()
 with st.expander("Debug Status Values"):
 
     for item in items[:50]:
