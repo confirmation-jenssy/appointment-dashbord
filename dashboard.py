@@ -15,18 +15,22 @@ st.set_page_config(
 
 items = get_monday_items()
 
-for item in items[:20]:
+from collections import Counter
+
+status_counts = Counter()
+
+for item in items:
 
     values = {}
 
     for col in item["column_values"]:
         values[col["id"]] = col["text"]
 
-    st.write(
-        item["name"],
-        "| Status =",
-        values.get("status", "")
-    )
+    status_counts[
+        values.get("status", "(BLANK)")
+    ] += 1
+
+st.write(status_counts)
 
 st.write("Items Returned:", len(items))
 
