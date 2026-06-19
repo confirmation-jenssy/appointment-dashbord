@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from config import (
     COLUMN_IDS,
@@ -48,6 +48,13 @@ def build_report(items):
                 "%Y-%m-%d %H:%M"
             )
         except:
+            continue
+
+        today_date = datetime.now().date()
+
+        tomorrow_date = today_date + timedelta(days=1)
+        
+        if dt.date() not in [today_date, tomorrow_date]:
             continue
 
         if dt.date() != today:
