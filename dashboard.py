@@ -109,11 +109,12 @@ if page == "Confirmation":
                 c2.metric("Cancelled", report["cancelled"])
                 c3.metric("Reschedule", report["reschedule"])
                 c4.metric("Rejected", report["rejected"])
+                
                     else:
-             # Display a message if no data is available for reporting
-             col1, col2 = st.columns(2)
-             col1.info("Data Unavailable")
-             col2.warning("Please check your API keys or board settings.")
+                         # Display a message if no data is available for reporting
+                         col1, col2 = st.columns(2)
+                         col1.info("Data Unavailable")
+                         col2.warning("Please check your API keys or board settings.")
 
 
 # Note: The remaining "Appointment Counts" logic would go here 
