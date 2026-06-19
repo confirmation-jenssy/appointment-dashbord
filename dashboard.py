@@ -124,6 +124,13 @@ if page == "Appointment Counts":
 
     st.title("Appointment Counts")
     
-    counts = build_appointment_counts(items)
+    st.write("Total items pulled from Monday:", len(items))
 
-    st.write(counts)
+if len(items) > 0:
+
+    sample = {}
+
+    for col in items[0]["column_values"]:
+        sample[col["id"]] = col["text"]
+
+    st.write(sample)
