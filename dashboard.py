@@ -27,6 +27,12 @@ if page == "Confirmation":
 
     st.title("Confirmation")
 
+    col1, col2 = st.columns([8,1])
+
+    with col2:
+        if st.button("🔄 Refresh"):
+             st.rerun()
+
     tab1, tab2, tab3, tab4 = st.tabs([
         "Tommy & Elite EOD",
         "Universal EOD",
