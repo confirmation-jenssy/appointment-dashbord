@@ -9,7 +9,8 @@ from reporting import (
     build_tommy_elite_report,
     build_universal_report,
     build_mccormick_report,
-    build_nova_report
+    build_nova_report,
+    build_appointment_counts
 )
 
 st.set_page_config(
