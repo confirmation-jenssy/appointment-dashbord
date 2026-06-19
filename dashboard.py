@@ -15,26 +15,6 @@ st.set_page_config(
 
 items = get_monday_items()
 
-with st.expander("Status Summary"):
-
-    status_counts = {}
-
-    for item in items:
-
-        values = {}
-
-        for col in item["column_values"]:
-            values[col["id"]] = col["text"]
-
-        status = values.get("status", "")
-
-        if not status:
-            status = "(BLANK)"
-
-        status_counts[status] = (
-            status_counts.get(status, 0) + 1
-        )
-
     st.write(status_counts)
 
 page = st.sidebar.selectbox(
