@@ -170,52 +170,37 @@ def build_report(items):
 
 # The helper functions remain unchanged and use the updated build_report
 def build_universal_report(items):
-
-    filtered = []
-
-    for item in items:
-
-        values = {}
-
-        for col in item["column_values"]:
-            values[col["id"]] = col["text"]
-
-        status = values.get(
-            COLUMN_IDS["status"],
-            ""
-        ).upper().strip()
-
-        if status == "UNIVERSAL":
-            filtered.append(item)
-
-    return build_report(filtered)
-
+    return build_disburse_report(
+        items,
+        "UNIVERSAL"
+    )
 
 def build_mccormick_report(items):
-
-    filtered = []
-
-    for item in items:
-
-        values = {}
-
-        for col in item["column_values"]:
-            values[col["id"]] = col["text"]
-
-        status = values.get(
-            COLUMN_IDS["status"],
-            ""
-        ).upper().strip()
-
-        if status == "MCCORMICK":
-            filtered.append(item)
-
-    return build_report(filtered)
-
+    return build_disburse_report(
+        items,
+        "MCCORMICK"
+    )
 
 def build_nova_report(items):
+    return build_disburse_report(
+        items,
+        "NOVA"
+    )
 
-    filtered = []
+def build_disburse_report(items, client_name):
+
+    report = {
+        "confirmed": 0,
+        "same_day": 0,
+        "no_answer": 0,
+        "cancelled": 0,
+        "reschedule": 0,
+        "rejected": 0,
+        "total_leads": 0,
+        "conversion": 0
+    }
+
+    today = datetime.now().date()
 
     for item in items:
 
@@ -229,7 +214,54 @@ def build_nova_report(items):
             ""
         ).upper().strip()
 
-        if status == "NOVA":
-            filtered.append(item)
+        if status != client_name.upper():
+            continue
 
-    return build_report(filtered)
+        meeting_date = values.get(
+            COLUMN_IDS["meeting_date"],
+            ""
+        )
+
+        dt = parse_meeting_date(meeting_date)
+
+        if dt is None:
+            continue
+
+        if dt.date() != today:
+            continue
+
+        result = values.get(
+            COLUMN_IDS["same_day"],
+            ""
+        ).upper().strip()
+
+        report["total_leads"] += 1
+
+        if result == "CONFIRMED":
+            report["confirmed"] += 1
+
+        elif result == "NO ANSWER":
+            report["no_answer"] += 1
+
+        elif result in ["CANCEL", "CANCELED", "CANCELLED"]:
+            report["cancelled"] += 1
+
+        elif result == "RESCHEDULE":
+            report["reschedule"] += 1
+
+        elif result == "REJECTED":
+            report["rejected"] += 1
+
+        elif result == "SAME DAY":
+            report["same_day"] += 1
+            report["confirmed"] += 1
+
+    report["conversion"] = round(
+        (
+            report["confirmed"] /
+            max(1, report["total_leads"])
+        ) * 100,
+        2
+    )
+
+    return report
