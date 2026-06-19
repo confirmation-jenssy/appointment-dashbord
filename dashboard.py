@@ -122,5 +122,7 @@ if page == "Confirmation":
 if page == "Appointment Counts":
 
     st.title("Appointment Counts")
-        counts = build_appointment_counts(items)
-        st.write(counts)
+    
+    counts = build_appointment_counts(items)
+
+    st.write(counts)
