@@ -169,14 +169,67 @@ def build_report(items):
 
 
 # The helper functions remain unchanged and use the updated build_report
-def build_tommy_elite_report(items):
-    return build_report(items)
-
 def build_universal_report(items):
-    return build_report(items)
-    
+
+    filtered = []
+
+    for item in items:
+
+        values = {}
+
+        for col in item["column_values"]:
+            values[col["id"]] = col["text"]
+
+        status = values.get(
+            COLUMN_IDS["status"],
+            ""
+        ).upper().strip()
+
+        if status == "UNIVERSAL":
+            filtered.append(item)
+
+    return build_report(filtered)
+
+
 def build_mccormick_report(items):
-    return build_report(items)
-    
+
+    filtered = []
+
+    for item in items:
+
+        values = {}
+
+        for col in item["column_values"]:
+            values[col["id"]] = col["text"]
+
+        status = values.get(
+            COLUMN_IDS["status"],
+            ""
+        ).upper().strip()
+
+        if status == "MCCORMICK":
+            filtered.append(item)
+
+    return build_report(filtered)
+
+
 def build_nova_report(items):
-    return build_report(items)
+
+    filtered = []
+
+    for item in items:
+
+        values = {}
+
+        for col in item["column_values"]:
+            values[col["id"]] = col["text"]
+
+        status = values.get(
+            COLUMN_IDS["status"],
+            ""
+        ).upper().strip()
+
+        if status == "NOVA":
+            filtered.append(item)
+
+    return build_report(filtered)
