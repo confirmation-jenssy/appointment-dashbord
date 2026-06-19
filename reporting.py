@@ -154,17 +154,17 @@ def build_report(items):
 
     return report
 
-    def build_tommy_elite_report(items):
-        return build_report(items)
+def build_tommy_elite_report(items):
+    return build_report(items)
 
 
-    def build_universal_report(items):
-        return build_report(items)
+def build_universal_report(items):
+    return build_report(items)
     
     
-    def build_mccormick_report(items):
-        return build_report(items)
+def build_mccormick_report(items):
+    return build_report(items)
     
     
-    def build_nova_report(items):
-        return build_report(items)
+def build_nova_report(items):
+    return build_report(items)
