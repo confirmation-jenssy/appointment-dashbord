@@ -342,8 +342,12 @@ def build_appointment_counts(items):
 
         campaign = None
 
-        if "TOMMY" in source:
-            campaign = "tommy_elite"
+        if "OREGON" in source:
+            campaign = "oregon"
+        elif "WASHINGTON" in source:
+            campaign = "washington"
+        elif "SOUTHERN CALIFORNIA" in source:
+            campaign = "socal"
         elif "MCCORMICK" in source:
             campaign = "mccormick"
         elif "NOVA" in source:
