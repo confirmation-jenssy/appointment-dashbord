@@ -16,10 +16,14 @@ def get_monday_items():
     }
 
     from datetime import datetime
+    from zoneinfo import ZoneInfo
+    
+    today = datetime.now(
+        ZoneInfo("America/Los_Angeles")
+    ).strftime("%Y-%m-%d")
 
-    # Use UTC for date calculation if possible, but keep local time formatting for consistency
-    today = datetime.now().strftime("%Y-%m-%d") 
-
+    st.write("Monday API date filter =", today)
+    
     query = f"""
     {{
         boards(ids: {BOARD_ID}) {{
