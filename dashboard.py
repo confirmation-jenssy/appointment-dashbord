@@ -171,11 +171,20 @@ if page == "Appointment Counts":
 
     st.subheader("Tomorrow Load")
 
-    st.write("Oregon loaded")
+    st.write(
+        "Oregon:",
+        counts["oregon"]["tomorrow"]
+    )
     
-    st.write("Washington loaded")
+    st.write(
+        "Washington:",
+        counts["washington"]["tomorrow"]
+    )
     
-    st.write("SoCal loaded")
+    st.write(
+        "SoCal:",
+        counts["socal"]["tomorrow"]
+    )
     
     st.write(counts)
             
