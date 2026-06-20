@@ -392,7 +392,9 @@ def build_appointment_counts(items):
         "today": str(today),
         "tomorrow": str(tomorrow),
         "today_count": (
-            counts["tommy_elite"]["total"]
+            counts["oregon"]["total"]
+            + counts["washington"]["total"]
+            + counts["socal"]["total"]
             + counts["mccormick"]["total"]
             + counts["nova"]["total"]
             + counts["universal"]["total"]
