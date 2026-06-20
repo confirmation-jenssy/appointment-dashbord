@@ -130,9 +130,27 @@ if page == "Appointment Counts":
 
     st.title("Appointment Counts")
 
-    st.write(
-        "LA Time:",
-        datetime.now(
-            ZoneInfo("America/Los_Angeles")
+    st.write("Today =", today)
+
+today_count = 0
+
+for item in items:
+
+    values = {}
+
+    for col in item["column_values"]:
+        values[col["id"]] = col["text"]
+
+    meeting_date = values.get(
+        COLUMN_IDS["meeting_date"],
+        ""
+    )
+
+    dt = parse_meeting_date(meeting_date)
+
+    if dt and dt.date() == today:
+        today_count += 1
+
+st.write("Appointments for today =", today_count)
         )
     )
