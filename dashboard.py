@@ -130,6 +130,10 @@ if page == "Appointment Counts":
 
     st.title("Appointment Counts")
 
+    counts = build_appointment_counts(items)
+    
+    st.write(counts)
+
     st.write("LA Today =", datetime.now(
         ZoneInfo("America/Los_Angeles")
     ).date())
@@ -159,6 +163,4 @@ if page == "Appointment Counts":
             })
     
     st.write("TOTAL JUNE 19 APPOINTMENTS =", today_hits)
-
-    st.write(counts)
             
