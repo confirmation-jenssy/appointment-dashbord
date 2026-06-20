@@ -370,7 +370,7 @@ def build_appointment_counts(items):
         if campaign is None:
             continue
 
-    appointment_day = dt.date()
+    appointment_day = datetime.now(ZoneInfo("America/Los_Angeles")).date()
 
     # TODAY DAY
     if appointment_day == today:
