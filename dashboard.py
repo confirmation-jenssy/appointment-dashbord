@@ -133,8 +133,6 @@ if page == "Appointment Counts":
     st.write("LA Today =", datetime.now(
         ZoneInfo("America/Los_Angeles")
     ).date())
-
-    st.write(counts)
     
     today_hits = 0
 
@@ -161,4 +159,6 @@ if page == "Appointment Counts":
             })
     
     st.write("TOTAL JUNE 19 APPOINTMENTS =", today_hits)
+
+    st.write(counts)
             
