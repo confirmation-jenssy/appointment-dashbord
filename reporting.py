@@ -15,29 +15,28 @@ from config import (
 
 
 def parse_meeting_date(date_string):
-    """
-    Attempts to parse a date string using multiple common formats. 
-    Returns the datetime object if successful, otherwise None.
-    """
     if not date_string:
         return None
 
-    # List of possible date format codes (YYYY-MM-DD, YYYY-MM-DD HH:MM, etc.)
     date_formats = [
-        "%Y-%m-%d %H:%M", # Date and Time (The current expected format)
-        "%Y-%m-%d",       # Just the Date
-        "%m/%d/%Y",       # Common US Format 
-        "%d/%m/%Y"        # Common UK/EU Format
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%d",
+        "%m/%d/%Y",
+        "%d/%m/%Y"
     ]
 
     for fmt in date_formats:
         try:
             dt = datetime.strptime(date_string, fmt)
-            dt = dt.replace(tzinfo=timezone.utc).astimezone(LA)
-            return dt
+
+            # assume UTC ONLY if no timezone info exists
+            dt = dt.replace(tzinfo=timezone.utc)
+
+            return dt.astimezone(LA)
+
         except ValueError:
-            continue # Try the next format
-            
+            continue
+
     return None
 
 
