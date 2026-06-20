@@ -133,6 +133,8 @@ if page == "Appointment Counts":
     st.write("LA Today =", datetime.now(
         ZoneInfo("America/Los_Angeles")
     ).date())
+
+    st.write(counts)
     
     today_hits = 0
 
