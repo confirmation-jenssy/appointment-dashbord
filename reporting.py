@@ -380,7 +380,7 @@ def build_appointment_counts(items):
         if confirmation != "":
             counts[campagin]["worked"] += 1
 
-        else
+        else:
             add_time_bucket(
                 counts[campagin]["today"],
                 dt.hour
