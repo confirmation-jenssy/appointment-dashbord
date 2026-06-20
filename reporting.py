@@ -271,27 +271,95 @@ def build_disburse_report(items, client_name):
 
 def build_appointment_counts(items):
 
+    today = datetime.now().date()
+    tomorrow = today + timedelta(days=1)
+
     counts = {
-        "tommy_elite": {
-            "total": 0,
-            "worked": 0,
-            "left": 0
-        },
-        "mccormick": {
-            "total": 0,
-            "worked": 0,
-            "left": 0
-        },
-        "nova": {
-            "total": 0,
-            "worked": 0,
-            "left": 0
-        },
-        "universal": {
-            "total": 0,
-            "worked": 0,
-            "left": 0
-        }
+        "tommy_elite": create_campaign_counts(),
+        "mccormick": create_campaign_counts(),
+        "nova": create_campaign_counts(),
+        "universal": create_campaign_counts()
     }
+
+    for item in items:
+
+        values = {}
+
+        for col in item["column_values"]:
+            values[col["id"]] = col["text"]
+
+        source = values.get(
+            COLUMN_IDS["source"],
+            ""
+        ).upper()
+
+        status = values.get(
+            COLUMN_IDS["status"],
+            ""
+        ).upper().strip()
+
+        confirmation = values.get(
+            COLUMN_IDS["confirmation"],
+            ""
+        ).strip()
+
+        meeting_date = values.get(
+            COLUMN_IDS["meeting_date"],
+            ""
+        )
+
+        dt = parse_meeting_date(meeting_date)
+
+        if dt is None:
+            continue
+
+        campaign = None
+
+        if "TOMMY" in source:
+            campaign = "tommy_elite"
+
+        elif "MCCORMICK" in source:
+            campaign = "mccormick"
+
+        elif "NOVA" in source:
+            campaign = "nova"
+
+        elif status == "UNIVERSAL":
+            campaign = "universal"
+
+        if campaign is None:
+            continue
+
+        appointment_day = dt.date()
+
+        # TODAY COUNTS
+        if appointment_day == today:
+
+            counts[campaign]["total"] += 1
+
+            if confirmation != "":
+                counts[campaign]["worked"] += 1
+
+            else:
+                add_time_bucket(
+                    counts[campaign]["today"],
+                    dt.hour
+                )
+
+        # TOMORROW COUNTS
+        elif appointment_day == tomorrow:
+
+            if confirmation == "":
+                add_time_bucket(
+                    counts[campaign]["tomorrow"],
+                    dt.hour
+                )
+
+    for campaign in counts.values():
+
+        campaign["left"] = (
+            campaign["total"]
+            - campaign["worked"]
+        )
 
     return counts
