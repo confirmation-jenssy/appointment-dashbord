@@ -124,18 +124,18 @@ if page == "Appointment Counts":
 
     st.title("Appointment Counts")
 
-        st.write("Server Today:", datetime.now().date())
+    st.write("Server Today:", datetime.now().date())
 
-        for item in items[:10]:
+    for item in items[:10]:
 
-            values = {}
+        values = {}
 
-            for col in item["column_values"]:
-                values[col["id"]] = col["text"]
+        for col in item["column_values"]:
+            values[col["id"]] = col["text"]
 
-            st.write(
-                values.get("date_mkr2q53p", "")
-            )
+        st.write(
+            values.get("date_mkr2q53p", "")
+        )
     
     counts = build_appointment_counts(items)
 
