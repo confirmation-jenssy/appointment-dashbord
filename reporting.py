@@ -372,16 +372,6 @@ def build_appointment_counts(items):
 
     appointment_day = dt.date()
 
-    counts["debug_dates"] = counts.get(
-        "debug_dates",
-        []
-    )
-    
-    if len(counts["debug_dates"]) < 20:
-        counts["debug_dates"].append(
-            str(appointment_day)
-        )
-
     # TODAY DAY
     if appointment_day == today:
 
