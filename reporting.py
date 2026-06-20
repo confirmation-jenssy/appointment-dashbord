@@ -273,21 +273,24 @@ def build_appointment_counts(items):
 
     counts = {
         "tommy_elite": {
-            "total": 25,
-            "worked": 18,
-            "left": 7,
-            "today": {
-                "10-12": 0,
-                "1-3": 3,
-                "4-6": 2,
-                "7-8": 2
-            },
-            "tomorrow": {
-                "10-12": 4,
-                "1-3": 6,
-                "4-6": 3,
-                "7-8": 1
-            }
+            "total": 0,
+            "worked": 0,
+            "left": 0
+        },
+        "mccormick": {
+            "total": 0,
+            "worked": 0,
+            "left": 0
+        },
+        "nova": {
+            "total": 0,
+            "worked": 0,
+            "left": 0
+        },
+        "universal": {
+            "total": 0,
+            "worked": 0,
+            "left": 0
         }
     }
 
