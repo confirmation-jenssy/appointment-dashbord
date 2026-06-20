@@ -378,11 +378,11 @@ def build_appointment_counts(items):
         counts[campaign]["total"] =+ 1
 
         if confirmation != "":
-            counts[campagin]["worked"] += 1
+            counts[campaign]["worked"] += 1
 
         else:
             add_time_bucket(
-                counts[campagin]["today"],
+                counts[campaign]["today"],
                 dt.hour
             )
     # TOMORRROW COUNTS
