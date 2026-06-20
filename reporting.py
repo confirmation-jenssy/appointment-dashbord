@@ -374,10 +374,21 @@ def build_appointment_counts(items):
 
         # TODAY COUNTS
         if appointment_day == today:
+
+            counts[campaign]["total"] += 1
+        
+            if confirmation != "":
+                counts[campaign]["worked"] += 1
+        
+            else:
+                add_time_bucket(
+                    counts[campaign]["today"],
+                    dt.hour
+                )
         
         # TOMORROW COUNTS
         elif appointment_day == tomorrow:
-
+        
             if confirmation == "":
                 add_time_bucket(
                     counts[campaign]["tomorrow"],
@@ -390,11 +401,6 @@ def build_appointment_counts(items):
             campaign["total"]
             - campaign["worked"]
         )
-
-    counts["debug"] = {
-        "today": str(today),
-        "tomorrow": str(tomorrow)
-    }
 
     counts["debug"] = {
         "today": str(today),
