@@ -7,9 +7,6 @@ import time # Added for better handling of parsing attempts
 
 LA = ZoneInfo("America/Los_Angeles")
 
-dt = datetime.strptime(date_string, fmt)
-dt = dt.replace(tzinfo=timezone.utc).astimezone(LA)
-
 from config import (
     COLUMN_IDS,
     CONFIRMED_STATUSES,
@@ -36,6 +33,7 @@ def parse_meeting_date(date_string):
     for fmt in date_formats:
         try:
             dt = datetime.strptime(date_string, fmt)
+            dt = dt.replace(tzinfo=timezone.utc).astimezone(LA)
             return dt
         except ValueError:
             continue # Try the next format
