@@ -5,6 +5,11 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 import time # Added for better handling of parsing attempts
 
+LA = ZoneInfo("America/Los_Angeles")
+
+dt = datetime.strptime(date_string, fmt)
+dt = dt.replace(tzinfo=timezone.utc).astimezone(LA)
+
 from config import (
     COLUMN_IDS,
     CONFIRMED_STATUSES,
@@ -370,7 +375,7 @@ def build_appointment_counts(items):
         if campaign is None:
             continue
 
-    appointment_day = datetime.now(ZoneInfo("America/Los_Angeles")).date()
+    appointment_day = dt.date()
 
     # TODAY DAY
     if appointment_day == today:
