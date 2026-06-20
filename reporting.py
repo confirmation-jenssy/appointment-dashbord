@@ -370,31 +370,30 @@ def build_appointment_counts(items):
         if campaign is None:
             continue
 
-        appointment_day = dt.date()
+    appointment_day = day.date()
 
-        # TODAY COUNTS
-        if appointment_day == today:
+    # TODAY DAY
+    if appointment_day == today:
 
-            counts[campaign]["total"] += 1
-        
-            if confirmation != "":
-                counts[campaign]["worked"] += 1
-        
-            else:
-                add_time_bucket(
-                    counts[campaign]["today"],
-                    dt.hour
-                )
-        
-        # TOMORROW COUNTS
-        elif appointment_day == tomorrow:
-        
-            if confirmation == "":
-                add_time_bucket(
-                    counts[campaign]["tomorrow"],
-                    dt.hour
-                )
+        counts[campaign]["total"] =+ 1
 
+        if confirmation != "":
+            counts[campagin]["worked"] += 1
+
+        else
+            add_time_bucket(
+                counts[campagin]["today"],
+                dt.hour
+            )
+    # TOMORRROW COUNTS
+    elif appointment_day == tomorrow:
+
+        if confirmation == "":
+            add_time_bucket(
+                counts[campaign]{"tomorrow"],
+                dt.hour
+            )
+    
     for campaign in counts.values():
 
         campaign["left"] = (
@@ -410,7 +409,7 @@ def build_appointment_counts(items):
             + counts["mccormick"]["total"]
             + counts["nova"]["total"]
             + counts["universal"]["total"]
-        )
+            )
     }
     
     return counts
