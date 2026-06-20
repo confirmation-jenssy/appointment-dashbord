@@ -126,7 +126,7 @@ if page == "Appointment Counts":
 
     st.title("Appointment Counts")
 
-    st.write("Server Today:", datetime.now().date())
+    st.write("Server Today:", datetime.now())
 
     for item in items[:10]:
 
