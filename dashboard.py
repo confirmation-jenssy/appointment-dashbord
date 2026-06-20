@@ -123,19 +123,7 @@ if page == "Confirmation":
 if page == "Appointment Counts":
 
     st.title("Appointment Counts")
-    
-    st.write("Total items pulled from Monday:", len(items))
 
-    for item in items:
+    counts = build_appointment_counts(items)
 
-        values = {}
-    
-        for col in item["column_values"]:
-            values[col["id"]] = col["text"]
-    
-        st.write({
-            "source": values.get("text_mkr22s20", ""),
-            "status": values.get("status", ""),
-            "confirmation": values.get("color_mkr2rpkj", ""),
-            "meeting_date": values.get("date_mkr2q53p", "")
-        })
+    st.write(counts)
