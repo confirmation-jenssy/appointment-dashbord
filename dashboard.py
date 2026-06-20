@@ -152,5 +152,4 @@ if page == "Appointment Counts":
             today_count += 1
     
     st.write("Appointments for today =", today_count)
-            )
-        )
+            
