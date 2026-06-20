@@ -375,7 +375,7 @@ def build_appointment_counts(items):
     # TODAY DAY
     if appointment_day == today:
 
-        counts[campaign]["total"] =+ 1
+        counts[campaign]["total"] += 1
 
         if confirmation != "":
             counts[campaign]["worked"] += 1
