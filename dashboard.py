@@ -6,8 +6,6 @@ import streamlit as st
 from zoneinfo import ZoneInfo
 import sys
 
-st.write(sys.version)
-
 from datetime import datetime
 
 from monday_api import get_monday_items
