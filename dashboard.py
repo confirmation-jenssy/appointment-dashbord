@@ -130,26 +130,7 @@ if page == "Appointment Counts":
 
     st.title("Appointment Counts")
 
-    st.write("Today =", today)
+    counts = build_appointment_counts(items)
 
-    today_count = 0
-    
-    for item in items:
-    
-        values = {}
-    
-        for col in item["column_values"]:
-            values[col["id"]] = col["text"]
-    
-        meeting_date = values.get(
-            COLUMN_IDS["meeting_date"],
-            ""
-        )
-    
-        dt = parse_meeting_date(meeting_date)
-    
-        if dt and dt.date() == today:
-            today_count += 1
-    
-    st.write("Appointments for today =", today_count)
+    st.write(counts)
             
