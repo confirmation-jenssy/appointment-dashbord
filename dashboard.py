@@ -4,6 +4,10 @@
 
 import streamlit as st
 
+import sys
+
+st.write(sys.version)
+
 from datetime import datetime
 
 from monday_api import get_monday_items
