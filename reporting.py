@@ -269,6 +269,40 @@ def build_disburse_report(items, client_name):
 
     return report
 
+def create_campaign_counts():
+
+    return {
+        "total": 0,
+        "worked": 0,
+        "left": 0,
+        "today": {
+            "10-12": 0,
+            "1-3": 0,
+            "4-6": 0,
+            "7-8": 0
+        },
+        "tomorrow": {
+            "10-12": 0,
+            "1-3": 0,
+            "4-6": 0,
+            "7-8": 0
+        }
+    }
+
+def add_time_bucket(bucket, hour):
+
+    if 10 <= hour <= 12:
+        bucket["10-12"] += 1
+
+    elif 13 <= hour <= 15:
+        bucket["1-3"] += 1
+
+    elif 16 <= hour <= 18:
+        bucket["4-6"] += 1
+
+    elif 19 <= hour <= 20:
+        bucket["7-8"] += 1
+
 def build_appointment_counts(items):
 
     today = datetime.now().date()
