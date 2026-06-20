@@ -154,19 +154,38 @@ if page == "Appointment Counts":
 
     st.subheader("Daily Capacity")
 
-    st.write(
-        "Oregon Capacity:",
+    c1, c2, c3 = st.columns(3)
+    
+    c1.metric(
+        "Oregon Capacity",
         oregon_reps * 3
     )
     
-    st.write(
-        "Washington Capacity:",
+    c2.metric(
+        "Washington Capacity",
         washington_reps * 3
     )
     
-    st.write(
-        "Southern California Capacity:",
+    c3.metric(
+        "SoCal Capacity",
         socal_reps * 3
+    )
+
+    st.subheader("Tomorrow Load")
+
+    st.write(
+        "Oregon:",
+        counts["oregon"]["tomorrow"]
+    )
+    
+    st.write(
+        "Washington:",
+        counts["washington"]["tomorrow"]
+    )
+    
+    st.write(
+        "SoCal:",
+        counts["socal"]["tomorrow"]
     )
     
     st.write(counts)
