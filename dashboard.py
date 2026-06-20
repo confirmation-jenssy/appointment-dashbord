@@ -151,6 +151,23 @@ if page == "Appointment Counts":
         min_value=0,
         value=5
     )
+
+    st.subheader("Daily Capacity")
+
+    st.write(
+        "Oregon Capacity:",
+        oregon_reps * 3
+    )
+    
+    st.write(
+        "Washington Capacity:",
+        washington_reps * 3
+    )
+    
+    st.write(
+        "Southern California Capacity:",
+        socal_reps * 3
+    )
     
     st.write(counts)
             
