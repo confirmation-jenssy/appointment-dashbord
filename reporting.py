@@ -314,7 +314,9 @@ def build_appointment_counts(items):
     tomorrow = today + timedelta(days=1)
 
     counts = {
-        "tommy_elite": create_campaign_counts(),
+        "oregon": create_campaign_counts(),
+        "washington": create_campaign_counts(),
+        "socal": create_campaign_counts(),
         "mccormick": create_campaign_counts(),
         "nova": create_campaign_counts(),
         "universal": create_campaign_counts()
