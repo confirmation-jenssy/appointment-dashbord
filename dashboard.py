@@ -1195,6 +1195,46 @@ if page == "End of Day Export":
     )
 
     worksheet = sheet.sheet1
+
+    if st.button("Debug Monday Data"):
+
+        st.write("Items Loaded:", len(items))
+    
+        dates = []
+    
+        for item in items:
+    
+            status = get_column_value(
+                item,
+                "status"
+            )
+    
+            appt_date = get_column_value(
+                item,
+                "date_mkr2q53p"
+            )
+    
+            if appt_date:
+    
+                dates.append(appt_date)
+    
+                st.write(
+                    item["name"],
+                    "|",
+                    status,
+                    "|",
+                    appt_date
+                )
+    
+        st.write(
+            "Earliest Date:",
+            min(dates) if dates else "None"
+        )
+    
+        st.write(
+            "Latest Date:",
+            max(dates) if dates else "None"
+        )
     
     if st.button("Test Export 6/15 - 6/19", type="primary"):
 
