@@ -160,12 +160,12 @@ if page == "Appointment Counts":
     )
     
     c2.metric(
-        "Washington Capacity",
+        "WA Capacity",
         washington_reps * 3
     )
     
     c3.metric(
-        "SoCal Capacity",
+        "CA Capacity",
         socal_reps * 3
     )
 
