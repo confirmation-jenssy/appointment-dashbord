@@ -172,7 +172,7 @@ if page == "Appointment Counts":
 
     c1.metric(
         "OR",
-        oregon_reps * 3,
+        oregon_target,
         f"{oregon_reps} reps"
     )
         
