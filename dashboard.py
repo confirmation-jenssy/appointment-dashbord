@@ -301,19 +301,49 @@ if page == "Appointment Counts":
             f"**OR {get_status(or_today, oregon_reps * 3)}**"
         )
         
-        st.write(counts["oregon"]["today"])
+        st.write(
+            f"10-12: {counts['oregon']['today']['10-12']}"
+        )
+        
+        st.write(
+            f"1-3: {counts['oregon']['today']['1-3']}"
+        )
+        
+        st.write(
+            f"4-6: {counts['oregon']['today']['4-6']}"
+        )
         
         st.markdown(
             f"**WA {get_status(wa_today, washington_reps * 3)}**"
         )
         
-        st.write(counts["washington"]["today"])
+        st.write(
+            f"10-12: {counts['washington']['today']['10-12']}"
+        )
+        
+        st.write(
+            f"1-3: {counts['washington']['today']['1-3']}"
+        )
+        
+        st.write(
+            f"4-6: {counts['washington']['today']['4-6']}"
+        )
         
         st.markdown(
             f"**CA {get_status(ca_today, socal_reps * 3)}**"
         )
         
-        st.write(counts["socal"]["today"])
+        st.write(
+            f"10-12: {counts['socal']['today']['10-12']}"
+        )
+        
+        st.write(
+            f"1-3: {counts['socal']['today']['1-3']}"
+        )
+        
+        st.write(
+            f"4-6: {counts['socal']['today']['4-6']}"
+        )
     
     with right_col:
         
