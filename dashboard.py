@@ -24,6 +24,7 @@ page = st.sidebar.selectbox(
     "Select Page",
     [
         "End of Day Report",
+        "End of Day Export"
         "Total Appointment"
     ]
 )
@@ -119,6 +120,24 @@ if page == "End of Day Report":
 
 # Note: The remaining "Total Appointment" logic would go here 
 # and should also be wrapped with data checking if implemented later.
+if page == "End of Day Report":
+
+    st.title("End of Day Report")
+    st.subheader("CF Appointments Ready")
+
+    st.write("Tommy: 0")
+    st.write("Elite: 0")
+    st.write("McCormick: 0")
+    st.write("Nova: 0")
+    st.write("Universal: 0")
+
+    st.divider()
+
+    st.write("Total: 0")
+
+    if st.button("Export CF Appointments"):
+        st.success("Export started")
+
 if page == "Total Appointment":
 
     st.title("Total Appointment")
