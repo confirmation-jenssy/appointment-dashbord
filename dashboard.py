@@ -623,273 +623,285 @@ if page == "Appointment Counts":
     with right_col:
         
         st.subheader("Tomorrow")
-        
-        st.markdown("### OR")
-        
-        slot_target = round(
-            oregon_target / 3
-        )
-        
-        slot_booked = counts["oregon"]["tomorrow"]["10-12"]
 
-        st.write(
-            f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-        
-        slot_target = round(
-            oregon_target / 3
-        )
-        
-        slot_booked = counts["oregon"]["tomorrow"]["1-3"]
+        or_col, wa_col, ca_col = st.columns(3)
 
-        st.write(
-            f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-        
-        slot_target = round(
-            oregon_target / 3
-        )
-        
-        slot_booked = counts["oregon"]["tomorrow"]["4-6"]
+        with or_col:
 
-        st.write(
-            f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
-        )
+            st.markdown("### OR")
         
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
+            slot_target = round(
+                oregon_target / 3
+            )
+            
+            slot_booked = counts["oregon"]["tomorrow"]["10-12"]
 
-        slot_booked = counts["oregon"]["tomorrow"]["7-8"]
+            st.write(
+                f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+            
+            slot_target = round(
+                oregon_target / 3
+            )
+            
+            slot_booked = counts["oregon"]["tomorrow"]["1-3"]
 
-        st.write(
-            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
+            st.write(
+                f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+            
+            slot_target = round(
+                oregon_target / 3
+            )
+            
+            slot_booked = counts["oregon"]["tomorrow"]["4-6"]
 
-        needs = []
+            st.write(
+                f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
 
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["tomorrow"]["10-12"]
-        )
-        if missing:
-            needs.append(f"10AM-12PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["tomorrow"]["1-3"]
-        )
-        if missing:
-            needs.append(f"1PM-3PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["tomorrow"]["4-6"]
-        )
-        if missing:
-            needs.append(f"4PM-6PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["tomorrow"]["7-8"]
-        )
-        if missing:
-            needs.append(f"7PM-8PM → {missing}")
-        
-        if needs:
-            st.markdown("**Needs Leads:**")
-        
-            for item in needs:
-                st.write(f"• {item}")
-        
-        st.markdown("### WA")
+            slot_booked = counts["oregon"]["tomorrow"]["7-8"]
 
-        slot_target = round(
+            st.write(
+                f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            needs = []
+
+            missing = max(
+                0,
+                slot_target - counts["oregon"]["tomorrow"]["10-12"]
+            )
+            if missing:
+                needs.append(f"10AM-12PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["oregon"]["tomorrow"]["1-3"]
+            )
+            if missing:
+                needs.append(f"1PM-3PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["oregon"]["tomorrow"]["4-6"]
+            )
+            if missing:
+                needs.append(f"4PM-6PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["oregon"]["tomorrow"]["7-8"]
+            )
+            if missing:
+                needs.append(f"7PM-8PM → {missing}")
+            
+            if needs:
+                st.markdown("**Needs Leads:**")
+            
+                for item in needs:
+                    st.write(f"• {item}")
+
+        with wa_col:
+
+            st.markdown("### WA")
+
+            slot_target = round(
             washington_target / 3
         )
 
-        slot_booked = counts["washington"]["tomorrow"]["10-12"]
+            slot_booked = counts["washington"]["tomorrow"]["10-12"]
 
-        st.write(
-            f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
-        )
+            st.write(
+                f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            slot_target = round(
+                washington_target / 3
+            )
+
+            slot_booked = counts["washington"]["tomorrow"]["1-3"]
+
+            st.write(
+                f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            slot_target = round(
+                washington_target / 3
+            )
+
+            slot_booked = counts["washington"]["tomorrow"]["4-6"]
+
+            st.write(
+                f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            slot_booked = counts["washington"]["tomorrow"]["7-8"]
+
+            st.write(
+                f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            needs = []
+
+            missing = max(
+                0,
+                slot_target - counts["washington"]["tomorrow"]["10-12"]
+            )
+            if missing:
+                needs.append(f"10AM-12PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["washington"]["tomorrow"]["1-3"]
+            )
+            if missing:
+                needs.append(f"1PM-3PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["washington"]["tomorrow"]["4-6"]
+            )
+            if missing:
+                needs.append(f"4PM-6PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["washington"]["tomorrow"]["7-8"]
+            )
+            if missing:
+                needs.append(f"7PM-8PM → {missing}")
+            
+            if needs:
+                st.markdown("**Needs Leads:**")
+            
+                for item in needs:
+                    st.write(f"• {item}")    
+
+        with ca_col:
+
+            st.markdown("### CA")
+
+            st.markdown("### CA")
+
+            slot_target = round(
+                socal_target / 3
+            )
+
+            slot_booked = counts["socal"]["tomorrow"]["10-12"]
+
+            st.write(
+                f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            slot_target = round(
+                socal_target / 3
+            )
+
+            slot_booked = counts["socal"]["tomorrow"]["1-3"]
+
+            st.write(
+                f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            slot_target = round(
+                washington_target / 3
+            )
+
+            slot_booked = counts["socal"]["tomorrow"]["4-6"]
+
+            st.write(
+                f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            slot_booked = counts["socal"]["tomorrow"]["7-8"]
+
+            st.write(
+                f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+            )
+            
+            st.caption(
+                f"Leads: {slot_booked} | Goal: {slot_target}"
+            )
+
+            needs = []
+
+            missing = max(
+                0,
+                slot_target - counts["socal"]["tomorrow"]["10-12"]
+            )
+            if missing:
+                needs.append(f"10AM-12PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["socal"]["tomorrow"]["1-3"]
+            )
+            if missing:
+                needs.append(f"1PM-3PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["socal"]["tomorrow"]["4-6"]
+            )
+            if missing:
+                needs.append(f"4PM-6PM → {missing}")
+            
+            missing = max(
+                0,
+                slot_target - counts["socal"]["tomorrow"]["7-8"]
+            )
+            if missing:
+                needs.append(f"7PM-8PM → {missing}")
+            
+            if needs:
+                st.markdown("**Needs Leads:**")
+            
+                for item in needs:
+                    st.write(f"• {item}")  
         
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        slot_target = round(
-            washington_target / 3
-        )
-
-        slot_booked = counts["washington"]["tomorrow"]["1-3"]
-
-        st.write(
-            f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
-        )
         
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        slot_target = round(
-            washington_target / 3
-        )
-
-        slot_booked = counts["washington"]["tomorrow"]["4-6"]
-
-        st.write(
-            f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        slot_booked = counts["washington"]["tomorrow"]["7-8"]
-
-        st.write(
-            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        needs = []
-
-        missing = max(
-            0,
-            slot_target - counts["washington"]["tomorrow"]["10-12"]
-        )
-        if missing:
-            needs.append(f"10AM-12PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["washington"]["tomorrow"]["1-3"]
-        )
-        if missing:
-            needs.append(f"1PM-3PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["washington"]["tomorrow"]["4-6"]
-        )
-        if missing:
-            needs.append(f"4PM-6PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["washington"]["tomorrow"]["7-8"]
-        )
-        if missing:
-            needs.append(f"7PM-8PM → {missing}")
-        
-        if needs:
-            st.markdown("**Needs Leads:**")
-        
-            for item in needs:
-                st.write(f"• {item}")
-        
-        st.markdown("### CA")
-
-        slot_target = round(
-            socal_target / 3
-        )
-
-        slot_booked = counts["socal"]["tomorrow"]["10-12"]
-
-        st.write(
-            f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        slot_target = round(
-            socal_target / 3
-        )
-
-        slot_booked = counts["socal"]["tomorrow"]["1-3"]
-
-        st.write(
-            f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        slot_target = round(
-            washington_target / 3
-        )
-
-        slot_booked = counts["socal"]["tomorrow"]["4-6"]
-
-        st.write(
-            f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        slot_booked = counts["socal"]["tomorrow"]["7-8"]
-
-        st.write(
-            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
-        )
-        
-        st.caption(
-            f"Leads: {slot_booked} | Goal: {slot_target}"
-        )
-
-        needs = []
-
-        missing = max(
-            0,
-            slot_target - counts["socal"]["tomorrow"]["10-12"]
-        )
-        if missing:
-            needs.append(f"10AM-12PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["socal"]["tomorrow"]["1-3"]
-        )
-        if missing:
-            needs.append(f"1PM-3PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["socal"]["tomorrow"]["4-6"]
-        )
-        if missing:
-            needs.append(f"4PM-6PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["socal"]["tomorrow"]["7-8"]
-        )
-        if missing:
-            needs.append(f"7PM-8PM → {missing}")
-        
-        if needs:
-            st.markdown("**Needs Leads:**")
-        
-            for item in needs:
-                st.write(f"• {item}")
