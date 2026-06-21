@@ -165,6 +165,8 @@ if page == "Appointment Counts":
         f"TOTAL: {total_capacity}"
     )
 
+    # TODAY
+    
     today_or = (
         counts["oregon"]["today"]["10-12"]
         + counts["oregon"]["today"]["1-3"]
@@ -189,16 +191,8 @@ if page == "Appointment Counts":
         + today_ca
     )
     
-    st.subheader("Today")
+    # TOMORROW
     
-    st.write(
-        f"OR: {today_or}    "
-        f"WA: {today_wa}    "
-        f"CA: {today_ca}    "
-        f"TOTAL: {today_total}    "
-        f"ATM: {total_capacity}"
-    )
-
     tomorrow_or = (
         counts["oregon"]["tomorrow"]["10-12"]
         + counts["oregon"]["tomorrow"]["1-3"]
@@ -223,59 +217,35 @@ if page == "Appointment Counts":
         + tomorrow_ca
     )
     
-    st.subheader("Tomorrow")
-    
-    st.write(
-        f"OR: {tomorrow_or}    "
-        f"WA: {tomorrow_wa}    "
-        f"CA: {tomorrow_ca}    "
-        f"TOTAL: {tomorrow_total}    "
-        f"ATM: {total_capacity}"
-    )
-
-    left_col, right_col = st.columns(2)
-
-    with left_col:
-        st.subheader("Today")
-
-    with right_col:
-        st.subheader("Tomorrow")
-
-    oregon_booked = (
-        counts["oregon"]["tomorrow"]["10-12"]
-        + counts["oregon"]["tomorrow"]["1-3"]
-        + counts["oregon"]["tomorrow"]["4-6"]
-    )
-    
-    washington_booked = (
-        counts["washington"]["tomorrow"]["10-12"]
-        + counts["washington"]["tomorrow"]["1-3"]
-        + counts["washington"]["tomorrow"]["4-6"]
-    )
-    
-    socal_booked = (
-        counts["socal"]["tomorrow"]["10-12"]
-        + counts["socal"]["tomorrow"]["1-3"]
-        + counts["socal"]["tomorrow"]["4-6"]
-    )
-    
-    st.write(
-        f"OR: {oregon_booked} appointments"
-    )
-    
-    st.write(
-        f"WA: {washington_booked} appointments"
-    )
-    
-    st.write(
-        f"CA: {socal_booked} appointments"
-    )
-    
-    st.subheader("Status")
+    # CAPACITY
     
     oregon_capacity = oregon_reps * 3
     washington_capacity = washington_reps * 3
     socal_capacity = socal_reps * 3
+    
+    # SIDE BY SIDE
+    
+    left_col, right_col = st.columns(2)
+    
+    with left_col:
+    
+        st.subheader("Today")
+    
+        st.write(f"OR: {today_or}")
+        st.write(f"WA: {today_wa}")
+        st.write(f"CA: {today_ca}")
+        st.write(f"TOTAL: {today_total}")
+        st.write(f"ATM: {total_capacity}")
+    
+    with right_col:
+    
+        st.subheader("Tomorrow")
+    
+        st.write(f"OR: {tomorrow_or}")
+        st.write(f"WA: {tomorrow_wa}")
+        st.write(f"CA: {tomorrow_ca}")
+        st.write(f"TOTAL: {tomorrow_total}")
+        st.write(f"ATM: {total_capacity}")
     
     st.write(
         "Oregon:",
