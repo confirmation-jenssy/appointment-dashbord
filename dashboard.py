@@ -20,6 +20,50 @@ from reporting import (
 # --- CHANGE HERE: Fetch data when needed (and rely on the caching in monday_api.py) ---
 items = get_monday_items() 
 
+def build_eod_counts(items):
+
+    counts = {
+        "tommy": 0,
+        "elite": 0,
+        "mccormick": 0,
+        "nova": 0,
+        "universal": 0
+    }
+
+    for item in items:
+
+        status = item["name"]
+
+        confirmation = ""
+
+        for col in item["column_values"]:
+
+            if col["id"] == "color_mkr2rpkj":
+                confirmation = col.get("text", "")
+
+        if status == "Tommy":
+            counts["tommy"] += 1
+
+        elif status == "Elite":
+            counts["elite"] += 1
+
+        elif status == "Universal":
+            counts["universal"] += 1
+
+        elif (
+            status == "Nova"
+            and confirmation == "Confirmed"
+        ):
+            counts["nova"] += 1
+
+        elif (
+            status == "McCormick"
+            and confirmation == "Confirmed"
+        ):
+            counts["mccormick"] += 1
+
+    return counts
+
 page = st.sidebar.selectbox(
     "Select Page",
     [
@@ -1024,7 +1068,9 @@ if page == "Total Appointment":
             
                 for item in needs:
                     st.write(f"• {item}")  
-        
+
+
+
 if page == "End of Day Export":
 
     st.title("End of Day Export")
@@ -1043,7 +1089,12 @@ if page == "End of Day Export":
     
     st.divider()
     
-    st.write("Total: 0")
+    total_cf = sum(eod_counts.values())
+
+    st.metric(
+        "Total CF",
+        total_cf
+    )
     
     if st.button("Export CF Appointments"):
         st.success("Export started")
