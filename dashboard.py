@@ -199,33 +199,13 @@ if page == "Total Appointment":
 
     with c1:
         st.markdown(
-            f"""
-            <div style="text-align:center;">
-                <div style="
-                    color:#2563eb;
-                    font-size:28px;
-                    font-weight:bold;
-                    margin-bottom:-10px;
-                ">
-                    OR
-                </div>
-    
-                <div style="
-                    font-size:42px;
-                    font-weight:bold;
-                ">
-                    {oregon_target}
-                </div>
-    
-                <div style="
-                    color:#22c55e;
-                    font-size:16px;
-                ">
-                    ↑ {oregon_reps} reps
-                </div>
-            </div>
-            """,
+            "<h4 style='color:#2563eb; margin-bottom:0;'>OR</h4>",
             unsafe_allow_html=True
+        )
+        st.metric(
+            label=" ",
+            value=oregon_target,
+            delta=f"{oregon_reps} reps"
         )
     
     with c2:
