@@ -1259,18 +1259,12 @@ if page == "End of Day Export":
                 "%Y-%m-%d %H:%M"
             )
         
-           # if not (
-           #     datetime(2026, 6, 15)
-           #     <= appt_dt
-           #     <= datetime(2026, 6, 19, 23, 59)
-           # ):
-           #     continue
-
-            st.write(
-                item["name"],
-                status,
-                appointment_date
-            )
+           if not (
+                datetime(2026, 6, 21)
+                <= appt_dt
+                <= datetime(2026, 6, 21, 23, 59)
+            ):
+                continue
             
             row = [
                 appointment_date,
