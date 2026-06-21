@@ -172,10 +172,10 @@ if page == "Appointment Counts":
     left_col, right_col = st.columns(2)
 
     with left_col:
-    st.subheader("Today")
+        st.subheader("Today")
 
     with right_col:
-    st.subheader("Tomorrow")
+        st.subheader("Tomorrow")
 
     oregon_booked = (
         counts["oregon"]["tomorrow"]["10-12"]
