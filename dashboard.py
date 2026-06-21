@@ -155,6 +155,17 @@ if page == "Appointment Counts":
             value=2
         )
 
+    st.subheader("Performance")
+
+    confirmation_rate = st.number_input(
+        "Confirmation Rate %",
+        min_value=1,
+        max_value=100,
+        value=50
+    )
+
+    lead_multiplier = 100 / confirmation_rate
+
     st.subheader("Capacity")
 
     c1, c2, c3 = st.columns(3)
@@ -231,9 +242,20 @@ if page == "Appointment Counts":
     
     # CAPACITY
     
-    oregon_capacity = oregon_reps * 3
-    washington_capacity = washington_reps * 3
-    socal_capacity = socal_reps * 3
+    oregon_target = round(
+        (oregon_reps * 3)
+        * lead_multiplier
+    )
+    
+    washington_target = round(
+        (washington_reps * 3)
+        * lead_multiplier
+    )
+    
+    socal_target = round(
+        (socal_reps * 3)
+        * lead_multiplier
+    )
     
     # SIDE BY SIDE
     
