@@ -296,6 +296,19 @@ if page == "Appointment Counts":
             return "🟢 FULL"
     
         return "🔴 OVERBOOKED"
+
+        def get_slot_status(booked, target):
+
+        if booked == 0:
+            return "🔴"
+    
+        elif booked < target:
+            return "🟡"
+    
+        elif booked == target:
+            return "🟢"
+    
+        return "🔵"
     
     with left_col:
 
