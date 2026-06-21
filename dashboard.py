@@ -1186,24 +1186,32 @@ if page == "End of Day Export":
         total_cf
     )
     
-    if st.button("Export CF Appointments"):
+    if st.button("Build Export List"):
 
-        rows = build_eod_export_rows(items)
-        
-        df = pd.DataFrame(rows)
-        
-        df.insert(0, "Export", False)
-        
+        st.session_state["export_rows"] = (
+            build_eod_export_rows(items)
+        )
+    
+    if "export_rows" in st.session_state:
+    
+        df = pd.DataFrame(
+            st.session_state["export_rows"]
+        )
+    
+        if "Export" not in df.columns:
+            df.insert(0, "Export", False)
+    
         edited_df = st.data_editor(
             df,
             use_container_width=True,
-            hide_index=True
+            hide_index=True,
+            key="eod_export_editor"
         )
-
+    
         selected = edited_df[
             edited_df["Export"] == True
         ]
-        
+    
         st.metric(
             "Selected For Export",
             len(selected)
