@@ -525,8 +525,11 @@ if page == "Appointment Counts":
         slot_booked = counts["washington"]["tomorrow"]["10-12"]
 
         st.write(
-            f"10AM-12PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
         slot_target = round(
@@ -536,19 +539,25 @@ if page == "Appointment Counts":
         slot_booked = counts["washington"]["tomorrow"]["1-3"]
 
         st.write(
-            f"1PM-3PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
         slot_target = round(
             washington_target / 3
         )
 
-        slot_booked = counts["washington"]["tomorrow"]["4-6"]
-        
+        slot_booked = counts["washington"]["tomorrow"]["3-6"]
+
         st.write(
-            f"4PM-6PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"3PM-6PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
         st.markdown("### CA")
@@ -560,8 +569,11 @@ if page == "Appointment Counts":
         slot_booked = counts["socal"]["tomorrow"]["10-12"]
 
         st.write(
-            f"10AM-12PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
         slot_target = round(
@@ -571,18 +583,24 @@ if page == "Appointment Counts":
         slot_booked = counts["socal"]["tomorrow"]["1-3"]
 
         st.write(
-            f"1PM-3PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"1PM-3PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
         slot_target = round(
             washington_target / 3
         )
 
-        slot_booked = counts["washington"]["tomorrow"]["4-6"]
-        
+        slot_booked = counts["socal"]["tomorrow"]["3-6"]
+
         st.write(
-            f"4PM-6PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"3PM-6PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
