@@ -372,17 +372,38 @@ if page == "Appointment Counts":
         st.markdown(
             f"**WA {get_status(wa_today, washington_target)}**"
         )
-        
-        st.write(
-            f"10-12: {counts['washington']['today']['10-12']}"
+
+        slot_target = round(
+            washington_target / 3
         )
-        
+
+        slot_booked = counts["washington"]["today"]["10-12"]
+
         st.write(
-            f"1-3: {counts['washington']['today']['1-3']}"
+            f"10AM-12PM: {slot_booked}/{slot_target} "
+            f"{get_slot_status(slot_booked, slot_target)}"
         )
+
+        slot_target = round(
+            washington_target / 3
+        )
+
+        slot_booked = counts["washington"]["today"]["1-3"]
+
+        st.write(
+            f"1PM-3PM: {slot_booked}/{slot_target} "
+            f"{get_slot_status(slot_booked, slot_target)}"
+        )
+
+        slot_target = round(
+            washington_target / 3
+        )
+
+        slot_booked = counts["washington"]["today"]["4-6"]
         
         st.write(
-            f"4-6: {counts['washington']['today']['4-6']}"
+            f"4PM-6PM: {slot_booked}/{slot_target} "
+            f"{get_slot_status(slot_booked, slot_target)}"
         )
         
         st.markdown(
