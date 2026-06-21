@@ -1165,6 +1165,15 @@ def build_eod_export_rows(items):
 
     return rows
 
+def get_column_value(item, column_id):
+
+    for col in item["column_values"]:
+
+        if col["id"] == column_id:
+            return col.get("text", "")
+
+    return ""
+
 if page == "End of Day Export":
 
     st.title("End of Day Export")
@@ -1191,17 +1200,9 @@ if page == "End of Day Export":
 
     worksheet = sheet.sheet1
     
-    if st.button("Test Write"):
+    if st.button("Test Export 6/15 - 6/19"):
 
-        worksheet.append_row([
-            "06/21/2026 11:00 AM",
-            "TEST CUSTOMER",
-            "123 Main St",
-            "555-555-5555",
-            "Test Job"
-        ])
-
-        st.success("Row added")
+        st.write("Starting test export...")
     
     st.success("Google connected!")
 
