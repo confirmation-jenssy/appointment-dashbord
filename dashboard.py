@@ -389,6 +389,43 @@ if page == "Appointment Counts":
         st.caption(
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
+
+        needs = []
+
+        missing = max(
+            0,
+            slot_target - counts["oregon"]["today"]["10-12"]
+        )
+        if missing:
+            needs.append(f"10AM-12PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["oregon"]["today"]["1-3"]
+        )
+        if missing:
+            needs.append(f"1PM-3PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["oregon"]["today"]["4-6"]
+        )
+        if missing:
+            needs.append(f"4PM-6PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["oregon"]["today"]["7-8"]
+        )
+        if missing:
+            needs.append(f"7PM-8PM → {missing}")
+        
+        if needs:
+            st.markdown("**Needs Leads:**")
+        
+            for item in needs:
+                st.write(f"• {item}")
+
         
         st.markdown("### WA")
 
@@ -443,6 +480,42 @@ if page == "Appointment Counts":
         st.caption(
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
+
+        needs = []
+
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["10-12"]
+        )
+        if missing:
+            needs.append(f"10AM-12PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["1-3"]
+        )
+        if missing:
+            needs.append(f"1PM-3PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["4-6"]
+        )
+        if missing:
+            needs.append(f"4PM-6PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["7-8"]
+        )
+        if missing:
+            needs.append(f"7PM-8PM → {missing}")
+        
+        if needs:
+            st.markdown("**Needs Leads:**")
+        
+            for item in needs:
+                st.write(f"• {item}")
         
         st.markdown("### CA")
 
@@ -497,78 +570,6 @@ if page == "Appointment Counts":
         st.caption(
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
-
-        needs = []
-
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["today"]["10-12"]
-        )
-        if missing:
-            needs.append(f"10AM-12PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["today"]["1-3"]
-        )
-        if missing:
-            needs.append(f"1PM-3PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["today"]["4-6"]
-        )
-        if missing:
-            needs.append(f"4PM-6PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["oregon"]["today"]["7-8"]
-        )
-        if missing:
-            needs.append(f"7PM-8PM → {missing}")
-        
-        if needs:
-            st.markdown("**Needs Leads:**")
-        
-            for item in needs:
-                st.write(f"• {item}")
-
-        needs = []
-
-        missing = max(
-            0,
-            slot_target - counts["washington"]["today"]["10-12"]
-        )
-        if missing:
-            needs.append(f"10AM-12PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["washington"]["today"]["1-3"]
-        )
-        if missing:
-            needs.append(f"1PM-3PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["washington"]["today"]["4-6"]
-        )
-        if missing:
-            needs.append(f"4PM-6PM → {missing}")
-        
-        missing = max(
-            0,
-            slot_target - counts["washington"]["today"]["7-8"]
-        )
-        if missing:
-            needs.append(f"7PM-8PM → {missing}")
-        
-        if needs:
-            st.markdown("**Needs Leads:**")
-        
-            for item in needs:
-                st.write(f"• {item}")
 
         needs = []
 
