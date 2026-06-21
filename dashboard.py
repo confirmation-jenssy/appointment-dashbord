@@ -1028,13 +1028,18 @@ if page == "Total Appointment":
 if page == "End of Day Export":
 
     st.title("End of Day Export")
-    st.subheader("CF Appointments Ready")
     
-    st.write("Tommy: 0")
-    st.write("Elite: 0")
-    st.write("McCormick: 0")
-    st.write("Nova: 0")
-    st.write("Universal: 0")
+    eod_counts = build_eod_counts(items)
+
+    st.subheader("CF Appointments Ready")
+
+    c1, c2, c3, c4, c5 = st.columns(5)
+
+    c1.metric("Tommy", eod_counts["tommy"])
+    c2.metric("Elite", eod_counts["elite"])
+    c3.metric("McCormick", eod_counts["mccormick"])
+    c4.metric("Nova", eod_counts["nova"])
+    c5.metric("Universal", eod_counts["universal"])
     
     st.divider()
     
