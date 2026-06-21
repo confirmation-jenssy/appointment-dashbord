@@ -267,15 +267,15 @@ if page == "Appointment Counts":
 
     def get_status(booked, capacity):
 
-    if booked < (capacity * 0.75):
-        return "🟡 NEED LEADS"
-
-    elif booked <= capacity:
-        return "🟢 FULL"
-
-    return "🔴 OVERBOOKED"
-
-    with left_col:
+        if booked < (capacity * 0.75):
+            return "🟡 NEED LEADS"
+    
+        elif booked <= capacity:
+            return "🟢 FULL"
+    
+        return "🔴 OVERBOOKED"
+    
+        with left_col:
 
         st.subheader("Today")
     
