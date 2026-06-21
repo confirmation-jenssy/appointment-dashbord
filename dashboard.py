@@ -1189,14 +1189,28 @@ if page == "End of Day Export":
     if st.button("Export CF Appointments"):
 
         rows = build_eod_export_rows(items)
-    
-        st.success(
-            f"{len(rows)} appointments ready for export"
-        )
-    
+        
         df = pd.DataFrame(rows)
-    
-        st.dataframe(
+        
+        df.insert(0, "Export", False)
+        
+        edited_df = st.data_editor(
             df,
-            use_container_width=True
+            use_container_width=True,
+            hide_index=True
+        )
+
+        selected = edited_df[
+            edited_df["Export"] == True
+        ]
+        
+        st.metric(
+            "Selected For Export",
+            len(selected)
+        )
+
+        if st.button("Send Selected"):
+
+        st.success(
+            f"Exporting {len(selected)} appointments"
         )
