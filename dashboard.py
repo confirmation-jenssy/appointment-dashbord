@@ -198,35 +198,35 @@ if page == "Total Appointment":
     c1, c2, c3 = st.columns(3)
 
     with c1:
-    st.markdown(
-        f"""
-        <div style="text-align:center;">
-            <div style="
-                color:#2563eb;
-                font-size:28px;
-                font-weight:bold;
-                margin-bottom:-10px;
-            ">
-                OR
+        st.markdown(
+            f"""
+            <div style="text-align:center;">
+                <div style="
+                    color:#2563eb;
+                    font-size:28px;
+                    font-weight:bold;
+                    margin-bottom:-10px;
+                ">
+                    OR
+                </div>
+    
+                <div style="
+                    font-size:42px;
+                    font-weight:bold;
+                ">
+                    {oregon_target}
+                </div>
+    
+                <div style="
+                    color:#22c55e;
+                    font-size:16px;
+                ">
+                    ↑ {oregon_reps} reps
+                </div>
             </div>
-
-            <div style="
-                font-size:42px;
-                font-weight:bold;
-            ">
-                {oregon_target}
-            </div>
-
-            <div style="
-                color:#22c55e;
-                font-size:16px;
-            ">
-                ↑ {oregon_reps} reps
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+            """,
+            unsafe_allow_html=True
+        )
     
     with c2:
         st.markdown(
