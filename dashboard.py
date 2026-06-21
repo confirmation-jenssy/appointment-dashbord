@@ -754,7 +754,7 @@ if page == "Appointment Counts":
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
-                needs = []
+        needs = []
 
         missing = max(
             0,
