@@ -1083,10 +1083,16 @@ if page == "End of Day Export":
 
         st.write(f"Items Loaded: {len(items)}")
 
-        for item in items[:5]:
-            st.write(item)
+        for item in items:
+
+        for col in item["column_values"]:
     
-        st.write(eod_counts)
+            if col["id"] == "status":
+                st.write(
+                    item["name"],
+                    col["text"]
+                )
+                st.write(col["text"])
 
     st.subheader("CF Appointments Ready")
 
