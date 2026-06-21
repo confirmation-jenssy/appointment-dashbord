@@ -1083,8 +1083,6 @@ if page == "End of Day Export":
 
         st.write(f"Items Loaded: {len(items)}")
 
-        for item in items:
-
         for col in item["column_values"]:
     
             if col["id"] == "status":
@@ -1092,7 +1090,7 @@ if page == "End of Day Export":
                     item["name"],
                     col["text"]
                 )
-                st.write(col["text"])
+                
 
     st.subheader("CF Appointments Ready")
 
