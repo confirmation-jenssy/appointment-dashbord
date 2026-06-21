@@ -32,13 +32,15 @@ def build_eod_counts(items):
 
     for item in items:
 
-        status = item["name"]
-
+        status = ""
         confirmation = ""
 
         for col in item["column_values"]:
 
-            if col["id"] == "color_mkr2rpkj":
+            if col["id"] == "status":
+                status = col.get("text", "")
+
+            elif col["id"] == "color_mkr2rpkj":
                 confirmation = col.get("text", "")
 
         if status == "Tommy":
