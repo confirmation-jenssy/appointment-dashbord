@@ -20,35 +20,6 @@ from reporting import (
 st.markdown("""
 <style>
 
-.or-card {
-    background-color: #eff6ff;
-    border: 1px solid #93c5fd;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-.wa-card {
-    background-color: #f0fdf4;
-    border: 1px solid #86efac;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-.ca-card {
-    background-color: #fef2f2;
-    border: 1px solid #fca5a5;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-st.set_page_config(
-    page_title="Confirmation",
-    layout="wide"
-)
-
 # --- CHANGE HERE: Fetch data when needed (and rely on the caching in monday_api.py) ---
 items = get_monday_items() 
 
