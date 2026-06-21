@@ -1152,6 +1152,7 @@ def build_eod_export_rows(items):
             formatted_date = date_time
 
         rows.append({
+            "Company": status,
             "Date/Time": formatted_date,
             "Name": item["name"],
             "Address": address,
@@ -1217,6 +1218,35 @@ if page == "End of Day Export":
             len(selected)
         )
 
+        st.divider()
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+        
+        c1.metric(
+            "Tommy",
+            len(selected[selected["Company"] == "Tommy"])
+        )
+        
+        c2.metric(
+            "Elite",
+            len(selected[selected["Company"] == "Elite"])
+        )
+        
+        c3.metric(
+            "McCormick",
+            len(selected[selected["Company"] == "McCormick"])
+        )
+        
+        c4.metric(
+            "Nova",
+            len(selected[selected["Company"] == "Nova"])
+        )
+        
+        c5.metric(
+            "Universal",
+            len(selected[selected["Company"] == "Universal"])
+        )
+        
         if st.button("Send Selected"):
 
             st.success(
