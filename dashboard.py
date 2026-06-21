@@ -415,7 +415,7 @@ if page == "Appointment Counts":
                 needs.append(f"7PM-8PM → {missing}")
             
             if needs:
-                st.warning("**Needs :**")
+                st.warning("**Needs ↓**")
             
                 for item in needs:
                     st.write(f"• {item}")
@@ -515,7 +515,7 @@ if page == "Appointment Counts":
                 needs.append(f"7PM-8PM → {missing}")
             
             if needs:
-                st.warning("**Needs :**")
+                st.warning("**Needs ↓**")
             
                 for item in needs:
                     st.write(f"• {item}")
@@ -615,7 +615,7 @@ if page == "Appointment Counts":
                 needs.append(f"7PM-8PM → {missing}")
             
             if needs:
-                st.warning("**Needs :**")
+                st.warning("**Needs ↓**")
             
                 for item in needs:
                     st.write(f"• {item}")
@@ -713,7 +713,7 @@ if page == "Appointment Counts":
                 needs.append(f"7PM-8PM → {missing}")
             
             if needs:
-                st.warning("**Needs :**")
+                st.warning("**Needs ↓**")
             
                 for item in needs:
                     st.write(f"• {item}")
@@ -805,7 +805,7 @@ if page == "Appointment Counts":
                 needs.append(f"7PM-8PM → {missing}")
             
             if needs:
-                st.warning("**Needs :**")
+                st.warning("**Needs ↓**")
             
                 for item in needs:
                     st.write(f"• {item}")    
@@ -897,7 +897,7 @@ if page == "Appointment Counts":
                 needs.append(f"7PM-8PM → {missing}")
             
             if needs:
-                st.warning("**Needs :**")
+                st.warning("**Needs ↓**")
             
                 for item in needs:
                     st.write(f"• {item}")  
