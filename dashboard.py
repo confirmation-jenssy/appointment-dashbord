@@ -1079,7 +1079,7 @@ if page == "End of Day Export":
 
     st.write(f"Items Loaded: {len(items)}")
 
-    for item in items[:20]:
+    for item in items[:116]:
 
         for col in item["column_values"]:
 
