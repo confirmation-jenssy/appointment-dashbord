@@ -150,23 +150,27 @@ if page == "Appointment Counts":
         value=5
     )
 
-        c1.metric(
-            "OR",
-            oregon_reps * 3,
-            f"{oregon_reps} reps"
-        )
+    st.subheader("Capacity")
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric(
+        "OR",
+        oregon_reps * 3,
+        f"{oregon_reps} reps"
+    )
         
-        c2.metric(
-            "WA",
-            washington_reps * 3,
-            f"{washington_reps} reps"
-        )
+    c2.metric(
+        "WA",
+        washington_reps * 3,
+        f"{washington_reps} reps"
+    )
         
-        c3.metric(
-            "CA",
-            socal_reps * 3,
-            f"{socal_reps} reps"
-        )
+    c3.metric(
+        "CA",
+        socal_reps * 3,
+        f"{socal_reps} reps"
+    )
 
     # TODAY
     
