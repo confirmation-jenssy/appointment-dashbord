@@ -155,7 +155,7 @@ if page == "Appointment Counts":
     c1, c2, c3 = st.columns(3)
     
     c1.metric(
-        "Oregon Capacity",
+        "OR Capacity",
         oregon_reps * 3
     )
     
