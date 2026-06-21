@@ -1040,5 +1040,5 @@ if page == "End of Day Report":
     
     st.write("Total: 0")
     
-        if st.button("Export CF Appointments"):
-            st.success("Export started")
+    if st.button("Export CF Appointments"):
+        st.success("Export started")
