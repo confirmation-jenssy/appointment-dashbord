@@ -522,7 +522,7 @@ if page == "Appointment Counts":
         )
 
         st.markdown(
-            f"**CA {get_status(tomorrow_ca, sacal_target)}**"
+            f"**CA {get_status(tomorrow_ca, socal_target)}**"
         )
 
         slot_target = round(
@@ -548,12 +548,13 @@ if page == "Appointment Counts":
         )
 
         slot_target = round(
-            socal_target / 3
+            washington_target / 3
         )
 
-        slot_booked = counts["socal"]["tomorrow"]["4-6"]
+        slot_booked = counts["washington"]["tomorrow"]["4-6"]
         
         st.write(
             f"4PM-6PM: {slot_booked}/{slot_target} "
             f"{get_slot_status(slot_booked, slot_target)}"
         )
+
