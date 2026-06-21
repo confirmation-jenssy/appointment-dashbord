@@ -351,7 +351,7 @@ if page == "Total Appointment":
                         OR
                     </div>
                     <div style="font-size:36px;font-weight:bold;">
-                        {Tomorrow_or}
+                        {tomorrow_or}
                     </div>
                 </div>
                 """,
@@ -366,7 +366,7 @@ if page == "Total Appointment":
                         WA
                     </div>
                     <div style="font-size:36px;font-weight:bold;">
-                        {Tomorrow_wa}
+                        {tomorrow_wa}
                     </div>
                 </div>
                 """,
@@ -381,7 +381,7 @@ if page == "Total Appointment":
                         CA
                     </div>
                     <div style="font-size:36px;font-weight:bold;">
-                        {Tomorrow_ca}
+                        {tomorrow_ca}
                     </div>
                 </div>
                 """,
