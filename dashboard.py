@@ -70,7 +70,7 @@ if page == "End of Day Report":
             
                 c1, c2 = st.columns(2)
                 c1.metric("Confirmed", report["confirmed"])
-                c2.metric("Conversion %", f'{report["conversion"]}%')
+                c2.metric("Confirm %", f'{report["conversion"]}%')
             
                 st.divider()
             
@@ -85,7 +85,7 @@ if page == "End of Day Report":
             
                 c1, c2 = st.columns(2)
                 c1.metric("Confirmed", report["confirmed"])
-                c2.metric("Conversion %", f'{report["conversion"]}%')
+                c2.metric("Confirm %", f'{report["conversion"]}%')
             
                 st.divider()
             
@@ -100,7 +100,7 @@ if page == "End of Day Report":
             
                 c1, c2 = st.columns(2)
                 c1.metric("Confirmed", report["confirmed"])
-                c2.metric("Conversion %", f'{report["conversion"]}%')
+                c2.metric("Confirm %", f'{report["conversion"]}%')
             
                 st.divider()
             
