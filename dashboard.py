@@ -350,18 +350,18 @@ if page == "Appointment Counts":
         with or_col:
 
             st.markdown(
-                '<div class="or-card">',
+                "<h3 style='color:#2563eb'>OR</h3>",
                 unsafe_allow_html=True
             )
 
-            st.markdown("### OR")
-
-            # Oregon content
+            # Oregon slots
             or_today = (
             counts["oregon"]["today"]["10-12"]
             + counts["oregon"]["today"]["1-3"]
             + counts["oregon"]["today"]["4-6"]
         )
+
+            # Oregon Needs Leads
             slot_target = round(
                 oregon_target / 3
             )
@@ -450,28 +450,21 @@ if page == "Appointment Counts":
                 for item in needs:
                     st.write(f"• {item}")
             
+        with wa_col:
+
             st.markdown(
-                '</div>',
+                "<h3 style='color:#16a34a'>WA</h3>",
                 unsafe_allow_html=True
             )
 
-        with wa_col:
-
-            with wa_col:
-
-                st.markdown(
-                    '<div class="wa-card">',
-                    unsafe_allow_html=True
-                )
-
-            st.markdown("### WA")
-
-            # Washington content
+            # Washington slots
             wa_today = (
             counts["washington"]["today"]["10-12"]
             + counts["washington"]["today"]["1-3"]
             + counts["washington"]["today"]["4-6"]
         )
+
+            # Washington Needs Leads
             slot_target = round(
                 washington_target / 3
             )
@@ -560,29 +553,21 @@ if page == "Appointment Counts":
                 for item in needs:
                     st.write(f"• {item}")
 
+        with ca_col:
+
             st.markdown(
-                '</div>',
+                "<h3 style='color:#dc2626'>CA</h3>",
                 unsafe_allow_html=True
             )
 
-        with ca_col:
-
-            with ca_col:
-
-                st.markdown(
-                    '<div class="ca-card">',
-                    unsafe_allow_html=True
-                )
-
-                st.markdown("### CA")
-
-            # California content
+            # California slots
             ca_today = (
             counts["socal"]["today"]["10-12"]
             + counts["socal"]["today"]["1-3"]
             + counts["socal"]["today"]["4-6"]
         )
 
+            # California Needs Leads
             slot_target = round(
                 socal_target / 3
             )
@@ -670,11 +655,6 @@ if page == "Appointment Counts":
             
                 for item in needs:
                     st.write(f"• {item}")
-
-            st.markdown(
-                '</div>',
-                unsafe_allow_html=True
-            )
     
     with right_col:
         
