@@ -319,11 +319,7 @@ if page == "Appointment Counts":
             + counts["socal"]["today"]["4-6"]
         )
         
-        st.markdown(
-            get_status(
-                or_today,
-                oregon_target
-            )
+        st.markdown(get_status(or_today, oregon_target)
         
         st.write(
             f"10-12: {counts['oregon']['today']['10-12']}"
