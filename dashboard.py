@@ -345,8 +345,11 @@ if page == "Appointment Counts":
         slot_booked = counts["oregon"]["today"]["10-12"]
         
         st.write(
-            f"10AM-12PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"10AM-12PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
         
         slot_target = round(
@@ -354,10 +357,13 @@ if page == "Appointment Counts":
         )
         
         slot_booked = counts["oregon"]["today"]["1-3"]
-        
+
         st.write(
-            f"1PM-3PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"1PM-13PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
         
         slot_target = round(
@@ -365,10 +371,13 @@ if page == "Appointment Counts":
         )
         
         slot_booked = counts["oregon"]["today"]["4-6"]
-        
+
         st.write(
-            f"4PM-6PM: {slot_booked}/{slot_target} "
-            f"{get_slot_status(slot_booked, slot_target)}"
+            f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
         )
         
         st.markdown("### WA")
