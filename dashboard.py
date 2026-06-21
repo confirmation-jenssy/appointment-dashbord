@@ -150,23 +150,87 @@ if page == "Appointment Counts":
         value=5
     )
 
-    st.subheader("Daily Capacity")
+    st.subheader("Capacity")
+    
+    total_capacity = (
+        (oregon_reps * 3)
+        + (washington_reps * 3)
+        + (socal_reps * 3)
+    )
+    
+    st.write(
+        f"OR: {oregon_reps * 3}    "
+        f"WA: {washington_reps * 3}    "
+        f"CA: {socal_reps * 3}    "
+        f"TOTAL: {total_capacity}"
+    )
 
-    c1, c2, c3 = st.columns(3)
-    
-    c1.metric(
-        "OR Capacity",
-        oregon_reps * 3
+    today_or = (
+        counts["oregon"]["today"]["10-12"]
+        + counts["oregon"]["today"]["1-3"]
+        + counts["oregon"]["today"]["4-6"]
     )
     
-    c2.metric(
-        "WA Capacity",
-        washington_reps * 3
+    today_wa = (
+        counts["washington"]["today"]["10-12"]
+        + counts["washington"]["today"]["1-3"]
+        + counts["washington"]["today"]["4-6"]
     )
     
-    c3.metric(
-        "CA Capacity",
-        socal_reps * 3
+    today_ca = (
+        counts["socal"]["today"]["10-12"]
+        + counts["socal"]["today"]["1-3"]
+        + counts["socal"]["today"]["4-6"]
+    )
+    
+    today_total = (
+        today_or
+        + today_wa
+        + today_ca
+    )
+    
+    st.subheader("Today")
+    
+    st.write(
+        f"OR: {today_or}    "
+        f"WA: {today_wa}    "
+        f"CA: {today_ca}    "
+        f"TOTAL: {today_total}    "
+        f"ATM: {total_capacity}"
+    )
+
+    today_or = (
+        counts["oregon"]["today"]["10-12"]
+        + counts["oregon"]["today"]["1-3"]
+        + counts["oregon"]["today"]["4-6"]
+    )
+    
+    today_wa = (
+        counts["washington"]["today"]["10-12"]
+        + counts["washington"]["today"]["1-3"]
+        + counts["washington"]["today"]["4-6"]
+    )
+    
+    today_ca = (
+        counts["socal"]["today"]["10-12"]
+        + counts["socal"]["today"]["1-3"]
+        + counts["socal"]["today"]["4-6"]
+    )
+    
+    today_total = (
+        today_or
+        + today_wa
+        + today_ca
+    )
+    
+    st.subheader("Today")
+    
+    st.write(
+        f"OR: {today_or}    "
+        f"WA: {today_wa}    "
+        f"CA: {today_ca}    "
+        f"TOTAL: {today_total}    "
+        f"ATM: {total_capacity}"
     )
 
     left_col, right_col = st.columns(2)
