@@ -169,7 +169,13 @@ if page == "Appointment Counts":
         socal_reps * 3
     )
 
-    st.subheader("Tomorrow Load")
+    left_col, right_col = st.columns(2)
+
+    with left_col:
+    st.subheader("Today")
+
+    with right_col:
+    st.subheader("Tomorrow")
 
     oregon_booked = (
         counts["oregon"]["tomorrow"]["10-12"]
