@@ -229,8 +229,6 @@ if page == "Total Appointment":
             value=socal_target,
             delta=f"{socal_reps} reps"
         )
-        
-    # TODAY
     
     today_or = (
         counts["oregon"]["today"]["10-12"]
@@ -292,9 +290,51 @@ if page == "Total Appointment":
     
         c1, c2, c3, c4 = st.columns(4)
     
-        c1.metric("OR", today_or)
-        c2.metric("WA", today_wa)
-        c3.metric("CA", today_ca)
+        with c1:
+            st.markdown(
+                f"""
+                <div style="text-align:center;">
+                    <div style="color:#2563eb;font-weight:bold;font-size:20px;">
+                        OR
+                    </div>
+                    <div style="font-size:36px;font-weight:bold;">
+                        {today_or}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
+        with c2:
+            st.markdown(
+                f"""
+                <div style="text-align:center;">
+                    <div style="color:#16a34a;font-weight:bold;font-size:20px;">
+                        WA
+                    </div>
+                    <div style="font-size:36px;font-weight:bold;">
+                        {today_wa}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
+        with c3:
+            st.markdown(
+                f"""
+                <div style="text-align:center;">
+                    <div style="color:#dc2626;font-weight:bold;font-size:20px;">
+                        CA
+                    </div>
+                    <div style="font-size:36px;font-weight:bold;">
+                        {today_ca}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
         c4.metric("TOTAL", today_total)
     
     with right_col:
@@ -303,10 +343,52 @@ if page == "Total Appointment":
     
         c1, c2, c3, c4 = st.columns(4)
     
-        c1.metric("OR", tomorrow_or)
-        c2.metric("WA", tomorrow_wa)
-        c3.metric("CA", tomorrow_ca)
-        c4.metric("TOTAL", tomorrow_total)
+        with c1:
+            st.markdown(
+                f"""
+                <div style="text-align:center;">
+                    <div style="color:#2563eb;font-weight:bold;font-size:20px;">
+                        OR
+                    </div>
+                    <div style="font-size:36px;font-weight:bold;">
+                        {Tomorrow_or}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
+        with c2:
+            st.markdown(
+                f"""
+                <div style="text-align:center;">
+                    <div style="color:#16a34a;font-weight:bold;font-size:20px;">
+                        WA
+                    </div>
+                    <div style="font-size:36px;font-weight:bold;">
+                        {Tomorrow_wa}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
+        with c3:
+            st.markdown(
+                f"""
+                <div style="text-align:center;">
+                    <div style="color:#dc2626;font-weight:bold;font-size:20px;">
+                        CA
+                    </div>
+                    <div style="font-size:36px;font-weight:bold;">
+                        {Tomorrow_ca}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
+        c4.metric("TOTAL", Tomorrow_total)
 
     st.divider()
 
