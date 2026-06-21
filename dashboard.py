@@ -330,9 +330,7 @@ if page == "Appointment Counts":
             + counts["socal"]["today"]["4-6"]
         )
         
-        st.markdown(
-            f"**OR {get_status(or_today, oregon_target)}**"
-        )
+        st.markdown("### OR")
         
         slot_target = round(
             oregon_target / 3
@@ -367,9 +365,7 @@ if page == "Appointment Counts":
             f"{get_slot_status(slot_booked, slot_target)}"
         )
         
-        st.markdown(
-            f"**WA {get_status(wa_today, washington_target)}**"
-        )
+        st.markdown("### WA")
 
         slot_target = round(
             washington_target / 3
@@ -404,9 +400,7 @@ if page == "Appointment Counts":
             f"{get_slot_status(slot_booked, slot_target)}"
         )
         
-        st.markdown(
-            f"**CA {get_status(ca_today, socal_target)}**"
-        )
+        st.markdown("### CA")
 
         slot_target = round(
             socal_target / 3
@@ -445,9 +439,7 @@ if page == "Appointment Counts":
         
         st.subheader("Tomorrow")
         
-        st.markdown(
-            f"**OR {get_status(tomorrow_or, oregon_target)}**"
-        )
+        st.markdown("### OR")
         
         slot_target = round(
             oregon_target / 3
@@ -482,9 +474,7 @@ if page == "Appointment Counts":
             f"{get_slot_status(slot_booked, slot_target)}"
         )
         
-        st.markdown(
-            f"**WA {get_status(tomorrow_wa, washington_target)}**"
-        )
+        st.markdown("### WA")
 
         slot_target = round(
             washington_target / 3
@@ -519,9 +509,7 @@ if page == "Appointment Counts":
             f"{get_slot_status(slot_booked, slot_target)}"
         )
 
-        st.markdown(
-            f"**CA {get_status(tomorrow_ca, socal_target)}**"
-        )
+        st.markdown("### CA")
 
         slot_target = round(
             socal_target / 3
