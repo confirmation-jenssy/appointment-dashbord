@@ -533,24 +533,78 @@ if page == "Appointment Counts":
         
             for item in needs:
                 st.write(f"• {item}")
-        
-        st.success(f"Needs: {oregon_needed} More Leads")
 
-        washington_needed = (
-            max(0, slot_target - counts["washington"]["today"]["10-12"])
-            + max(0, slot_target - counts["washington"]["today"]["1-3"])
-            + max(0, slot_target - counts["washington"]["today"]["4-6"])
-        )
-        
-        st.success(f"Needs: {washington_needed} More Leads")
+        needs = []
 
-        socal_needed = (
-            max(0, slot_target - counts["socal"]["today"]["10-12"])
-            + max(0, slot_target - counts["socal"]["today"]["1-3"])
-            + max(0, slot_target - counts["socal"]["today"]["4-6"])
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["10-12"]
         )
+        if missing:
+            needs.append(f"10AM-12PM → {missing}")
         
-        st.success(f"Needs: {socal_needed} More Leads")
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["1-3"]
+        )
+        if missing:
+            needs.append(f"1PM-3PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["4-6"]
+        )
+        if missing:
+            needs.append(f"4PM-6PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["washington"]["today"]["7-8"]
+        )
+        if missing:
+            needs.append(f"7PM-8PM → {missing}")
+        
+        if needs:
+            st.markdown("**Needs Leads:**")
+        
+            for item in needs:
+                st.write(f"• {item}")
+
+        needs = []
+
+        missing = max(
+            0,
+            slot_target - counts["socal"]["today"]["10-12"]
+        )
+        if missing:
+            needs.append(f"10AM-12PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["socal"]["today"]["1-3"]
+        )
+        if missing:
+            needs.append(f"1PM-3PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["socal"]["today"]["4-6"]
+        )
+        if missing:
+            needs.append(f"4PM-6PM → {missing}")
+        
+        missing = max(
+            0,
+            slot_target - counts["socal"]["today"]["7-8"]
+        )
+        if missing:
+            needs.append(f"7PM-8PM → {missing}")
+        
+        if needs:
+            st.markdown("**Needs Leads:**")
+        
+            for item in needs:
+                st.write(f"• {item}")
     
     with right_col:
         
