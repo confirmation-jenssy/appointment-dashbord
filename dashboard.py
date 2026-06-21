@@ -247,18 +247,18 @@ if page == "Appointment Counts":
         st.write(f"TOTAL: {tomorrow_total}")
         st.write(f"ATM: {total_capacity}")
     
-    st.write(
-        "Oregon:",
-        f"{oregon_booked}/{oregon_capacity}"
-    )
-    
-    st.write(
-        "Washington:",
-        f"{washington_booked}/{washington_capacity}"
-    )
-    
-    st.write(
-        "SoCal:",
-        f"{socal_booked}/{socal_capacity}"
-    )
-            
+        st.write(
+            "Oregon:",
+            f"{oregon_booked}/{oregon_capacity}"
+        )
+        
+        st.write(
+            "Washington:",
+            f"{washington_booked}/{washington_capacity}"
+        )
+        
+        st.write(
+            "SoCal:",
+            f"{socal_booked}/{socal_capacity}"
+        )
+                
