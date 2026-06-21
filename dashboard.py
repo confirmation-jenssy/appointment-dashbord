@@ -320,8 +320,10 @@ if page == "Appointment Counts":
         )
         
         st.markdown(
-            f"**OR {get_status(or_today, oregon_reps * 3)}**"
-        )
+            get_status(
+                or_today,
+                oregon_target
+            )
         
         st.write(
             f"10-12: {counts['oregon']['today']['10-12']}"
@@ -336,7 +338,7 @@ if page == "Appointment Counts":
         )
         
         st.markdown(
-            f"**WA {get_status(wa_today, washington_reps * 3)}**"
+            f"**WA {get_status(wa_today, washington_target)}**"
         )
         
         st.write(
@@ -352,7 +354,7 @@ if page == "Appointment Counts":
         )
         
         st.markdown(
-            f"**CA {get_status(ca_today, socal_reps * 3)}**"
+            f"**CA {get_status(ca_today, socal_target)}**"
         )
         
         st.write(
@@ -372,7 +374,7 @@ if page == "Appointment Counts":
         st.subheader("Tomorrow")
         
         st.markdown(
-            f"**OR {get_status(tomorrow_or, oregon_reps * 3)}**"
+            f"**OR {get_status(tomorrow_or, oregon_target)}**"
         )
         
         st.write(
@@ -388,7 +390,7 @@ if page == "Appointment Counts":
         )
         
         st.markdown(
-            f"**WA {get_status(tomorrow_wa, washington_reps * 3)}**"
+            f"**WA {get_status(tomorrow_wa, washington_target)}**"
         )
         
         st.write(
@@ -404,7 +406,7 @@ if page == "Appointment Counts":
         )
         
         st.markdown(
-            f"**CA {get_status(tomorrow_ca, socal_reps * 3)}**"
+            f"**CA {get_status(tomorrow_ca, socal_target)}**"
         )
         
         st.write(
