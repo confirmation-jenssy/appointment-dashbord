@@ -422,19 +422,19 @@ if page == "Appointment Counts":
             for item in needs:
                 st.write(f"• {item}")
         
-        wa_today = (
+        with wa_col:
+
+            st.markdown("### WA")
+
+            # Washington slots
+            wa_today = (
             counts["washington"]["today"]["10-12"]
             + counts["washington"]["today"]["1-3"]
             + counts["washington"]["today"]["4-6"]
         )
-        
-        ca_today = (
-            counts["socal"]["today"]["10-12"]
-            + counts["socal"]["today"]["1-3"]
-            + counts["socal"]["today"]["4-6"]
-        )
-        
-        st.markdown("### WA")
+
+            # Washington Needs Leads
+            st.markdown("### WA")
 
         slot_target = round(
             washington_target / 3
@@ -523,8 +523,20 @@ if page == "Appointment Counts":
         
             for item in needs:
                 st.write(f"• {item}")
-        
-        st.markdown("### CA")
+
+        with ca_col:
+
+            st.markdown("### CA")
+
+            # California slots
+            ca_today = (
+            counts["socal"]["today"]["10-12"]
+            + counts["socal"]["today"]["1-3"]
+            + counts["socal"]["today"]["4-6"]
+        )
+
+            # California Needs Leads
+            st.markdown("### CA")
 
         slot_target = round(
             socal_target / 3
