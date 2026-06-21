@@ -1077,6 +1077,8 @@ if page == "End of Day Export":
     
     eod_counts = build_eod_counts(items)
 
+    st.write(eod_counts)
+
     st.subheader("CF Appointments Ready")
 
     c1, c2, c3, c4, c5 = st.columns(5)
