@@ -197,23 +197,38 @@ if page == "Total Appointment":
 
     c1, c2, c3 = st.columns(3)
 
-    c1.metric(
-        "OR",
-        oregon_target,
-        f"{oregon_reps} reps"
-    )
+    with c1:
+        st.markdown(
+            "<h4 style='color:#2563eb'>OR</h4>",
+            unsafe_allow_html=True
+        )
+        st.metric(
+            "",
+            oregon_target,
+            f"{oregon_reps} reps"
+        )
     
-    c2.metric(
-        "WA",
-        washington_target,
-        f"{washington_reps} reps"
-    )
+    with c2:
+        st.markdown(
+            "<h4 style='color:#16a34a'>WA</h4>",
+            unsafe_allow_html=True
+        )
+        st.metric(
+            "",
+            washington_target,
+            f"{washington_reps} reps"
+        )
     
-    c3.metric(
-        "CA",
-        socal_target,
-        f"{socal_reps} reps"
-    )
+    with c3:
+        st.markdown(
+            "<h4 style='color:#dc2626'>CA</h4>",
+            unsafe_allow_html=True
+        )
+        st.metric(
+            "",
+            socal_target,
+            f"{socal_reps} reps"
+        )
 
     # TODAY
     
