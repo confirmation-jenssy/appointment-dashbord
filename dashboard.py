@@ -49,7 +49,7 @@ if page == "End of Day Report":
                 c1.metric("Confirmed", report["confirmed"])
                 c2.metric("Same Day", report["same_day"])
                 c3.metric("Same Day %", f'{report["same_day_percent"]}%')
-                c4.metric("Conversion %", f'{report["conversion"]}%')
+                c4.metric("Confirm %", f'{report["conversion"]}%')
 
                 st.divider()
 
