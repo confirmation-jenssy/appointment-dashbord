@@ -260,6 +260,16 @@ if page == "Appointment Counts":
     # SIDE BY SIDE
     
     left_col, right_col = st.columns(2)
+
+    with left_col:
+        st.subheader("Today")
+    
+        c1, c2, c3 = st.columns(3)
+
+    with right_col:
+        st.subheader("Tomorrow")
+    
+        c1, c2, c3 = st.columns(3)
     
     with left_col:
 
