@@ -332,7 +332,8 @@ if page == "Appointment Counts":
             + counts["socal"]["today"]["4-6"]
         )
         
-        st.markdown(get_status(or_today, oregon_target)
+        st.markdown(
+            f"**OR {get_status(or_today, oregon_target)}**"
         )
         
         slot_target = round(
