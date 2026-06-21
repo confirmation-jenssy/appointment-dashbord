@@ -151,22 +151,22 @@ if page == "Appointment Counts":
     )
 
         c1.metric(
-        "OR",
-        oregon_reps * 3,
-        f"{oregon_reps} reps"
-    )
-    
-    c2.metric(
-        "WA",
-        washington_reps * 3,
-        f"{washington_reps} reps"
-    )
-    
-    c3.metric(
-        "CA",
-        socal_reps * 3,
-        f"{socal_reps} reps"
-    )
+            "OR",
+            oregon_reps * 3,
+            f"{oregon_reps} reps"
+        )
+        
+        c2.metric(
+            "WA",
+            washington_reps * 3,
+            f"{washington_reps} reps"
+        )
+        
+        c3.metric(
+            "CA",
+            socal_reps * 3,
+            f"{socal_reps} reps"
+        )
 
     # TODAY
     
