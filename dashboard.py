@@ -1169,6 +1169,24 @@ if page == "End of Day Export":
 
     st.title("End of Day Export")
 
+    import gspread
+
+    from google.oauth2.service_account import (
+        Credentials
+    )
+    
+    creds = Credentials.from_service_account_info(
+        dict(st.secrets["gcp_service_account"]),
+        scopes=[
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive"
+        ]
+    )
+    
+    client = gspread.authorize(creds)
+    
+    st.success("Google connected!")
+
     eod_counts = build_eod_counts(items)
 
     st.subheader("CF Appointments Ready")
