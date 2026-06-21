@@ -3,8 +3,10 @@
 # ==============================
 
 import streamlit as st
+from datetime import datetime
 from zoneinfo import ZoneInfo
 import sys
+import pandas as pd
 
 from datetime import datetime
 
@@ -1074,7 +1076,90 @@ if page == "Total Appointment":
                 for item in needs:
                     st.write(f"• {item}")  
 
+def build_eod_export_rows(items):
 
+    rows = []
+
+    for item in items:
+
+        status = ""
+        confirmation = ""
+
+        date_time = ""
+        address = ""
+        phone = ""
+        work = ""
+
+        for col in item["column_values"]:
+
+            if col["id"] == "status":
+                status = col.get("text", "")
+
+            elif col["id"] == "color_mkr2rpkj":
+                confirmation = col.get("text", "")
+
+            elif col["id"] == "date_mkr2q53p":
+                date_time = col.get("text", "")
+
+            elif col["id"] == "text_mkr2an4n":
+                address = col.get("text", "")
+
+            elif col["id"] == "text_mkr27gh0":
+                phone = col.get("text", "")
+
+            elif col["id"] == "long_text_mkr2wjqk":
+                work = col.get("text", "")
+
+        include = False
+
+        if status in ["Tommy", "Elite"]:
+            include = True
+
+        elif (
+            status in ["Universal", "Nova", "McCormick"]
+            and confirmation == "Confirmed"
+        ):
+            include = True
+
+        if not include:
+            continue
+
+        try:
+
+            dt = datetime.strptime(
+                date_time,
+                "%Y-%m-%d %H:%M"
+            )
+
+            if status == "Nova":
+
+                dt = dt.replace(
+                    tzinfo=ZoneInfo("America/New_York")
+                )
+
+            else:
+
+                dt = dt.replace(
+                    tzinfo=ZoneInfo("America/Los_Angeles")
+                )
+
+            formatted_date = dt.strftime(
+                "%m/%d/%Y %I:%M %p"
+            )
+
+        except:
+
+            formatted_date = date_time
+
+        rows.append({
+            "Date/Time": formatted_date,
+            "Name": item["name"],
+            "Address": address,
+            "Phone Number": phone,
+            "Work": work
+        })
+
+    return rows
 
 if page == "End of Day Export":
 
@@ -1102,4 +1187,16 @@ if page == "End of Day Export":
     )
     
     if st.button("Export CF Appointments"):
-        st.success("Export started")
+
+        rows = build_eod_export_rows(items)
+    
+        st.success(
+            f"{len(rows)} appointments ready for export"
+        )
+    
+        df = pd.DataFrame(rows)
+    
+        st.dataframe(
+            df,
+            use_container_width=True
+        )
