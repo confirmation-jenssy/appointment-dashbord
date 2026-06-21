@@ -409,17 +409,38 @@ if page == "Appointment Counts":
         st.markdown(
             f"**CA {get_status(ca_today, socal_target)}**"
         )
-        
-        st.write(
-            f"10-12: {counts['socal']['today']['10-12']}"
+
+        slot_target = round(
+            socal_target / 3
         )
-        
+
+        slot_booked = counts["socal"]["today"]["10-12"]
+
         st.write(
-            f"1-3: {counts['socal']['today']['1-3']}"
+            f"10AM-12PM: {slot_booked}/{slot_target} "
+            f"{get_slot_status(slot_booked, slot_target)}"
         )
+
+        slot_target = round(
+            socal_target / 3
+        )
+
+        slot_booked = counts["socal"]["today"]["1-3"]
+
+        st.write(
+            f"1PM-3PM: {slot_booked}/{slot_target} "
+            f"{get_slot_status(slot_booked, slot_target)}"
+        )
+
+        slot_target = round(
+            socal_target / 3
+        )
+
+        slot_booked = counts["socal"]["today"]["4-6"]
         
         st.write(
-            f"4-6: {counts['socal']['today']['4-6']}"
+            f"4PM-6PM: {slot_booked}/{slot_target} "
+            f"{get_slot_status(slot_booked, slot_target)}"
         )
     
     with right_col:
