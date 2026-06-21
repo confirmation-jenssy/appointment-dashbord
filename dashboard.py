@@ -1074,8 +1074,6 @@ if page == "Total Appointment":
 if page == "End of Day Export":
 
     st.title("End of Day Export")
-
-    st.title("End of Day Export")
     
     eod_counts = build_eod_counts(items)
 
