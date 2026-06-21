@@ -263,6 +263,12 @@ if page == "Appointment Counts":
     
     with left_col:
 
+    or_col, wa_col, ca_col = st.columns(3)
+
+    with or_col:
+
+    st.markdown("### OR")
+
         st.subheader("Today")
     
         c1, c2, c3, c4 = st.columns(4)
