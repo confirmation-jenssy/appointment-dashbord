@@ -379,6 +379,16 @@ if page == "Appointment Counts":
         st.caption(
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
+
+        slot_booked = counts["oregon"]["today"]["7-8"]
+
+        st.write(
+            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
+        )
         
         st.markdown("### WA")
 
@@ -423,6 +433,16 @@ if page == "Appointment Counts":
         st.caption(
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
+
+        slot_booked = counts["washington"]["today"]["7-8"]
+
+        st.write(
+            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
+        )
         
         st.markdown("### CA")
 
@@ -462,6 +482,16 @@ if page == "Appointment Counts":
 
         st.write(
             f"4PM-6PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
+        )
+
+        slot_booked = counts["socal"]["today"]["7-8"]
+
+        st.write(
+            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
         )
         
         st.caption(
@@ -515,6 +545,16 @@ if page == "Appointment Counts":
         st.caption(
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
+
+        slot_booked = counts["oregon"]["tomorrow"]["7-8"]
+
+        st.write(
+            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
+        )
         
         st.markdown("### WA")
 
@@ -560,6 +600,16 @@ if page == "Appointment Counts":
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
+        slot_booked = counts["washington"]["tomorrow"]["7-8"]
+
+        st.write(
+            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
+        )
+        
         st.markdown("### CA")
 
         slot_target = round(
@@ -604,3 +654,36 @@ if page == "Appointment Counts":
             f"Leads: {slot_booked} | Goal: {slot_target}"
         )
 
+        slot_booked = counts["socal"]["tomorrow"]["7-8"]
+
+        st.write(
+            f"7PM-8PM {get_slot_status(slot_booked, slot_target)}"
+        )
+        
+        st.caption(
+            f"Leads: {slot_booked} | Goal: {slot_target}"
+        )
+        
+        oregon_needed = (
+            max(0, slot_target - counts["oregon"]["today"]["10-12"])
+            + max(0, slot_target - counts["oregon"]["today"]["1-3"])
+            + max(0, slot_target - counts["oregon"]["today"]["4-6"])
+        )
+        
+        st.success(f"Needs: {oregon_needed} More Leads")
+
+        washington_needed = (
+            max(0, slot_target - counts["washington"]["today"]["10-12"])
+            + max(0, slot_target - counts["washington"]["today"]["1-3"])
+            + max(0, slot_target - counts["washington"]["today"]["4-6"])
+        )
+        
+        st.success(f"Needs: {washington_needed} More Leads")
+
+        socal_needed = (
+            max(0, slot_target - counts["socal"]["today"]["10-12"])
+            + max(0, slot_target - counts["socal"]["today"]["1-3"])
+            + max(0, slot_target - counts["socal"]["today"]["4-6"])
+        )
+        
+        st.success(f"Needs: {socal_needed} More Leads")
