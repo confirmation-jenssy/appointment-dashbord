@@ -130,40 +130,40 @@ if page == "Total Appointment":
     c1, c2, c3 = st.columns(3)
     
     with c1:
-    st.markdown(
-        "<span style='color:#2563eb;font-weight:bold'>OR Reps</span>",
-        unsafe_allow_html=True
-    )
-    oregon_reps = st.number_input(
-        "OR Reps",
-        min_value=0,
-        value=2,
-        label_visibility="collapsed"
-    )
-
-with c2:
-    st.markdown(
-        "<span style='color:#16a34a;font-weight:bold'>WA Reps</span>",
-        unsafe_allow_html=True
-    )
-    washington_reps = st.number_input(
-        "WA Reps",
-        min_value=0,
-        value=2,
-        label_visibility="collapsed"
-    )
-
-with c3:
-    st.markdown(
-        "<span style='color:#dc2626;font-weight:bold'>CA Reps</span>",
-        unsafe_allow_html=True
-    )
-    socal_reps = st.number_input(
-        "CA Reps",
-        min_value=0,
-        value=2,
-        label_visibility="collapsed"
-    )
+        st.markdown(
+            "<span style='color:#2563eb;font-weight:bold'>OR Reps</span>",
+            unsafe_allow_html=True
+        )
+        oregon_reps = st.number_input(
+            "OR Reps",
+            min_value=0,
+            value=2,
+            label_visibility="collapsed"
+        )
+    
+    with c2:
+        st.markdown(
+            "<span style='color:#16a34a;font-weight:bold'>WA Reps</span>",
+            unsafe_allow_html=True
+        )
+        washington_reps = st.number_input(
+            "WA Reps",
+            min_value=0,
+            value=2,
+            label_visibility="collapsed"
+        )
+    
+    with c3:
+        st.markdown(
+            "<span style='color:#dc2626;font-weight:bold'>CA Reps</span>",
+            unsafe_allow_html=True
+        )
+        socal_reps = st.number_input(
+            "CA Reps",
+            min_value=0,
+            value=2,
+            label_visibility="collapsed"
+        )
 
     st.subheader("Performance")
 
