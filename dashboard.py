@@ -49,7 +49,10 @@ def build_eod_counts(items):
         elif status == "Elite":
             counts["elite"] += 1
 
-        elif status == "Universal":
+        elif (
+            status == "Universal"
+            and confirmation == "Confirmed"
+        ):
             counts["universal"] += 1
 
         elif (
