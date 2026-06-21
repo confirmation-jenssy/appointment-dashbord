@@ -175,16 +175,16 @@ if page == "Appointment Counts":
         oregon_target,
         f"{oregon_reps} reps"
     )
-        
+    
     c2.metric(
         "WA",
-        washington_reps * 3,
+        washington_target,
         f"{washington_reps} reps"
     )
-        
+    
     c3.metric(
         "CA",
-        socal_reps * 3,
+        socal_target,
         f"{socal_reps} reps"
     )
 
