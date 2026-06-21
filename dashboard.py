@@ -259,20 +259,34 @@ if page == "Appointment Counts":
     
     # SIDE BY SIDE
     
-    left_col, right_col = st.columns(2)
-    
     with left_col:
+
         st.subheader("Today")
     
-        c1, c2, c3 = st.columns(3)
-
+        c1, c2, c3, c4 = st.columns(4)
+    
+        c1.metric("OR", today_or)
+        c2.metric("WA", today_wa)
+        c3.metric("CA", today_ca)
+        c4.metric("TOTAL", today_total)
+    
     with right_col:
+
         st.subheader("Tomorrow")
     
-        c1, c2, c3 = st.columns(3)
+        c1, c2, c3, c4 = st.columns(4)
+    
+        c1.metric("OR", tomorrow_or)
+        c2.metric("WA", tomorrow_wa)
+        c3.metric("CA", tomorrow_ca)
+        c4.metric("TOTAL", tomorrow_total)
 
     st.divider()
 
+    st.info(
+    "🔴 Empty    |    🟡 Needs Leads    |    🟢 Goal Met    |    🔵 Extra Leads"
+    )
+    
     left_col, right_col = st.columns(2)
 
     def get_status(booked, capacity):
