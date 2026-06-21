@@ -240,21 +240,23 @@ if page == "Appointment Counts":
     left_col, right_col = st.columns(2)
     
     with left_col:
-    
+
         st.subheader("Today")
     
-        st.write(f"OR: {today_or}")
-        st.write(f"WA: {today_wa}")
-        st.write(f"CA: {today_ca}")
-        st.write(f"TOTAL: {today_total}")
-        st.write(f"ATM: {total_capacity}")
+        st.info(
+            f"OR: {today_or}   "
+            f"WA: {today_wa}   "
+            f"CA: {today_ca}   "
+            f"TOTAL: {today_total}"
+        )
     
     with right_col:
     
         st.subheader("Tomorrow")
     
-        st.write(f"OR: {tomorrow_or}")
-        st.write(f"WA: {tomorrow_wa}")
-        st.write(f"CA: {tomorrow_ca}")
-        st.write(f"TOTAL: {tomorrow_total}")
-        st.write(f"ATM: {total_capacity}")
+        st.info(
+            f"OR: {tomorrow_or}   "
+            f"WA: {tomorrow_wa}   "
+            f"CA: {tomorrow_ca}   "
+            f"TOTAL: {tomorrow_total}"
+        )
