@@ -388,7 +388,7 @@ if page == "Total Appointment":
                 unsafe_allow_html=True
             )
     
-        c4.metric("TOTAL", Tomorrow_total)
+        c4.metric("TOTAL", tomorrow_total)
 
     st.divider()
 
