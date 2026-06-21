@@ -17,9 +17,6 @@ from reporting import (
     build_appointment_counts
 )
 
-st.markdown("""
-<style>
-
 # --- CHANGE HERE: Fetch data when needed (and rely on the caching in monday_api.py) ---
 items = get_monday_items() 
 
