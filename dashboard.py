@@ -1211,6 +1211,6 @@ if page == "End of Day Export":
 
         if st.button("Send Selected"):
 
-        st.success(
-            f"Exporting {len(selected)} appointments"
-        )
+            st.success(
+                f"Exporting {len(selected)} appointments"
+            )
