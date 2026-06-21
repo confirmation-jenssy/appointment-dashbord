@@ -171,23 +171,6 @@ if page == "Appointment Counts":
 
     st.subheader("Tomorrow Load")
 
-    st.write(
-        "OR:",
-        counts["oregon"]["tomorrow"]
-    )
-    
-    st.write(
-        "WA:",
-        counts["washington"]["tomorrow"]
-    )
-    
-    st.write(
-        "CA:",
-        counts["socal"]["tomorrow"]
-    )
-    
-    st.subheader("Status")
-
     oregon_booked = (
         counts["oregon"]["tomorrow"]["10-12"]
         + counts["oregon"]["tomorrow"]["1-3"]
@@ -205,6 +188,20 @@ if page == "Appointment Counts":
         + counts["socal"]["tomorrow"]["1-3"]
         + counts["socal"]["tomorrow"]["4-6"]
     )
+    
+    st.write(
+        f"OR: {oregon_booked} appointments"
+    )
+    
+    st.write(
+        f"WA: {washington_booked} appointments"
+    )
+    
+    st.write(
+        f"CA: {socal_booked} appointments"
+    )
+    
+    st.subheader("Status")
     
     oregon_capacity = oregon_reps * 3
     washington_capacity = washington_reps * 3
