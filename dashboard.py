@@ -1188,6 +1188,8 @@ if page == "End of Day Export":
     sheet = client.open_by_key(
         st.secrets["tommy_sheet_id"]
     )
+
+    worksheet = sheet.sheet1
     
     if st.button("Test Write"):
 
