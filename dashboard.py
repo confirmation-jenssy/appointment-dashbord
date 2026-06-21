@@ -24,7 +24,7 @@ page = st.sidebar.selectbox(
     "Select Page",
     [
         "End of Day Report",
-        "Appointment Counts"
+        "Total Appointment"
     ]
 )
 
@@ -117,11 +117,11 @@ if page == "End of Day Report":
             col2.warning("Please check your API keys or board settings.")
 
 
-# Note: The remaining "Appointment Counts" logic would go here 
+# Note: The remaining "Total Appointment" logic would go here 
 # and should also be wrapped with data checking if implemented later.
-if page == "Appointment Counts":
+if page == "Total Appointment":
 
-    st.title("Appointment Counts")
+    st.title("Total Appointment")
 
     counts = build_appointment_counts(items)
 
