@@ -258,10 +258,6 @@ if page == "Appointment Counts":
     )
     
     # SIDE BY SIDE
-
-    st.info(
-        "🔴 Empty    |    🟡 Needs Leads    |    🟢 Goal Met    |    🔵 Extra Leads"
-    )
     
     left_col, right_col = st.columns(2)
     
@@ -288,6 +284,10 @@ if page == "Appointment Counts":
         c4.metric("TOTAL", tomorrow_total)
 
     st.divider()
+
+    st.info(
+        "🔴 Empty    |    🟡 Needs Leads    |    🟢 Goal Met    |    🔵 Extra Leads"
+    )
     
     left_col, right_col = st.columns(2)
 
