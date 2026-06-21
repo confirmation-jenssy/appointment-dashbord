@@ -1200,9 +1200,11 @@ if page == "End of Day Export":
 
     worksheet = sheet.sheet1
     
-    if st.button("Test Export 6/15 - 6/19"):
+    if st.button("Test Export 6/15 - 6/19", type="primary"):
 
-        st.write("Starting test export...")
+        st.warning(
+            "Only click once. This appends rows to the AUTO tabs."
+        )
 
         tommy_ws = client.open_by_key(
             st.secrets["tommy_sheet_id"]
