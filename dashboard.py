@@ -166,6 +166,23 @@ if page == "Appointment Counts":
 
     lead_multiplier = 100 / confirmation_rate
 
+    # CAPACITY
+    
+    oregon_target = round(
+        (oregon_reps * 3)
+        * lead_multiplier
+    )
+    
+    washington_target = round(
+        (washington_reps * 3)
+        * lead_multiplier
+    )
+    
+    socal_target = round(
+        (socal_reps * 3)
+        * lead_multiplier
+    )
+    
     st.subheader("Capacity")
 
     c1, c2, c3 = st.columns(3)
@@ -238,23 +255,6 @@ if page == "Appointment Counts":
         tomorrow_or
         + tomorrow_wa
         + tomorrow_ca
-    )
-    
-    # CAPACITY
-    
-    oregon_target = round(
-        (oregon_reps * 3)
-        * lead_multiplier
-    )
-    
-    washington_target = round(
-        (washington_reps * 3)
-        * lead_multiplier
-    )
-    
-    socal_target = round(
-        (socal_reps * 3)
-        * lead_multiplier
     )
     
     # SIDE BY SIDE
