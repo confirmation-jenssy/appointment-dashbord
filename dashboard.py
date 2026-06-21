@@ -459,10 +459,10 @@ if page == "Appointment Counts":
 
             with wa_col:
 
-            st.markdown(
-                '<div class="wa-card">',
-                unsafe_allow_html=True
-            )
+                st.markdown(
+                    '<div class="wa-card">',
+                    unsafe_allow_html=True
+                )
 
             st.markdown("### WA")
 
