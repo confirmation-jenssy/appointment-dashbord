@@ -1308,15 +1308,15 @@ if page == "End of Day Export":
                 universal_ws.append_row(row)
                 universal_exported += 1
 
-            st.success(
-                f"""
-            Tommy: {tommy_exported}
-            Elite: {elite_exported}
-            McCormick: {mccormick_exported}
-            Nova: {nova_exported}
-            Universal: {universal_exported}
-            """
-            )
+        st.success(
+            f"""
+        Tommy: {tommy_exported}
+        Elite: {elite_exported}
+        McCormick: {mccormick_exported}
+        Nova: {nova_exported}
+        Universal: {universal_exported}
+        """
+        )
         
         st.success("Sheets connected")
     
