@@ -18,6 +18,9 @@ from reporting import (
     build_nova_report,
     build_appointment_counts
 )
+st.write(
+    st.secrets["gcp_service_account"]["client_email"]
+)
 
 # --- CHANGE HERE: Fetch data when needed (and rely on the caching in monday_api.py) ---
 items = get_monday_items() 
