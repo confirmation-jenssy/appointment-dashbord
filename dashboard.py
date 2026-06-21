@@ -1076,11 +1076,6 @@ if page == "End of Day Export":
     st.title("End of Day Export")
 
     st.title("End of Day Export")
-
-    st.write(f"Items Loaded: {len(items)}")
-
-    for item in items[:5]:
-        st.write(item)
     
     eod_counts = build_eod_counts(items)
 
