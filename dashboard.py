@@ -814,8 +814,6 @@ if page == "Appointment Counts":
 
             st.markdown("### CA")
 
-            st.markdown("### CA")
-
             slot_target = round(
                 socal_target / 3
             )
