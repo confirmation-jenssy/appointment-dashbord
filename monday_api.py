@@ -21,8 +21,6 @@ def get_monday_items():
     today = datetime.now(
         ZoneInfo("America/Los_Angeles")
     ).strftime("%Y-%m-%d")
-
-    st.write("Monday API date filter =", today)
     
     query = f"""
     {{
