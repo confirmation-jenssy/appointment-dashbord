@@ -1226,20 +1226,97 @@ if page == "End of Day Export":
             st.secrets["universal_sheet_id"]
         ).worksheet("AUTO")
 
-        tommy_ws.append_row([
-            "06/18/2026 11:30 AM",
-            "TEST CUSTOMER",
-            "123 Main St",
-            "555-555-5555",
-            "Test Job",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ])
+        tommy_exported = 0
+        elite_exported = 0
+        mccormick_exported = 0
+        nova_exported = 0
+        universal_exported = 0
+
+        rom datetime import datetime
+
+        for item in items:
+
+            status = get_column_value(
+                item,
+                "status"
+            )
         
-        st.success("Test row written")
+            confirmation = get_column_value(
+                item,
+                "color_mkr2rpkj"
+            )
+        
+            appointment_date = get_column_value(
+                item,
+                "date_mkr2q53p"
+            )
+        
+            if not appointment_date:
+                continue
+        
+            appt_dt = datetime.strptime(
+                appointment_date,
+                "%Y-%m-%d %H:%M"
+            )
+        
+            if not (
+                datetime(2026, 6, 15)
+                <= appt_dt
+                <= datetime(2026, 6, 19, 23, 59)
+            ):
+                continue
+        
+            row = [
+                appointment_date,
+                item["name"],
+                get_column_value(item, "text_mkr2an4n"),
+                get_column_value(item, "text_mkr27gh0"),
+                get_column_value(item, "long_text_mkr2wjqk"),
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        
+            if status == "Tommy":
+                tommy_ws.append_row(row)
+                tommy_exported += 1
+        
+            elif status == "Elite":
+                elite_ws.append_row(row)
+                elite_exported += 1
+        
+            elif (
+                status == "McCormick"
+                and confirmation == "Confirmed"
+            ):
+                mccormick_ws.append_row(row)
+                mccormick_exported += 1
+        
+            elif (
+                status == "Nova"
+                and confirmation == "Confirmed"
+            ):
+                nova_ws.append_row(row)
+                nova_exported += 1
+        
+            elif (
+                status == "Universal"
+                and confirmation == "Confirmed"
+            ):
+                universal_ws.append_row(row)
+                universal_exported += 1
+
+            st.success(
+                f"""
+            Tommy: {tommy_exported}
+            Elite: {elite_exported}
+            McCormick: {mccormick_exported}
+            Nova: {nova_exported}
+            Universal: {universal_exported}
+            """
+            )
         
         st.success("Sheets connected")
     
