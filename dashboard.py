@@ -1203,6 +1203,28 @@ if page == "End of Day Export":
     if st.button("Test Export 6/15 - 6/19"):
 
         st.write("Starting test export...")
+
+        tommy_ws = client.open_by_key(
+            st.secrets["tommy_sheet_id"]
+        ).worksheet("AUTO")
+
+        elite_ws = client.open_by_key(
+            st.secrets["elite_sheet_id"]
+        ).worksheet("AUTO")
+
+        mccormick_ws = client.open_by_key(
+            st.secrets["mccormick_sheet_id"]
+        ).worksheet("AUTO")
+
+        nova_ws = client.open_by_key(
+            st.secrets["nova_sheet_id"]
+        ).worksheet("AUTO")
+
+        universal_ws = client.open_by_key(
+            st.secrets["universal_sheet_id"]
+        ).worksheet("AUTO")
+
+        st.success("Sheets connected")
     
     st.success("Google connected!")
 
