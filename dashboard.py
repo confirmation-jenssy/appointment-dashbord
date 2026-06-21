@@ -1082,20 +1082,6 @@ if page == "End of Day Export":
 
     eod_counts = build_eod_counts(items)
 
-    st.write(f"Items Loaded: {len(items)}")
-
-    for item in items[:116]:
-
-        for col in item["column_values"]:
-
-            if col["id"] == "status":
-
-                st.write(
-                    item["name"],
-                    "|",
-                    col["text"]
-                )
-
     st.subheader("CF Appointments Ready")
 
     c1, c2, c3, c4, c5 = st.columns(5)
