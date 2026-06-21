@@ -521,6 +521,10 @@ if page == "Appointment Counts":
             f"{get_slot_status(slot_booked, slot_target)}"
         )
 
+        st.markdown(
+            f"**CA {get_status(tomorrow_ca, sacal_target)}**"
+        )
+
         slot_target = round(
             socal_target / 3
         )
