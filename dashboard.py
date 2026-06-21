@@ -1184,8 +1184,6 @@ if page == "End of Day Export":
     )
     
     client = gspread.authorize(creds)
-
-    st.write(st.secrets.keys())
     
     sheet = client.open_by_key(
         st.secrets["tommy_sheet_id"]
@@ -1193,8 +1191,8 @@ if page == "End of Day Export":
     
     worksheet = sheet.sheet1
     
-    st.write(
-        worksheet.title
+    st.success(
+        f"Connected to {worksheet.title}"
     )
     
     st.success("Google connected!")
