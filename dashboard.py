@@ -1318,12 +1318,6 @@ if page == "End of Day Export":
             st.secrets["universal_sheet_id"]
         ).worksheet("AUTO")
 
-        tommy_exported = 0
-        elite_exported = 0
-        mccormick_exported = 0
-        nova_exported = 0
-        universal_exported = 0
-
         from datetime import datetime
 
         if "eod_items" in st.session_state:
@@ -1336,6 +1330,12 @@ if page == "End of Day Export":
         export_count = 0
 
         for item in st.session_state["eod_items"]:
+
+            tommy_rows = []
+            elite_rows = []
+            mccormick_rows = []
+            nova_rows = []
+            universal_rows = []
 
             status = get_column_value(item, "status")
             confirmation = get_column_value(item, "color_mkr2rpkj")
