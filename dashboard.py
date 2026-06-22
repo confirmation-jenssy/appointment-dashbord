@@ -1392,8 +1392,10 @@ def build_lead_card(
     project
 ):
 
-    return f"""
-LEAD CARD {company.upper()}
+    if company == "Tommy":
+
+        return f"""
+LEAD CARD TOMMY BUILDER
 
 DATE/TIME: {appointment_date}
 NAME: {name}
@@ -1403,6 +1405,65 @@ PHONE: {phone}
 PROJECT DETAILS:
 {project}
 """.strip()
+
+    elif company == "Elite":
+
+        return f"""
+LEAD CARD ELITE
+
+DATE/TIME: {appointment_date}
+NAME: {name}
+ADDRESS: {address}
+PHONE: {phone}
+
+PROJECT DETAILS:
+{project}
+""".strip()
+
+    elif company == "Universal":
+
+        return f"""
+LEAD CARD UNIVERSAL GROUP TECH
+
+DATE/TIME: {appointment_date}
+NAME: {name}
+ADDRESS: {address}
+PHONE: {phone}
+
+PROJECT:
+{project}
+""".strip()
+
+    elif company == "McCormick":
+
+        return f"""
+LEAD CARD MCCORMICK
+
+DATE/TIME: {appointment_date}
+NAME: {name}
+ADDRESS: {address}
+PHONE: {phone}
+
+PROJECT:
+{project}
+""".strip()
+
+    elif company == "Nova":
+
+        return f"""
+LEAD CARD NOVA
+
+DATE/TIME: {appointment_date}
+NAME: {name}
+ADDRESS: {address}
+PHONE: {phone}
+
+PROJECT / TITLE HOLDER / CREDIT SCORE / BANKRUPTCY:
+
+{project}
+""".strip()
+
+    return ""
 
 if page == "Lead Cards":
 
