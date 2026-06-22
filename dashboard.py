@@ -1395,6 +1395,12 @@ if page == "End of Day Export":
                 and confirmation == "Confirmed"
             ):
                 universal_rows.append(row)
+
+            st.write("Tommy:", len(tommy_rows))
+            st.write("Elite:", len(elite_rows))
+            st.write("McCormick:", len(mccormick_rows))
+            st.write("Nova:", len(nova_rows))
+            st.write("Universal:", len(universal_rows))
         
                 export_count += 1
         
