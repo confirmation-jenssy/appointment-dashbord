@@ -1203,6 +1203,7 @@ if page == "End of Day Export":
         {{
           boards(ids: {BOARD_ID}) {{
             items_page(limit: 500) {{
+              cursor
               items {{
                 id
                 name
