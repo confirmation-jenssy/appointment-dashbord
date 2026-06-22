@@ -1326,7 +1326,7 @@ if page == "End of Day Export":
 
         from datetime import datetime
 
-        f "eod_items" in st.session_state:
+        if "eod_items" in st.session_state:
 
             st.write(
                 "Export dataset size:",
