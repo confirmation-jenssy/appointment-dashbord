@@ -1378,6 +1378,12 @@ if page == "End of Day Export":
         
         st.write("Appointments that will export:", export_count)
 
+        tommy_rows = []
+        elite_rows = []
+        mccormick_rows = []
+        nova_rows = []
+        universal_rows = []
+
         st.success(
             f"""
         Tommy: {tommy_exported}
