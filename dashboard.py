@@ -1198,56 +1198,23 @@ if page == "End of Day Export":
 
     import requests
     
-    if st.button("Debug EOD Query"):
+    if st.button("Debug Loaded Data"):
 
-        eod_response = requests.post(
-            MONDAY_URL,
-            json={"query": eod_query},
-            headers=headers
-        )
-    
-        eod_items = (
-            eod_response.json()["data"]
-            ["boards"][0]
-            ["items_page"]["items"]
-        )
-    
-        st.write(
-            "EOD Items Loaded:",
-            len(eod_items)
-        )
+        st.write("Items Loaded:", len(items))
     
         dates = []
     
-        for item in eod_items:
+        for item in items:
     
-            appt_date = get_column_value(
-                item,
-                "date_mkr2q53p"
-            )
+            for col in item["column_values"]:
     
-            if appt_date:
-                dates.append(appt_date)
+                if col["id"] == "date_mkr2q53p":
     
-        st.write(
-            "Earliest Appointment:",
-            min(dates)
-        )
+                    if col.get("text"):
+                        dates.append(col["text"])
     
-        st.write(
-            "Latest Appointment:",
-            max(dates)
-        )
-    
-        st.write(
-            "Earliest Date:",
-            min(dates) if dates else "None"
-        )
-    
-        st.write(
-            "Latest Date:",
-            max(dates) if dates else "None"
-        )
+        st.write("Earliest:", min(dates))
+        st.write("Latest:", max(dates))
     
     if st.button("Test Export 6/15 - 6/19", type="primary"):
 
