@@ -1261,6 +1261,12 @@ if page == "End of Day Export":
             st.session_state["export_rows"]
         )
 
+        if st.button("Select All"):
+            st.session_state["export_rows"]["Export"] = True
+        
+        if st.button("Deselect All"):
+            st.session_state["export_rows"]["Export"] = False
+
         edited_df = st.data_editor(
             df,
             use_container_width=True,
