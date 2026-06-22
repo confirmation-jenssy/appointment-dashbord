@@ -1225,6 +1225,9 @@ if page == "End of Day Export":
             }
         )
 
+        st.json(response.json())
+        st.stop()
+
         page = response.json()["data"]["boards"][0]["items_page"]
 
         all_items.extend(page["items"])
