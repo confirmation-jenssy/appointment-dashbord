@@ -1333,22 +1333,13 @@ if page == "End of Day Export":
                 len(st.session_state["eod_items"])
             )
 
-        for item in st.session_state["eod_items"]:
+        export_count = 0
 
-            status = get_column_value(
-                item,
-                "status"
-            )
+        for item in st.session_state["eod_items"]:
         
-            confirmation = get_column_value(
-                item,
-                "color_mkr2rpkj"
-            )
-        
-            appointment_date = get_column_value(
-                item,
-                "date_mkr2q53p"
-            )
+            status = get_column_value(item, "status")
+            confirmation = get_column_value(item, "color_mkr2rpkj")
+            appointment_date = get_column_value(item, "date_mkr2q53p")
         
             if not appointment_date:
                 continue
@@ -1364,66 +1355,17 @@ if page == "End of Day Export":
                 <= datetime(2026, 6, 19, 23, 59)
             ):
                 continue
-            
-            st.write(
-                item["name"],
-                status,
-                appointment_date
-            )
-            
-            row = [
-                appointment_date,
-                item["name"],
-                get_column_value(item, "text_mkr2an4n"),
-                get_column_value(item, "text_mkr27gh0"),
-                get_column_value(item, "long_text_mkr2wjqk"),
-                "",
-                "",
-                "",
-                "",
-                ""
-            ]
         
-            if status == "Tommy":
-            
-                try:
-
-                    tommy_ws.append_row(row)
-            
-                    tommy_exported += 1
-            
-                except Exception as e:
-            
-                    st.error(f"Failed on: {item['name']}")
-                    st.write(row)
-                    st.exception(e)
-            
-                    break
-        
-            elif status == "Elite":
-                elite_ws.append_row(row)
-                elite_exported += 1
+            if status in ["Tommy", "Elite"]:
+                export_count += 1
         
             elif (
-                status == "McCormick"
+                status in ["McCormick", "Nova", "Universal"]
                 and confirmation == "Confirmed"
             ):
-                mccormick_ws.append_row(row)
-                mccormick_exported += 1
+                export_count += 1
         
-            elif (
-                status == "Nova"
-                and confirmation == "Confirmed"
-            ):
-                nova_ws.append_row(row)
-                nova_exported += 1
-        
-            elif (
-                status == "Universal"
-                and confirmation == "Confirmed"
-            ):
-                universal_ws.append_row(row)
-                universal_exported += 1
+        st.write("Appointments that will export:", export_count)
 
         st.success(
             f"""
