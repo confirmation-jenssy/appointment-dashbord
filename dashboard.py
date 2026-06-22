@@ -1196,18 +1196,28 @@ if page == "End of Day Export":
 
     worksheet = sheet.sheet1
 
-    if st.button("Debug Monday Data"):
+    if st.button("Debug EOD Query"):
 
-        st.write("Items Loaded:", len(items))
+        eod_response = requests.post(
+            MONDAY_URL,
+            json={"query": eod_query},
+            headers=headers
+        )
+    
+        eod_items = (
+            eod_response.json()["data"]
+            ["boards"][0]
+            ["items_page"]["items"]
+        )
+    
+        st.write(
+            "EOD Items Loaded:",
+            len(eod_items)
+        )
     
         dates = []
     
-        for item in items:
-    
-            status = get_column_value(
-                item,
-                "status"
-            )
+        for item in eod_items:
     
             appt_date = get_column_value(
                 item,
@@ -1215,16 +1225,17 @@ if page == "End of Day Export":
             )
     
             if appt_date:
-    
                 dates.append(appt_date)
     
-                st.write(
-                    item["name"],
-                    "|",
-                    status,
-                    "|",
-                    appt_date
-                )
+        st.write(
+            "Earliest Appointment:",
+            min(dates)
+        )
+    
+        st.write(
+            "Latest Appointment:",
+            max(dates)
+        )
     
         st.write(
             "Earliest Date:",
