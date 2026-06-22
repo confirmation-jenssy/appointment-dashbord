@@ -1344,10 +1344,21 @@ if page == "End of Day Export":
             if not appointment_date:
                 continue
         
-            appt_dt = datetime.strptime(
-                appointment_date,
-                "%Y-%m-%d %H:%M"
-            )
+            try:
+
+                appt_dt = datetime.strptime(
+                    appointment_date,
+                    "%Y-%m-%d %H:%M"
+                )
+            
+            except Exception:
+            
+                st.write(
+                    "BAD DATE:",
+                    repr(appointment_date)
+                )
+            
+                continue
         
             if not (
                 datetime(2026, 6, 15)
