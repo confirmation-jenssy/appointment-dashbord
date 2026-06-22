@@ -1311,53 +1311,34 @@ if page == "End of Day Export":
 
         if st.button("Send Appointments"):
 
-            tommy_rows = []
-            elite_rows = []
-            mccormick_rows = []
-            nova_rows = []
-            universal_rows = []
-        
-            for item in selected_items:
-        
-                # build row here
-        
-                if status == "Tommy":
-                    tommy_rows.append(row)
-        
-                elif status == "Elite":
-                    elite_rows.append(row)
-        
-                elif status == "McCormick":
-                    mccormick_rows.append(row)
-        
-                elif status == "Nova":
-                    nova_rows.append(row)
-        
-                elif status == "Universal":
-                    universal_rows.append(row)
-
             tommy_ws = client.open_by_key(
                 st.secrets["tommy_sheet_id"]
             ).worksheet("AUTO")
-
+        
             elite_ws = client.open_by_key(
                 st.secrets["elite_sheet_id"]
             ).worksheet("AUTO")
-
+        
             mccormick_ws = client.open_by_key(
                 st.secrets["mccormick_sheet_id"]
             ).worksheet("AUTO")
-
+        
             nova_ws = client.open_by_key(
                 st.secrets["nova_sheet_id"]
             ).worksheet("AUTO")
-
+        
             universal_ws = client.open_by_key(
                 st.secrets["universal_sheet_id"]
             ).worksheet("AUTO")
-
+        
+            tommy_sent = 0
+            elite_sent = 0
+            mccormick_sent = 0
+            nova_sent = 0
+            universal_sent = 0
+        
             for _, row in selected.iterrows():
-
+        
                 values = [
                     row["Date"],
                     row["Name"],
@@ -1365,35 +1346,38 @@ if page == "End of Day Export":
                     row["Phone"],
                     row["Work"]
                 ]
-
+        
                 if row["Company"] == "Tommy":
                     tommy_ws.append_row(values)
-
+                    tommy_sent += 1
+        
                 elif row["Company"] == "Elite":
                     elite_ws.append_row(values)
-
+                    elite_sent += 1
+        
                 elif row["Company"] == "McCormick":
                     mccormick_ws.append_row(values)
-
+                    mccormick_sent += 1
+        
                 elif row["Company"] == "Nova":
                     nova_ws.append_row(values)
-
+                    nova_sent += 1
+        
                 elif row["Company"] == "Universal":
                     universal_ws.append_row(values)
-
+                    universal_sent += 1
+        
             st.success(
                 f"""
-            Export Complete
-            
-            Tommy: {len(tommy_rows)}
-            Elite: {len(elite_rows)}
-            McCormick: {len(mccormick_rows)}
-            Nova: {len(nova_rows)}
-            Universal: {len(universal_rows)}
-            
-            Total Sent:
-            {len(tommy_rows)+len(elite_rows)+len(mccormick_rows)+len(nova_rows)+len(universal_rows)}
-            """
+        Export Complete
+        
+        Tommy: {tommy_sent}
+        Elite: {elite_sent}
+        McCormick: {mccormick_sent}
+        Nova: {nova_sent}
+        Universal: {universal_sent}
+        
+        Total Sent:
+        {tommy_sent + elite_sent + mccormick_sent + nova_sent + universal_sent}
+        """
             )
-
-            
