@@ -7,6 +7,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 import sys
 import pandas as pd
+import requests
 
 from datetime import datetime
 
