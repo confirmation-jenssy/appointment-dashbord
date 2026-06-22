@@ -1536,8 +1536,11 @@ if page == "Lead Cards":
             row["Project"]
         )
 
-        st.text_area(
-            f"{row['Company']} - {row['Name']}",
+        st.subheader(
+            f"{row['Company']} - {row['Name']}"
+        )
+        
+        st.code(
             card,
-            height=250
+            language=None
         )
