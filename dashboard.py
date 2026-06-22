@@ -1195,94 +1195,84 @@ if page == "End of Day Export":
 
     st.success("Google connected!")
 
-    eod_query = f"""
-    {{
-        boards(ids: {BOARD_ID}) {{
-            items_page(
-                limit: 500
-            ) {{
-                items {{
-                    id
-                    name
-                    column_values {{
+    if st.button("Load ALL Historical Appointments"):
+
+        all_items = []
+
+        query = """
+        {
+            boards(ids: {BOARD_ID}) {
+                items_page(limit: 500) {
+                    cursor
+                    items {
                         id
-                        text
-                    }}
-                }}
-            }}
-        }}
-    }}
-    """
-    
-    if st.button("Load Historical Appointments"):
-    
+                        name
+                        column_values {
+                            id
+                            text
+                        }
+                    }
+                }
+            }
+        }
+        """
+
         response = requests.post(
             "https://api.monday.com/v2",
-            json={"query": eod_query},
+            json={"query": query},
             headers={
                 "Authorization": st.secrets["MONDAY_API_KEY"]
             }
         )
-    
-        eod_items = (
-            response.json()["data"]
-            ["boards"][0]
-            ["items_page"]["items"]
-        )
-    
-        st.write(
-            "Historical Items Loaded:",
-            len(eod_items)
-        )
 
-        count = 0
+        page = response.json()["data"]["boards"][0]["items_page"]
 
-        for item in eod_items:
-        
-            appointment_date = get_column_value(
-                item,
-                "date_mkr2q53p"
+        all_items.extend(page["items"])
+
+        cursor = page["cursor"]
+
+        while cursor:
+
+            next_query = f"""
+            {{
+                next_items_page(
+                    cursor: "{cursor}",
+                    limit: 500
+                ) {{
+                    cursor
+                    items {{
+                        id
+                        name
+                        column_values {{
+                            id
+                            text
+                        }}
+                    }}
+                }}
+            }}
+            """
+
+            response = requests.post(
+                "https://api.monday.com/v2",
+                json={"query": next_query},
+                headers={
+                    "Authorization": st.secrets["MONDAY_API_KEY"]
+                }
             )
-        
-            if appointment_date.startswith("2026-06-15"):
-                count += 1
-        
-        st.write(
-            "June 15 appointments:",
-            count
+
+            page = response.json()["data"]["next_items_page"]
+
+            all_items.extend(page["items"])
+
+            cursor = page["cursor"]
+
+            st.write(f"Loaded {len(all_items)} items...")
+
+        st.session_state["eod_items"] = all_items
+
+        st.success(
+            f"Loaded {len(all_items)} total items"
         )
-
-        st.session_state["eod_items"] = eod_items
-
-        dates = []
-
-        for item in eod_items:
-        
-            date_value = get_column_value(
-                item,
-                "date_mkr2q53p"
-            )
-        
-            if date_value:
-                dates.append(date_value)
-        
-        st.write(
-            "Earliest Date:",
-            min(dates)
-        )
-        
-        st.write(
-            "Latest Date:",
-            max(dates)
-        )
-    
-        st.session_state["eod_items"] = eod_items
-    
-    sheet = client.open_by_key(
-        st.secrets["tommy_sheet_id"]
-    )
-
-    worksheet = sheet.sheet1
 
     import requests
     
