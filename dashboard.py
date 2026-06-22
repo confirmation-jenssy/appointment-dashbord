@@ -1402,7 +1402,7 @@ if page == "End of Day Export":
         st.write("Nova:", len(nova_rows))
         st.write("Universal:", len(universal_rows))
         
-            export_count += 1
+        export_count += 1
         
         st.write("Appointments that will export:", export_count)
 
