@@ -1385,8 +1385,20 @@ if page == "End of Day Export":
             ]
         
             if status == "Tommy":
-                tommy_ws.append_row(row)
-                tommy_exported += 1
+            
+                try:
+
+                    tommy_ws.append_row(row)
+            
+                    tommy_exported += 1
+            
+            except Exception as e:
+            
+                st.error(f"Failed on: {item['name']}")
+                st.write(row)
+                st.exception(e)
+            
+                break
         
             elif status == "Elite":
                 elite_ws.append_row(row)
