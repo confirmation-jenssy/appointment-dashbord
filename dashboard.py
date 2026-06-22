@@ -1271,6 +1271,26 @@ if page == "End of Day Export":
             st.write(f"Loaded {len(all_items)}")
     
         st.session_state["eod_items"] = all_items
+
+        for day in ["15", "16", "17", "18", "19"]:
+
+            count = 0
+        
+            for item in all_items:
+        
+                appointment_date = get_column_value(
+                    item,
+                    "date_mkr2q53p"
+                )
+        
+                if appointment_date.startswith(
+                    f"2026-06-{day}"
+                ):
+                    count += 1
+        
+            st.write(
+                f"June {day}: {count}"
+            )
     
         st.success(
             f"Loaded {len(all_items)} total items"
