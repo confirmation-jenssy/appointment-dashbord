@@ -50,6 +50,37 @@ def get_monday_items():
     }}
     """
 
+    eod_query = f"""
+    {{
+        boards(ids: {BOARD_ID}) {{
+            items_page(
+                limit: 500
+            ) {{
+                items {{
+                    id
+                    name
+                    column_values {{
+                        id
+                        text
+                    }}
+                }}
+            }}
+        }}
+    }}
+    """
+
+    eod_response = requests.post(
+        MONDAY_URL,
+        json={"query": eod_query},
+        headers=headers
+    )
+    
+    eod_items = (
+        eod_response.json()["data"]
+        ["boards"][0]
+        ["items_page"]["items"]
+    )
+
     try:
         response = requests.post(
             "https://api.monday.com/v2",
