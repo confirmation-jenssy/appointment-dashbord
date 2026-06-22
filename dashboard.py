@@ -1198,7 +1198,7 @@ if page == "End of Day Export":
     if st.button("Load ALL Historical Appointments"):
 
         all_items = []
-
+    
         query = f"""
         {{
           boards(ids: {BOARD_ID}) {{
@@ -1216,7 +1216,7 @@ if page == "End of Day Export":
           }}
         }}
         """
-
+    
         response = requests.post(
             "https://api.monday.com/v2",
             json={"query": query},
@@ -1224,40 +1224,36 @@ if page == "End of Day Export":
                 "Authorization": st.secrets["MONDAY_API_KEY"]
             }
         )
-
-        st.json(response.json())
-        st.stop()
-
+    
         page = response.json()["data"]["boards"][0]["items_page"]
-
+    
         all_items.extend(page["items"])
-
+    
         cursor = page["cursor"]
-
+    
+        st.write(f"Loaded {len(all_items)}")
+    
         while cursor:
-
+    
             next_query = f"""
             {{
-                next_items_page(
-                    cursor: "{cursor}",
-                    limit: 500
-                ) {{
-                    cursor
-                    items {{
-                        id
-                        name
-                        column_values {{
-                            id
-                            text
-                        }}
-                    }}
+              next_items_page(
+                cursor: "{cursor}",
+                limit: 500
+              ) {{
+                cursor
+                items {{
+                  id
+                  name
+                  column_values {{
+                    id
+                    text
+                  }}
                 }}
+              }}
             }}
             """
-
-            st.json(response.json())
-            st.stop()
-
+    
             response = requests.post(
                 "https://api.monday.com/v2",
                 json={"query": next_query},
@@ -1265,17 +1261,17 @@ if page == "End of Day Export":
                     "Authorization": st.secrets["MONDAY_API_KEY"]
                 }
             )
-
+    
             page = response.json()["data"]["next_items_page"]
-
+    
             all_items.extend(page["items"])
-
+    
             cursor = page["cursor"]
-
-            st.write(f"Loaded {len(all_items)} items...")
-
+    
+            st.write(f"Loaded {len(all_items)}")
+    
         st.session_state["eod_items"] = all_items
-
+    
         st.success(
             f"Loaded {len(all_items)} total items"
         )
