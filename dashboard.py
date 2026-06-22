@@ -1260,12 +1260,15 @@ if page == "End of Day Export":
         df = pd.DataFrame(
             st.session_state["export_rows"]
         )
-
+        
+        if "Export" not in df.columns:
+            df.insert(0, "Export", False)
+        
         if st.button("Select All"):
-            st.session_state["export_rows"]["Export"] = True
+            df["Export"] = True
         
         if st.button("Deselect All"):
-            st.session_state["export_rows"]["Export"] = False
+            df["Export"] = False
 
         edited_df = st.data_editor(
             df,
