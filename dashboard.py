@@ -1276,6 +1276,16 @@ if page == "End of Day Export":
         selected = edited_df[
             edited_df["Export"] == True
         ]
+        
+        st.write(
+            f"""
+        Tommy: {len(selected[selected["Company"] == "Tommy"])}
+        Elite: {len(selected[selected["Company"] == "Elite"])}
+        McCormick: {len(selected[selected["Company"] == "McCormick"])}
+        Nova: {len(selected[selected["Company"] == "Nova"])}
+        Universal: {len(selected[selected["Company"] == "Universal"])}
+        """
+        )
 
         st.metric(
             "Selected",
@@ -1329,4 +1339,19 @@ if page == "End of Day Export":
                 elif row["Company"] == "Universal":
                     universal_ws.append_row(values)
 
-            st.success("Appointments Sent")
+            st.success(
+                f"""
+            Export Complete
+            
+            Tommy: {len(tommy_rows)}
+            Elite: {len(elite_rows)}
+            McCormick: {len(mccormick_rows)}
+            Nova: {len(nova_rows)}
+            Universal: {len(universal_rows)}
+            
+            Total Sent:
+            {len(tommy_rows)+len(elite_rows)+len(mccormick_rows)+len(nova_rows)+len(universal_rows)}
+            """
+            )
+
+            
