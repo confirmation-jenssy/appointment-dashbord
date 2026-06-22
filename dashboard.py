@@ -1234,6 +1234,28 @@ if page == "End of Day Export":
             "Historical Items Loaded:",
             len(eod_items)
         )
+
+        dates = []
+
+        for item in eod_items:
+        
+            date_value = get_column_value(
+                item,
+                "date_mkr2q53p"
+            )
+        
+            if date_value:
+                dates.append(date_value)
+        
+        st.write(
+            "Earliest Date:",
+            min(dates)
+        )
+        
+        st.write(
+            "Latest Date:",
+            max(dates)
+        )
     
         st.session_state["eod_items"] = eod_items
     
