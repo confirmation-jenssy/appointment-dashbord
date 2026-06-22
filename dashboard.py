@@ -1293,7 +1293,12 @@ if page == "End of Day Export":
             )
     
         from datetime import datetime
-
+        from zoneinfo import ZoneInfo
+        
+        today = datetime.now(
+            ZoneInfo("America/Los_Angeles")
+        ).date()
+        
         tommy_rows = []
         elite_rows = []
         mccormick_rows = []
@@ -1317,11 +1322,7 @@ if page == "End of Day Export":
             except:
                 continue
         
-            if not (
-                datetime(2026, 6, 15)
-                <= appt_dt
-                <= datetime(2026, 6, 21, 23, 59)
-            ):
+            if appt_dt.date() != today:
                 continue
         
             include = False
@@ -1342,21 +1343,21 @@ if page == "End of Day Export":
                 item,
                 "text_mkr2an4n"
             )
-            
+        
             phone = get_column_value(
                 item,
                 "text_mkr27gh0"
             )
-            
+        
             work = get_column_value(
                 item,
                 "long_text_mkr2wjqk"
             )
-
+        
             formatted_date = appt_dt.strftime(
                 "%m/%d/%Y %I:%M %p"
             )
-            
+        
             row = [
                 formatted_date,
                 item["name"],
@@ -1385,7 +1386,7 @@ if page == "End of Day Export":
         st.write("McCormick:", len(mccormick_rows))
         st.write("Nova:", len(nova_rows))
         st.write("Universal:", len(universal_rows))
-
+        
         tommy_ws = client.open_by_key(
             st.secrets["tommy_sheet_id"]
         ).worksheet("AUTO")
