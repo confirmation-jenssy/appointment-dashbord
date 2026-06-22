@@ -1392,13 +1392,13 @@ if page == "End of Day Export":
             
                     tommy_exported += 1
             
-            except Exception as e:
+                except Exception as e:
             
-                st.error(f"Failed on: {item['name']}")
-                st.write(row)
-                st.exception(e)
+                    st.error(f"Failed on: {item['name']}")
+                    st.write(row)
+                    st.exception(e)
             
-                break
+                    break
         
             elif status == "Elite":
                 elite_ws.append_row(row)
