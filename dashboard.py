@@ -1195,94 +1195,94 @@ if page == "End of Day Export":
 
     st.success("Google connected!")
 
-        from datetime import datetime
-        from zoneinfo import ZoneInfo
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
         
-        today = datetime.now(
-            ZoneInfo("America/Los_Angeles")
-        ).date()
+    today = datetime.now(
+        ZoneInfo("America/Los_Angeles")
+    ).date()
         
-        tommy_rows = []
-        elite_rows = []
-        mccormick_rows = []
-        nova_rows = []
-        universal_rows = []
+    tommy_rows = []
+    elite_rows = []
+    mccormick_rows = []
+    nova_rows = []
+    universal_rows = []
         
-        for item in st.session_state["eod_items"]:
+    for item in st.session_state["eod_items"]:
         
-            status = get_column_value(item, "status")
-            confirmation = get_column_value(item, "color_mkr2rpkj")
-            appointment_date = get_column_value(item, "date_mkr2q53p")
+        status = get_column_value(item, "status")
+        confirmation = get_column_value(item, "color_mkr2rpkj")
+        appointment_date = get_column_value(item, "date_mkr2q53p")
         
-            if not appointment_date:
-                continue
+        if not appointment_date:
+            continue
         
-            try:
-                appt_dt = datetime.strptime(
-                    appointment_date,
-                    "%Y-%m-%d %H:%M"
-                )
-            except:
-                continue
-        
-            if appt_dt.date() != today:
-                continue
-        
-            include = False
-        
-            if status in ["Tommy", "Elite"]:
-                include = True
-        
-            elif (
-                status in ["McCormick", "Nova", "Universal"]
-                and confirmation == "Confirmed"
-            ):
-                include = True
-        
-            if not include:
-                continue
-        
-            address = get_column_value(
-                item,
-                "text_mkr2an4n"
+        try:
+            appt_dt = datetime.strptime(
+                appointment_date,
+                "%Y-%m-%d %H:%M"
             )
+        except:
+            continue
         
-            phone = get_column_value(
-                item,
-                "text_mkr27gh0"
-            )
+        if appt_dt.date() != today:
+            continue
         
-            work = get_column_value(
-                item,
-                "long_text_mkr2wjqk"
-            )
+        include = False
         
-            formatted_date = appt_dt.strftime(
-                "%m/%d/%Y %I:%M %p"
-            )
+        if status in ["Tommy", "Elite"]:
+            include = True
         
-            row = [
-                formatted_date,
-                item["name"],
-                address,
-                phone,
-                work
-            ]
+        elif (
+            status in ["McCormick", "Nova", "Universal"]
+            and confirmation == "Confirmed"
+        ):
+            include = True
         
-            if status == "Tommy":
-                tommy_rows.append(row)
+        if not include:
+            continue
         
-            elif status == "Elite":
-                elite_rows.append(row)
+        address = get_column_value(
+            item,
+            "text_mkr2an4n"
+        )
         
-            elif status == "McCormick":
-                mccormick_rows.append(row)
+        phone = get_column_value(
+            item,
+            "text_mkr27gh0"
+        )
         
-            elif status == "Nova":
-                nova_rows.append(row)
+        work = get_column_value(
+            item,
+            "long_text_mkr2wjqk"
+        )
         
-            elif status == "Universal":
-                universal_rows.append(row)
+        formatted_date = appt_dt.strftime(
+            "%m/%d/%Y %I:%M %p"
+        )
+        
+        row = [
+            formatted_date,
+            item["name"],
+            address,
+            phone,
+            work
+        ]
+        
+        if status == "Tommy":
+            tommy_rows.append(row)
+        
+        elif status == "Elite":
+            elite_rows.append(row)
+        
+        elif status == "McCormick":
+            mccormick_rows.append(row)
+        
+        elif status == "Nova":
+            nova_rows.append(row)
+        
+        elif status == "Universal":
+            universal_rows.append(row)
         
         st.write("Tommy:", len(tommy_rows))
         st.write("Elite:", len(elite_rows))
