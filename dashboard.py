@@ -1270,7 +1270,7 @@ if page == "End of Day Export":
 
         from datetime import datetime
 
-        for item in items:
+        for item in eod_items:
 
             status = get_column_value(
                 item,
