@@ -1371,6 +1371,17 @@ if page == "End of Day Export":
                 "",
                 ""
             ]
+
+            st.write(
+                "DEBUG:",
+                item["name"],
+                "| Status:",
+                repr(status),
+                "| Confirm:",
+                repr(confirmation),
+                "| Date:",
+                appointment_date
+            )
         
             if status == "Tommy":
                 tommy_rows.append(row)
@@ -1413,13 +1424,7 @@ if page == "End of Day Export":
         universal_rows = []
 
         st.success(
-            f"""
-        Tommy: {tommy_exported}
-        Elite: {elite_exported}
-        McCormick: {mccormick_exported}
-        Nova: {nova_exported}
-        Universal: {universal_exported}
-        """
+            f"Appointments that will export: {export_count}"
         )
         
         st.success("Sheets connected")
