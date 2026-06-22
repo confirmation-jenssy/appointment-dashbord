@@ -1248,7 +1248,7 @@ if page == "End of Day Export":
     
         dates = []
     
-        or item in st.session_state["eod_items"]:
+        for item in st.session_state["eod_items"]:
     
             for col in item["column_values"]:
     
