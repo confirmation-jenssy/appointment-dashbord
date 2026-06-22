@@ -1201,19 +1201,18 @@ if page == "End of Day Export":
 
         query = """
         {
-            boards(ids: {BOARD_ID}) {
-                items_page(limit: 500) {
-                    cursor
-                    items {
-                        id
-                        name
-                        column_values {
-                            id
-                            text
-                        }
-                    }
+          boards(ids: {BOARD_ID}) {
+            items_page(limit: 500) {
+              items {
+                id
+                name
+                column_values {
+                  id
+                  text
                 }
+              }
             }
+          }
         }
         """
 
