@@ -1189,6 +1189,50 @@ if page == "End of Day Export":
     )
     
     client = gspread.authorize(creds)
+
+    st.success("Google connected!")
+
+    eod_query = f"""
+    {{
+        boards(ids: {BOARD_ID}) {{
+            items_page(
+                limit: 500
+            ) {{
+                items {{
+                    id
+                    name
+                    column_values {{
+                        id
+                        text
+                    }}
+                }}
+            }}
+        }}
+    }}
+    """
+    
+    if st.button("Load Historical Appointments"):
+    
+        response = requests.post(
+            "https://api.monday.com/v2",
+            json={"query": eod_query},
+            headers={
+                "Authorization": st.secrets["MONDAY_API_KEY"]
+            }
+        )
+    
+        eod_items = (
+            response.json()["data"]
+            ["boards"][0]
+            ["items_page"]["items"]
+        )
+    
+        st.write(
+            "Historical Items Loaded:",
+            len(eod_items)
+        )
+    
+        st.session_state["eod_items"] = eod_items
     
     sheet = client.open_by_key(
         st.secrets["tommy_sheet_id"]
@@ -1204,7 +1248,7 @@ if page == "End of Day Export":
     
         dates = []
     
-        for item in items:
+        or item in st.session_state["eod_items"]:
     
             for col in item["column_values"]:
     
@@ -1339,8 +1383,6 @@ if page == "End of Day Export":
         )
         
         st.success("Sheets connected")
-    
-    st.success("Google connected!")
 
     eod_counts = build_eod_counts(items)
 
