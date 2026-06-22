@@ -1297,26 +1297,6 @@ if page == "End of Day Export":
         )
 
     import requests
-    
-    if st.button("Debug Loaded Data"):
-
-        st.write("Items Loaded:", len(items))
-    
-        dates = []
-    
-        for item in st.session_state["eod_items"]:
-    
-            for col in item["column_values"]:
-    
-                if col["id"] == "date_mkr2q53p":
-    
-                    if col.get("text"):
-                        dates.append(col["text"])
-    
-        st.write("Earliest:", min(dates))
-        st.write("Latest:", max(dates))
-    
-    if st.button("Test Export 6/15 - 6/19", type="primary"):
 
         st.warning(
             "Only click once. This appends rows to the AUTO tabs."
@@ -1350,6 +1330,11 @@ if page == "End of Day Export":
 
         from datetime import datetime
 
+        st.write(
+            "Export dataset size:",
+            len(eod_items)
+        )
+
         for item in eod_items:
 
             status = get_column_value(
@@ -1375,16 +1360,18 @@ if page == "End of Day Export":
                 "%Y-%m-%d %H:%M"
             )
         
-            if (
+            if not (
                 datetime(2026, 6, 15)
                 <= appt_dt
                 <= datetime(2026, 6, 19, 23, 59)
             ):
-                st.write(
-                    item["name"],
-                    status,
-                    appointment_date
-                )
+                continue
+            
+            st.write(
+                item["name"],
+                status,
+                appointment_date
+            )
             
             row = [
                 appointment_date,
