@@ -1255,6 +1255,9 @@ if page == "End of Day Export":
             }}
             """
 
+            st.json(response.json())
+            st.stop()
+
             response = requests.post(
                 "https://api.monday.com/v2",
                 json={"query": next_query},
