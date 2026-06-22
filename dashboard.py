@@ -1413,18 +1413,19 @@ if page == "Lead Cards":
     lead_rows = []
 
     for item in items:
-    
+
         status = get_column_value(item, "status")
+
         confirmation = get_column_value(
             item,
             "color_mkr2rpkj"
         )
-    
+
         include = False
-    
+
         if status in ["Tommy", "Elite"]:
             include = True
-    
+
         elif (
             status in [
                 "Nova",
@@ -1434,10 +1435,10 @@ if page == "Lead Cards":
             and confirmation == "Confirmed"
         ):
             include = True
-    
+
         if not include:
             continue
-    
+
         lead_rows.append({
             "Company": status,
             "Name": item["name"],
@@ -1458,24 +1459,24 @@ if page == "Lead Cards":
                 "long_text_mkr2wjqk"
             )
         })
-        
-     st.write(
-            f"Lead Cards Found: {len(lead_rows)}"
+
+    st.write(
+        f"Lead Cards Found: {len(lead_rows)}"
+    )
+
+    for row in lead_rows:
+
+        card = build_lead_card(
+            row["Company"],
+            row["Date"],
+            row["Name"],
+            row["Address"],
+            row["Phone"],
+            row["Project"]
         )
 
-        for row in lead_rows:
-
-            card = build_lead_card(
-                row["Company"],
-                row["Date"],
-                row["Name"],
-                row["Address"],
-                row["Phone"],
-                row["Project"]
-            )
-    
-            st.text_area(
-                f"{row['Company']} - {row['Name']}",
-                card,
-                height=250
-            )
+        st.text_area(
+            f"{row['Company']} - {row['Name']}",
+            card,
+            height=250
+        )
