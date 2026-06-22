@@ -1292,49 +1292,14 @@ if page == "End of Day Export":
                 f"June {day}: {count}"
             )
     
-        st.success(
-            f"Loaded {len(all_items)} total items"
-        )
-
-        import requests
-
-        tommy_ws = client.open_by_key(
-            st.secrets["tommy_sheet_id"]
-        ).worksheet("AUTO")
-
-        elite_ws = client.open_by_key(
-            st.secrets["elite_sheet_id"]
-        ).worksheet("AUTO")
-
-        mccormick_ws = client.open_by_key(
-            st.secrets["mccormick_sheet_id"]
-        ).worksheet("AUTO")
-
-        nova_ws = client.open_by_key(
-            st.secrets["nova_sheet_id"]
-        ).worksheet("AUTO")
-
-        universal_ws = client.open_by_key(
-            st.secrets["universal_sheet_id"]
-        ).worksheet("AUTO")
-
         from datetime import datetime
-
-        if "eod_items" in st.session_state:
-
-            st.write(
-                "Export dataset size:",
-                len(st.session_state["eod_items"])
-            )
-
-        export_count = 0
 
         tommy_rows = []
         elite_rows = []
         mccormick_rows = []
         nova_rows = []
         universal_rows = []
-
+        
         for item in st.session_state["eod_items"]:
         
             status = get_column_value(item, "status")
@@ -1359,40 +1324,62 @@ if page == "End of Day Export":
             ):
                 continue
         
+            include = False
+        
             if status in ["Tommy", "Elite"]:
-                export_count += 1
+                include = True
         
             elif (
                 status in ["McCormick", "Nova", "Universal"]
                 and confirmation == "Confirmed"
             ):
-                export_count += 1
+                include = True
         
-        #st.error(f"FINAL COUNT = {export_count}")
-        #st.stop()
-
-        rows = build_eod_export_rows(
-            st.session_state["eod_items"]
-        )
+            if not include:
+                continue
         
-        st.write("ROWS BUILT:", len(rows))
-
+            row = [
+                appointment_date,
+                item["name"]
+            ]
+        
+            if status == "Tommy":
+                tommy_rows.append(row)
+        
+            elif status == "Elite":
+                elite_rows.append(row)
+        
+            elif status == "McCormick":
+                mccormick_rows.append(row)
+        
+            elif status == "Nova":
+                nova_rows.append(row)
+        
+            elif status == "Universal":
+                universal_rows.append(row)
+        
         st.write("Tommy:", len(tommy_rows))
         st.write("Elite:", len(elite_rows))
         st.write("McCormick:", len(mccormick_rows))
         st.write("Nova:", len(nova_rows))
         st.write("Universal:", len(universal_rows))
         
-        export_count += 1
+        if tommy_rows:
+            tommy_ws.append_rows(tommy_rows)
         
-        st.write("Appointments that will export:", export_count)
-
-
-        st.success(
-            f"Appointments that will export: {export_count}"
-        )
+        if elite_rows:
+            elite_ws.append_rows(elite_rows)
         
-        st.success("Sheets connected")
+        if mccormick_rows:
+            mccormick_ws.append_rows(mccormick_rows)
+        
+        if nova_rows:
+            nova_ws.append_rows(nova_rows)
+        
+        if universal_rows:
+            universal_ws.append_rows(universal_rows)
+        
+        st.success("EXPORT COMPLETE")
 
     eod_counts = build_eod_counts(items)
 
