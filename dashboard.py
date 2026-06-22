@@ -1284,48 +1284,48 @@ if page == "End of Day Export":
         elif status == "Universal":
             universal_rows.append(row)
         
-        st.write("Tommy:", len(tommy_rows))
-        st.write("Elite:", len(elite_rows))
-        st.write("McCormick:", len(mccormick_rows))
-        st.write("Nova:", len(nova_rows))
-        st.write("Universal:", len(universal_rows))
-        
-        tommy_ws = client.open_by_key(
-            st.secrets["tommy_sheet_id"]
-        ).worksheet("AUTO")
-        
-        elite_ws = client.open_by_key(
-            st.secrets["elite_sheet_id"]
-        ).worksheet("AUTO")
-        
-        mccormick_ws = client.open_by_key(
-            st.secrets["mccormick_sheet_id"]
-        ).worksheet("AUTO")
-        
-        nova_ws = client.open_by_key(
-            st.secrets["nova_sheet_id"]
-        ).worksheet("AUTO")
-        
-        universal_ws = client.open_by_key(
-            st.secrets["universal_sheet_id"]
-        ).worksheet("AUTO")
-        
-        if tommy_rows:
-            tommy_ws.append_rows(tommy_rows)
-        
-        if elite_rows:
-            elite_ws.append_rows(elite_rows)
-        
-        if mccormick_rows:
-            mccormick_ws.append_rows(mccormick_rows)
-        
-        if nova_rows:
-            nova_ws.append_rows(nova_rows)
-        
-        if universal_rows:
-            universal_ws.append_rows(universal_rows)
-        
-        st.success("EXPORT COMPLETE")
+            st.write("Tommy:", len(tommy_rows))
+            st.write("Elite:", len(elite_rows))
+            st.write("McCormick:", len(mccormick_rows))
+            st.write("Nova:", len(nova_rows))
+            st.write("Universal:", len(universal_rows))
+            
+            tommy_ws = client.open_by_key(
+                st.secrets["tommy_sheet_id"]
+            ).worksheet("AUTO")
+            
+            elite_ws = client.open_by_key(
+                st.secrets["elite_sheet_id"]
+            ).worksheet("AUTO")
+            
+            mccormick_ws = client.open_by_key(
+                st.secrets["mccormick_sheet_id"]
+            ).worksheet("AUTO")
+            
+            nova_ws = client.open_by_key(
+                st.secrets["nova_sheet_id"]
+            ).worksheet("AUTO")
+            
+            universal_ws = client.open_by_key(
+                st.secrets["universal_sheet_id"]
+            ).worksheet("AUTO")
+            
+            if tommy_rows:
+                tommy_ws.append_rows(tommy_rows)
+            
+            if elite_rows:
+                elite_ws.append_rows(elite_rows)
+            
+            if mccormick_rows:
+                mccormick_ws.append_rows(mccormick_rows)
+            
+            if nova_rows:
+                nova_ws.append_rows(nova_rows)
+            
+            if universal_rows:
+                universal_ws.append_rows(universal_rows)
+            
+            st.success("EXPORT COMPLETE")
 
     eod_counts = build_eod_counts(items)
 
