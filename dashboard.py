@@ -1363,6 +1363,26 @@ if page == "End of Day Export":
         st.write("McCormick:", len(mccormick_rows))
         st.write("Nova:", len(nova_rows))
         st.write("Universal:", len(universal_rows))
+
+        tommy_ws = client.open_by_key(
+            st.secrets["tommy_sheet_id"]
+        ).worksheet("AUTO")
+        
+        elite_ws = client.open_by_key(
+            st.secrets["elite_sheet_id"]
+        ).worksheet("AUTO")
+        
+        mccormick_ws = client.open_by_key(
+            st.secrets["mccormick_sheet_id"]
+        ).worksheet("AUTO")
+        
+        nova_ws = client.open_by_key(
+            st.secrets["nova_sheet_id"]
+        ).worksheet("AUTO")
+        
+        universal_ws = client.open_by_key(
+            st.secrets["universal_sheet_id"]
+        ).worksheet("AUTO")
         
         if tommy_rows:
             tommy_ws.append_rows(tommy_rows)
