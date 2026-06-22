@@ -1336,7 +1336,7 @@ if page == "End of Day Export":
         export_count = 0
 
         for item in st.session_state["eod_items"]:
-        
+
             status = get_column_value(item, "status")
             confirmation = get_column_value(item, "color_mkr2rpkj")
             appointment_date = get_column_value(item, "date_mkr2q53p")
@@ -1345,19 +1345,11 @@ if page == "End of Day Export":
                 continue
         
             try:
-
                 appt_dt = datetime.strptime(
                     appointment_date,
                     "%Y-%m-%d %H:%M"
                 )
-            
-            except Exception:
-            
-                st.write(
-                    "BAD DATE:",
-                    repr(appointment_date)
-                )
-            
+            except:
                 continue
         
             if not (
@@ -1367,13 +1359,43 @@ if page == "End of Day Export":
             ):
                 continue
         
-            if status in ["Tommy", "Elite"]:
-                export_count += 1
+            row = [
+                appointment_date,
+                item["name"],
+                get_column_value(item, "text_mkr2an4n"),
+                get_column_value(item, "text_mkr27gh0"),
+                get_column_value(item, "long_text_mkr2wjqk"),
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        
+            if status == "Tommy":
+                tommy_rows.append(row)
+        
+            elif status == "Elite":
+                elite_rows.append(row)
         
             elif (
-                status in ["McCormick", "Nova", "Universal"]
+                status == "McCormick"
                 and confirmation == "Confirmed"
             ):
+                mccormick_rows.append(row)
+        
+            elif (
+                status == "Nova"
+                and confirmation == "Confirmed"
+            ):
+                nova_rows.append(row)
+        
+            elif (
+                status == "Universal"
+                and confirmation == "Confirmed"
+            ):
+                universal_rows.append(row)
+        
                 export_count += 1
         
         st.write("Appointments that will export:", export_count)
