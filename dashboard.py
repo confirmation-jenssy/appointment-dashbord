@@ -1272,7 +1272,7 @@ if page == "End of Day Export":
     
         st.session_state["eod_items"] = all_items
 
-        for day in ["15", "16", "17", "18", "19"]:
+        for day in ["15", "16", "17", "18", "19", "21"]:
 
             count = 0
         
@@ -1320,7 +1320,7 @@ if page == "End of Day Export":
             if not (
                 datetime(2026, 6, 15)
                 <= appt_dt
-                <= datetime(2026, 6, 19, 23, 59)
+                <= datetime(2026, 6, 21, 23, 59)
             ):
                 continue
         
