@@ -1199,21 +1199,21 @@ if page == "End of Day Export":
 
         all_items = []
 
-        query = """
-        {
-          boards(ids: {BOARD_ID}) {
-            items_page(limit: 500) {
-              items {
+        query = f"""
+        {{
+          boards(ids: {BOARD_ID}) {{
+            items_page(limit: 500) {{
+              items {{
                 id
                 name
-                column_values {
+                column_values {{
                   id
                   text
-                }
-              }
-            }
-          }
-        }
+                }}
+              }}
+            }}
+          }}
+        }}
         """
 
         response = requests.post(
