@@ -1311,8 +1311,6 @@ if page == "End of Day Export":
 
         if st.button("Send Appointments"):
 
-            if st.button("Send Appointments"):
-
             tommy_rows = []
             elite_rows = []
             mccormick_rows = []
