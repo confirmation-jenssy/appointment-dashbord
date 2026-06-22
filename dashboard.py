@@ -1196,6 +1196,8 @@ if page == "End of Day Export":
 
     worksheet = sheet.sheet1
 
+    import requests
+    
     if st.button("Debug EOD Query"):
 
         eod_response = requests.post(
