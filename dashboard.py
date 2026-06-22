@@ -1326,12 +1326,14 @@ if page == "End of Day Export":
 
         from datetime import datetime
 
-        st.write(
-            "Export dataset size:",
-            len(eod_items)
-        )
+        f "eod_items" in st.session_state:
 
-        for item in eod_items:
+            st.write(
+                "Export dataset size:",
+                len(st.session_state["eod_items"])
+            )
+
+        for item in st.session_state["eod_items"]:
 
             status = get_column_value(
                 item,
