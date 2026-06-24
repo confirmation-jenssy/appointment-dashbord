@@ -1280,15 +1280,27 @@ if page == "End of Day Export":
             df.insert(0, "Export", False)
         
         if st.button("Select All"):
-            df["Export"] = True
+
+            for row in st.session_state["export_rows"]:
+                row["Export"] = True
+        
+            st.rerun()
         
         if st.button("Deselect All"):
-            df["Export"] = False
+        
+            for row in st.session_state["export_rows"]:
+                row["Export"] = False
+        
+            st.rerun()
 
         edited_df = st.data_editor(
             df,
             use_container_width=True,
             hide_index=True
+        )
+
+        st.session_state["export_rows"] = (
+            edited_df.to_dict("records")
         )
 
         selected = edited_df[
