@@ -171,103 +171,74 @@ def build_report(items):
 
 # The helper functions remain unchanged and use the updated build_report
 def build_tommy_elite_report(items):
-    return build_report(items)
-
-def build_universal_report(items):
-    return build_disburse_report(
-        items,
-        "UNIVERSAL"
-    )
-
-def build_mccormick_report(items):
-    return build_disburse_report(
-        items,
-        "MCCORMICK"
-    )
-
-def build_nova_report(items):
-    return build_disburse_report(
-        items,
-        "NOVA"
-    )
-
-def build_disburse_report(items, client_name):
-
+    """Report for Tommy + Elite only (Universal excluded)"""
     report = {
         "confirmed": 0,
         "same_day": 0,
+        "tommy": 0,
+        "elite": 0,
         "no_answer": 0,
         "cancelled": 0,
         "reschedule": 0,
         "rejected": 0,
         "total_leads": 0,
-        "conversion": 0
+        "conversion": 0,
+        "same_day_percent": 0
     }
 
-    today = datetime.now(
-        ZoneInfo("America/Los_Angeles")
-    ).date()
+    today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
 
     for item in items:
+        values = {col["id"]: col["text"] for col in item["column_values"]}
 
-        values = {}
-
-        for col in item["column_values"]:
-            values[col["id"]] = col["text"]
-
-        status = values.get(
-            COLUMN_IDS["status"],
-            ""
-        ).upper().strip()
-
-        if status != client_name.upper():
-            continue
-
-        meeting_date = values.get(
-            COLUMN_IDS["meeting_date"],
-            ""
-        )
-
+        meeting_date = values.get(COLUMN_IDS["meeting_date"], "")
         dt = parse_meeting_date(meeting_date)
-
-        if dt is None:
+        if dt is None or dt.date() != today:
             continue
 
-        if dt.date() != today:
+        raw_status = values.get(COLUMN_IDS["status"], "").upper().strip()
+        raw_same_day = values.get(COLUMN_IDS["same_day"], "").upper().strip()
+        source = values.get(COLUMN_IDS["source"], "").upper()
+
+        # Only count Tommy and Elite
+        if raw_status not in ["TOMMY", "ELITE"]:
             continue
 
-        result = values.get(
-            COLUMN_IDS["same_day"],
-            ""
-        ).upper().strip()
+        report["confirmed"] += 1
 
-        report["total_leads"] += 1
+        if raw_status == "TOMMY":
+            report["tommy"] += 1
+        elif raw_status == "ELITE":
+            report["elite"] += 1
 
-        if result == "CONFIRMED":
-            report["confirmed"] += 1
+        # Same day
+        if raw_same_day == "SAME DAY":
+            report["same_day"] += 1
 
-        elif result == "NO ANSWER":
+        # Other statuses
+        if raw_status == "NO ANSWER":
             report["no_answer"] += 1
-
-        elif result in ["CANCEL", "CANCELED", "CANCELLED"]:
+        elif raw_status in ["CANCELED", "CANCELLED"]:
             report["cancelled"] += 1
-
-        elif result == "RESCHEDULE":
+        elif raw_status == "RESCHEDULE":
             report["reschedule"] += 1
-
-        elif result == "REJECTED":
+        elif raw_status == "REJECTED":
             report["rejected"] += 1
 
-        elif result == "SAME DAY":
-            report["same_day"] += 1
-            report["confirmed"] += 1
+    # Final calculations
+    report["total_leads"] = (
+        report["confirmed"]
+        + report["no_answer"]
+        + report["cancelled"]
+        + report["reschedule"]
+    )
 
     report["conversion"] = round(
-        (
-            report["confirmed"] /
-            max(1, report["total_leads"])
-        ) * 100,
-        2
+        (report["confirmed"] / max(1, report["total_leads"])) * 100, 2
+    )
+
+    report["same_day_percent"] = round(
+        (report["same_day"] / max(1, report["confirmed"])) * 100, 2
     )
 
     return report
