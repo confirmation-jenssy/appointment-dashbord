@@ -1178,6 +1178,11 @@ if page == "End of Day Export":
 
     st.title("End of Day Export")
 
+    auto_send = st.toggle(
+        "Auto Send to Google Sheets",
+        value=True
+    )
+
     import gspread
 
     from google.oauth2.service_account import Credentials
@@ -1201,9 +1206,12 @@ if page == "End of Day Export":
 
         rows = []
 
-        today = datetime.now(
-            ZoneInfo("America/Los_Angeles")
-        ).date()
+        selected_date = st.date_input(
+            "Appointment Date",
+            datetime.now(
+                ZoneInfo("America/Los_Angeles")
+            ).date()
+        )
 
         for item in items:
 
@@ -1228,7 +1236,7 @@ if page == "End of Day Export":
             except:
                 continue
 
-            if appt_dt.date() != today:
+            if appt_dt.date() != selected_date:
                 continue
 
             include = False
@@ -1250,7 +1258,7 @@ if page == "End of Day Export":
                 continue
 
             rows.append({
-                "Export": False,
+                "Export": auto_send,
                 "Company": status,
                 "Date": appointment_date,
                 "Name": item["name"],
@@ -1322,7 +1330,7 @@ if page == "End of Day Export":
             len(selected)
         )
 
-        if st.button("Send Appointments"):
+        if auto_send or st.button("Send Appointments"):
 
             tommy_ws = client.open_by_key(
                 st.secrets["tommy_sheet_id"]
