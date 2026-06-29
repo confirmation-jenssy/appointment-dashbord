@@ -1260,7 +1260,7 @@ if page == "End of Day Export":
             rows.append({
                 "Export": auto_send,
                 "Company": status,
-                "Date": appointment_date,
+                "Date": appt_dt.strftime("%m/%d/%Y %I:%M %p"),
                 "Name": item["name"],
                 "Address": get_column_value(
                     item,
