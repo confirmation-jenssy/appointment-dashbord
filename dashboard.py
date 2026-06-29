@@ -1330,7 +1330,7 @@ if page == "End of Day Export":
             len(selected)
         )
 
-        if auto_send or st.button("Send Appointments"):
+        if st.button("Send Appointments"):
 
             tommy_ws = client.open_by_key(
                 st.secrets["tommy_sheet_id"]
