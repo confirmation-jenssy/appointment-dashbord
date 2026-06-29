@@ -8,14 +8,10 @@ COLUMN_IDS = {
     "project": "long_text_mkr2wjqk",
     "source": "text_mkr22s20",
     "same_day": "color_mkr2rpkj",
-     "confirmation": "color_mkr2rpkj"
+    "confirmation": "color_mkr2rpkj",
 }
 
-CONFIRMED_STATUSES = {
-    "TOMMY",
-    "ELITE",
-    "UNIVERSAL"
-}
+CONFIRMED_STATUSES = {"TOMMY", "ELITE", "UNIVERSAL"}
 
 TOTAL_LEAD_STATUSES = {
     "TOMMY",
@@ -24,5 +20,5 @@ TOTAL_LEAD_STATUSES = {
     "NO ANSWER",
     "CANCELED",
     "CANCELLED",
-    "RESCHEDULE"
+    "RESCHEDULE",
 }
